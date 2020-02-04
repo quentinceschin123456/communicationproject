@@ -24,25 +24,8 @@ Les jeux de plateaux :
 * othello
 * morpion
 
-
+## Scénarii morpion :
 On part d'une configuration connu, il faut gagner en 3-5 coups. 
-le joueur joue les croix
-depart :
-|o| | |
-| |x|o|
-| | |x|
+le joueur joue les croix  
 
-
-|o| | |
-| |x|o|
-| |x|x|
-
-
-|o| | |     |o|o| |
-| |x|o| ou  | |x|o|
-|o|x|x|     | |x|x|
-
-win
-|o|x| |     |o|x| |
-| |x|o| ou  | |x|o|
-|o|x|x|     |o|x|x|
+![alt](ressources/scenarii_morpion.png)
