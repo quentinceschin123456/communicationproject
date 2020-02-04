@@ -17,3 +17,32 @@ Nice to have :
  - Les influences dans vos choix
  - Les contraintes perso dans les choix de vie
  - L'explication des accidents de parcours
+
+
+Les jeux de plateaux :
+* contamination
+* othello
+* morpion
+
+
+On part d'une configuration connu, il faut gagner en 3-5 coups. 
+le joueur joue les croix
+depart :
+|o| | |
+| |x|o|
+| | |x|
+
+
+|o| | |
+| |x|o|
+| |x|x|
+
+
+|o| | |     |o|o| |
+| |x|o| ou  | |x|o|
+|o|x|x|     | |x|x|
+
+win
+|o|x| |     |o|x| |
+| |x|o| ou  | |x|o|
+|o|x|x|     |o|x|x|
