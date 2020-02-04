@@ -53,4 +53,4 @@ Les jeux de plateaux :
 On part d'une configuration connu, il faut gagner en 3-5 coups. 
 le joueur joue les croix  
 
-![alt](ressources/scenarii_morpion.png)
+![alt](./ressources/scenarii_morpion.png)
