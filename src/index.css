@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+}
+
+input {
+    flex-basis: 100%;
+    border: none;
+    font-size: 1em;
+    padding-bottom: 2px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#input {
+    display: flex;
+    flex: 2;
+}
+
+#firstContainer {
+    display: flex;
+    height: 100vh;
+}
+
+#leftContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    border-right: 2px solid #05FC69;
+}
+
+#rightContainer {
+    display: flex;
+    flex: 1;
+    border-left: 2px solid #05FC69;
+}
+
+#smoothDisplay {
+    flex: 10;
+    border-bottom: 2px solid #05FC69;
+}
+
+#commandResults {
+    flex: 2;
+    border-bottom: 2px solid #05FC69;
+}
+
+#commandInput {
+    flex-direction: column;
+    flex: 1;
+    display: flex;
+}
+
+#documentation {
+    flex: 1;
+}
+
+#textInput {
+    flex: 1;
+}
+
+.colors {
+    background-color: #061704;
+    color: #05FC69;
+}
+
+#inputChevron {
+    margin: auto;
+}
+
+.paddingContainer {
+    padding: 5px;
+}
