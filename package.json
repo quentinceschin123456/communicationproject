@@ -1,0 +1,19 @@
+{
+  "name": "communicationproject",
+  "version": "1.0.0",
+  "description": "*Etudiants : Corentin Grandchamps, Quentin Ceschin, Ancelin Gloriès*\r # Consigne et infos utiles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/cgrandchamps/communicationproject.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/cgrandchamps/communicationproject/issues"
+  },
+  "homepage": "https://gitlab.com/cgrandchamps/communicationproject#readme"
+}
