@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://gitlab.com/cgrandchamps/communicationproject/issues"
   },
-  "homepage": "https://gitlab.com/cgrandchamps/communicationproject#readme"
+  "homepage": "https://gitlab.com/cgrandchamps/communicationproject#readme",
+  "engines": {
+    "node": "10.x"
+  },
+  "dependencies": {
+    "express": "^4.9.8"
+  }
 }
