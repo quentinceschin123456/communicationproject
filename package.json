@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=package webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=package webpack --progress --hide-modules",
+    "start": "node launcher.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,11 @@
     "node": "10.x"
   },
   "dependencies": {
-    "express": "^4.9.8"
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
   }
 }
