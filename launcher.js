@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8000
 
 express()
   .use(express.static(path.join(__dirname, 'ressources')))
+  .use(express.static(path.join(__dirname, 'src/views')))
   .set('views', path.join(__dirname, 'src/views'))
   .set('view engine', 'ejs')
   .engine('html', require('ejs').renderFile)
