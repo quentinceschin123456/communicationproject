@@ -13,7 +13,8 @@ ______________________________________________________________________________
 
 - dir             : Liste tous les fichiers et dossiers dans un répertoire.
     Exemple : 
-        C:\Users\a> dir 
+        C:\Users\a> dir
+    Réponse : 
             15/02/2020  18:26    <DIR>          .
             15/02/2020  18:26    <DIR>          ..
             15/02/2020  19:15    <DIR>          Desktop
@@ -29,17 +30,38 @@ ______________________________________________________________________________
     Exemple :
         C:\Users\a> call aProgram.exe
 
+- open <file>     : Ouvrir un fichier.
+    Exemple : open CV.pdf
 ```
 ***
 ## Scénario :
 
 ```
+______________________________________________________________________________
 
+- ssh root@<adresseIP> : Permet de se connecter à un poste distant.
+    Exemple :
+        ssh root@192.168.1.2
+    Infos :
+        L'argument "--forcePassword" permet de chercher le mot de passe automatiquement.
+        Exemple : ssh --forcePassword root@192.168.1.2
+______________________________________________________________________________
+
+- netscan : Liste tous les ordinateurs connectés au réseau.
+    Exemple :
+        netscan
+    Réponse : 
+        ...
+______________________________________________________________________________
+
+- scp <EmplacementDistant> <EmplacementDestination> : Copie les fichiers d'un ordinateur distant.
+    Exemple : 
+        root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/
 ```
 ***
 ## Enigmes :
 
 ```
-
+A spécifier
 ```
 ***
