@@ -14,7 +14,7 @@ body {
 #leftContainer {
     display: flex;
     flex-direction: column;
-    flex: 2;
+    flex: 3;
     border-right: 2px solid #05FC69;
 }
 
@@ -87,7 +87,7 @@ body {
 #displayScreen {
     display: flex;
     flex-direction: column;
-    flex: 2;
+    flex: 3;
 }
 
 #displayScreenTitle {
