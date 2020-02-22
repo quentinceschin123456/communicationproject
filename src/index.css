@@ -44,11 +44,81 @@ body {
 }
 
 /**********/
+/*---------------------- LOADING ----------------------*/
+/**********/
+
+#loadingScreen {
+    display: flex;
+}
+
+.bar {
+    width: 30em;
+    height: 1em;
+    position: relative;
+    border-radius: 0.5em;
+    background: #f2f2f2;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.bar .percentage {
+    position: relative;
+    font-size: 1em;
+    background: tomato;
+    height: 1em;
+    border-radius: 0.5em;
+}
+
+.has-tip:before,
+.has-tip:after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+}
+
+.has-tip:before {
+    bottom: -10px;
+    right: -5px;
+    border: 5px solid;
+    border-color: transparent transparent tomato transparent;
+    -webkit-transition: opacity 0.1s;
+    transition: opacity 0.1s;
+}
+
+.has-tip:hover:before,
+.has-tip.active:before {
+    opacity: 1;
+}
+
+.has-tip:after {
+    content: attr(perc);
+    bottom: 0;
+    right: 0;
+    white-space: nowrap;
+    padding: 0.6em 1em;
+    border-radius: 2em;
+    line-height: 1;
+    color: #fff;
+    background: tomato;
+    -webkit-transform: translateX(50%) translateY(100%);
+    transform: translateX(50%) translateY(100%);
+    -webkit-transition: opacity 0.1s, -webkit-transform 0.2s;
+    transition: opacity 0.1s, -webkit-transform 0.2s;
+    transition: transform 0.2s, opacity 0.1s;
+    transition: transform 0.2s, opacity 0.1s, -webkit-transform 0.2s;
+}
+
+.has-tip:hover:after,
+.has-tip.active:after {
+    opacity: 1;
+    -webkit-transform: translateX(50%) translateY(100%) translateY(10px);
+    transform: translateX(50%) translateY(100%) translateY(10px);
+}
+/**********/
 /*---------------------- MENU ----------------------*/
 /**********/
 
 #menu {
-    display: flex;
+    display: none;
     flex-direction: column;
     flex: 1;
 }
@@ -68,7 +138,7 @@ body {
     font-weight: bold;
 }
 
-.menuScenarios:hover {
+.menuScenariosSelected {
     border: 1px solid white;
     border-left: 10px solid white;
     border-right: 10px solid white;
@@ -85,7 +155,7 @@ body {
 /**********/
 
 #displayScreen {
-    display: flex;
+    display: none;
     flex-direction: column;
     flex: 3;
 }
@@ -134,7 +204,7 @@ body {
 }
 
 #textInput {
-
+    visibility: hidden;
 }
 
 input {
@@ -149,6 +219,7 @@ input:focus {
 }
 
 #input {
+    visibility: hidden;
     display: flex;
     height: 30px;
 }
@@ -162,13 +233,19 @@ input:focus {
 /**********/
 
 #documentation {
+    display: none;
     flex: 1;
     overflow-y: auto;
 }
 
 #titleDocumentation {
+    margin: 30px 30px 0px 30px;
+    padding: 10px;
+    color: #061704;
     font-size: xx-large;
-    padding: 25px 0px 0px 40px;
+    border: 2px solid whitesmoke;
+    background-color: #05FC69;
+    font-weight: bold;
 }
 
 #textDocumentation {
@@ -194,4 +271,39 @@ input:focus {
 
 ::-webkit-scrollbar-thumb:hover {
     background: whitesmoke;
+}
+
+
+
+/**********/
+/*---------------------- TYPE ANIMATION ----------------------*/
+/**********/
+
+/* Animation */
+.anim-typewriter {    
+    border-right: 2px solid rgba(255, 255, 255, .75);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typewriter 10s steps(100) 1s 1 normal both,
+        blinkTextCursor 500ms steps(44) infinite normal;
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blinkTextCursor {
+    from {
+        border-right-color: rgba(255, 255, 255, .75);
+    }
+
+    to {
+        border-right-color: transparent;
+    }
 }
