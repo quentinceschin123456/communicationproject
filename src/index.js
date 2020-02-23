@@ -55,10 +55,13 @@ function initializeCommandTypingEvent() {
     var input = document.getElementsByTagName("INPUT")[0];
     input.onkeyup = function (event) {
         if (event.keyCode === 13) {
-            writeCommandResults("> " + input.value);
-            scrollDown("commandResults");
-            commandTraitment(input.value);
-            input.value = "";
+            var inputVal = input.value.trim();
+            if(inputVal !== "") {
+                writeCommandResults("> " + inputVal);
+                scrollDown("commandResults");
+                commandTraitment(inputVal);
+                input.value = "";
+            }
         }
     }
 }
@@ -67,7 +70,6 @@ function scrollDown(id) {
     var objDiv = document.getElementById(id);
     objDiv.scrollTop = objDiv.scrollHeight;
 }
-
 
 function commandTraitment(command) {
     var commandObj = cutCommand(command);
