@@ -1,5 +1,11 @@
+
+/**********/
+/*---------------------- INITIALISATION ----------------------*/
+/**********/
+
 (function init() {
-    displayAvailableCommands("initialisation");
+    var applicationState = "initialisation";
+    displayAvailableCommands(applicationState);
     var bar, perc, start, update;
 
     bar = document.getElementsByClassName('percentage')[0];
@@ -29,90 +35,78 @@
     start();
     setTimeout(() => {
         document.getElementById('loadingScreen').style.display = "none";
-        launchMenu()
-    }, 5000);
+        launchMenu(applicationState);
+    }, 1000);
 })();
 
-function launchMenu() {
+function launchMenu(applicationState) {
+    applicationState = "scenariosSelection";
     document.getElementById('menu').style.display = "flex";
     document.getElementById('displayScreen').style.display = "flex";
     document.getElementById('documentation').style.display = "block";
     document.getElementById('textInput').style.visibility = "visible";
     document.getElementById('input').style.visibility = "visible";
-    displayAvailableCommands("scenariosSelection");
+    displayAvailableCommands(applicationState);
     removeScenariosDisplayText();
-    initializeCommandTypingEvent();
+    initializeCommandTypingEvent(applicationState);
 }
 
-function removeScenariosDisplayText() {
-    var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
-    Array.from(listScenarioDisplayText).forEach(element => {
-        element.style.display = "none";
-    });
-}
 
-function initializeCommandTypingEvent() {
+function initializeCommandTypingEvent(applicationState) {
     var input = document.getElementsByTagName("INPUT")[0];
-    input.onkeyup = function (event) {
+    input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
-            var inputVal = input.value.trim();
-            if(inputVal !== "") {
-                writeCommandResults("> " + inputVal);
+            var command = input.value.trim();
+            if(command !== "") {
+                writeCommandResults("> " + command);
                 scrollDown("commandResults");
-                commandTraitment(inputVal);
+                applicationState = stateTraitment(command, applicationState);
                 input.value = "";
             }
         }
-    }
+    });
 }
 
-function scrollDown(id) {
-    var objDiv = document.getElementById(id);
-    objDiv.scrollTop = objDiv.scrollHeight;
-}
+/**********/
+/*---------------------- TRAITEMENTS APPLICATION ----------------------*/
+/**********/
 
-function commandTraitment(command) {
+function stateTraitment(command, applicationState) {
     var commandObj = cutCommand(command);
-    switch (commandObj.commandKey) {
-        case "test": {
-            document.getElementById("menuContainer").style.visibility = "hidden";
-            writeCommandResults("Suppression des effets visuels du menu");
+    switch(applicationState) {
+        case "scenariosSelection" : {
+            applicationState = commandsSelection(commandObj.commandKey, commandObj.commandOptions, applicationState);
             break;
         }
-        case "menu": {
-            document.getElementById("menu").style.display = "flex";
-            document.getElementById("displayScreenTitle").style.display = "flex";
-            displayAvailableCommands("scenariosSelection");
+        case "scenarioEnigmes": {
+            commandsEnigmes();
+            applicationState = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, applicationState);
+            break;
         }
+        case "scenarioHacking": {
+            commandsHacking();
+            applicationState = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, applicationState);
+            break;
+        }
+        case "scenarioJeux": {
+            commandsJeux();
+            applicationState = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, applicationState);
+            break;
+        }
+        default: break;    
+    }
+    scrollDown("commandResults");
+    return applicationState;
+}
+
+function commandsSelection(commandKey, commandOptions, applicationState) {
+    switch (commandKey) {
         case "select": {
-            selectScenario(commandObj.commandOptions, selectedScenario);
-            break;         
+            selectScenario(commandOptions);
+            break;
         }
         case "launch": {
-            if (document.getElementsByClassName('menuScenariosSelected')[0]) {
-                writeCommandResults("Chargement des modules des interfaces utilisateurs\nVérification des données\nLancement du scénario");
-                var selectedScenario = "";
-                switch (document.getElementsByClassName('menuScenariosSelected')[0].textContent.trim()) {
-                    case "Enigmes" : {
-                        selectedScenario = "scenarioEnigmes";
-                        break;
-                    }
-                    case "Hacking": {
-                        selectedScenario = "scenarioHacking";
-                        break;
-                    }
-                    case "Jeux": {
-                        selectedScenario = "scenarioJeux";
-                        break;
-                    }
-                    default: break;
-                }
-                displayAvailableCommands(selectedScenario);
-                document.getElementById("menu").style.display = "none";
-                document.getElementById("displayScreenTitle").style.display = "none";
-            } else {
-                writeCommandResults("Veuillez choisir un scénario avant de le charger.");
-            }
+            applicationState = launchScenario(applicationState);
             break;
         }
         default: {
@@ -120,45 +114,25 @@ function commandTraitment(command) {
             break;
         }
     }
-    scrollDown("commandResults");
+    return applicationState;
 }
 
-function cutCommand(command) {
-    var commandParts = command.split(" ");
-    var commandKey = commandParts[0];
-    commandParts.splice(0,1);
-    var commandOptions = commandParts;
-    return {commandKey, commandOptions};
-}
-
-function selectScenario(commandOptions, selectedScenario) {
+function selectScenario(commandOptions) {
     removeScenariosDisplayText()
     if (document.getElementsByClassName('menuScenariosSelected')[0]) {
         document.getElementsByClassName('menuScenariosSelected')[0].classList.remove('menuScenariosSelected');
     }
     switch (commandOptions[0]) {
         case "--enigmas": {
-            writeCommandResults("Sélection du scénario Enigmes.");
-            writeCommandResults("Affichage des informations supplémentaires pour le scénario choisi.");
-            document.getElementById("displayScreenTitle").textContent = document.getElementById('firstScenario').textContent;
-            document.getElementById("enigmesText").style.display = "block";
-            document.getElementById("firstScenario").classList.add('menuScenariosSelected');
+            displayScenario("firstScenario", "enigmesText");
             break;
         }
         case "--hacking": {
-            writeCommandResults("Sélection du scénario Hacking.");
-            writeCommandResults("Affichage des informations supplémentaires pour le scénario choisi.");
-            document.getElementById("displayScreenTitle").textContent = document.getElementById('secondScenario').textContent;
-            document.getElementById("hackingText").style.display = "block";
-            document.getElementById("secondScenario").classList.add('menuScenariosSelected');
+            displayScenario("secondScenario", "hackingText");
             break;
         }
         case "--games": {
-            writeCommandResults("Sélection du scénario Jeux.");
-            writeCommandResults("Affichage des informations supplémentaires pour le scénario choisi.");
-            document.getElementById("displayScreenTitle").textContent = document.getElementById('thirdScenario').textContent;
-            document.getElementById("gamesText").style.display = "block";
-            document.getElementById("thirdScenario").classList.add('menuScenariosSelected');
+            displayScenario("thirdScenario", "gamesText");
             break;
         }
         default: {
@@ -171,7 +145,63 @@ function selectScenario(commandOptions, selectedScenario) {
     }
 }
 
+function launchScenario(applicationState) {
+    if (document.getElementsByClassName('menuScenariosSelected')[0]) {
+        writeCommandResults("Chargement des modules des interfaces utilisateurs\nVérification des données\nLancement du scénario");
+        switch (document.getElementsByClassName('menuScenariosSelected')[0].textContent.trim()) {
+            case "Enigmes": {
+                applicationState = "scenarioEnigmes";
+                break;
+            }
+            case "Hacking": {
+                applicationState = "scenarioHacking";
+                break;
+            }
+            case "Jeux": {
+                applicationState = "scenarioJeux";
+                break;
+            }
+            default: break;
+        }
+        displayAvailableCommands(applicationState);
+        document.getElementById("menu").style.display = "none";
+        document.getElementById("displayScreenTitle").style.display = "none";
+    } else {
+        writeCommandResults("Veuillez choisir un scénario avant de le charger.");
+    }
+    return applicationState;
+}
+
+function commandsEnigmes() {}
+
+function commandsHacking() { }
+
+function commandsJeux() { }
+
+function commandsScenariosUtilities(commandKey, commandOptions, applicationState) {
+    switch (commandKey) {
+        case "menu": {
+            applicationState = "scenariosSelection";
+            document.getElementById("menu").style.display = "flex";
+            document.getElementById("displayScreenTitle").style.display = "flex";
+            displayAvailableCommands(applicationState);
+            writeCommandResults("Retour à l'écran principal de l'application.");
+            break;
+        }
+        default: {
+            writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
+            break;
+        }
+    }
+    return applicationState;
+}
+
+/**********/
+/*---------------------- DOCUMENTATION ----------------------*/
+/**********/
+
 function displayAvailableCommands(applicationState) {
+    console.log(applicationState);
     var documentation = document.getElementById('textDocumentation');
     switch(applicationState) {
         case "scenariosSelection": {
@@ -184,22 +214,67 @@ function displayAvailableCommands(applicationState) {
             break;
         }
         case "scenarioEnigmes": {
-            documentation.innerHTML = "No commands founded for Enigmes";
+            documentation.innerHTML = "<h2>Commandes du scénario : </h2>";
+            documentation.innerHTML += "No commands founded for Enigmes";
+            displayUtilitiesCommands(documentation);
             break;
         }
         case "scenarioHacking": {
-            documentation.innerHTML = "No commands founded for Hacking";
+            documentation.innerHTML = "<h2>Commandes du scénario : </h2>";
+            documentation.innerHTML += "No commands founded for Hacking";
+            displayUtilitiesCommands(documentation);
             break;
         }
         case "scenarioJeux": {
-            documentation.innerHTML = "No commands founded for Jeux";
+            documentation.innerHTML = "<h2>Commandes du scénario : </h2>";
+            documentation.innerHTML += "No commands founded for Jeux";
+            displayUtilitiesCommands(documentation);
             break;
         }
         default: break;
     }
 }
 
+function displayUtilitiesCommands(documentation) {
+    documentation.innerHTML += "<h2>Commandes utilitaires : </h2>";
+    documentation.innerHTML += "<strong>menu : </strong>Retourne au menu<br>";
+}
+
+/**********/
+/*---------------------- UTILITAIRE ----------------------*/
+/**********/
+
+function removeScenariosDisplayText() {
+    var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
+    Array.from(listScenarioDisplayText).forEach(element => {
+        element.style.display = "none";
+    });
+}
+
 function writeCommandResults(text) {
     var textResults = document.getElementById("textResults");
     textResults.innerText += "\n" + text;
+}
+
+function cutCommand(command) {
+    var commandParts = command.split(" ");
+    var commandKey = commandParts[0];
+    commandParts.splice(0, 1);
+    var commandOptions = commandParts;
+    return { commandKey, commandOptions };
+}
+
+
+function scrollDown(id) {
+    var objDiv = document.getElementById(id);
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+function displayScenario(idTitle, idText) {
+    var title = document.getElementById(idTitle).textContent.trim();
+    writeCommandResults("Sélection du scénario " + title + ".");
+    writeCommandResults("Affichage des informations supplémentaires pour le scénario choisi.");
+    document.getElementById("displayScreenTitle").textContent = title;
+    document.getElementById(idText).style.display = "block";
+    document.getElementById(idTitle).classList.add('menuScenariosSelected');
 }

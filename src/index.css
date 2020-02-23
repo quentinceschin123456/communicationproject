@@ -281,7 +281,7 @@ input:focus {
 
 /* Animation */
 .anim-typewriter {    
-    border-right: 2px solid rgba(255, 255, 255, .75);
+    /*border-right: 2px solid rgba(255, 255, 255, .75);*/
     white-space: nowrap;
     overflow: hidden;
     animation: typewriter 10s steps(100) 1s 1 normal both,
