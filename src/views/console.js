@@ -8,12 +8,18 @@
     displayAvailableCommands(applicationState);
     var count = 1;
     var loadingFunc = setInterval(() => {
-        document.getElementById('loadingBar' + count).style.visibility = "visible";
-        count++;
-    }, 500);
+        if (count < 11) {
+            document.getElementById('loadingBar' + count).style.visibility = "visible";
+            count++;
+        } else {
+            clearInterval(loadingFunc);
+            document.getElementById('loadingBarComponent').style.display = "none";
+            document.getElementById('loadingText').classList.add('loadingTextPlus');
+            document.getElementById('loadingText').textContent = "Bonjour Administrateur";
+        }
+    }, 350);
 
     setTimeout(() => {
-        clearInterval(loadingFunc);
         document.getElementById('loadingScreen').style.display = "none";
         launchMenu(applicationState);
     }, 5000);

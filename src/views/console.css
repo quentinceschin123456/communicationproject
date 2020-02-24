@@ -94,6 +94,13 @@ body {
     visibility: hidden;
 }
 
+.loadingTextPlus {
+    align-items: center !important;
+    flex: 0 !important;
+    box-shadow: inset 0px 0px 20px 0px;
+    border-radius: 20px;
+    padding: 5px 25px;
+}
 /**********/
 /*---------------------- MENU ----------------------*/
 /**********/
