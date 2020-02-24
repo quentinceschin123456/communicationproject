@@ -55,6 +55,7 @@ function launchMenu(applicationState) {
 
 function initializeCommandTypingEvent(applicationState) {
     var input = document.getElementsByTagName("INPUT")[0];
+    input.focus();
     input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
             var command = input.value.trim();
