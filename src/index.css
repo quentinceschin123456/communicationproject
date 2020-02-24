@@ -248,9 +248,10 @@ input:focus {
     font-weight: bold;
 }
 
-#textDocumentation {
+.textDocumentation {
     margin: 30px;
     font-size: large;
+    display: none;
 }
 
 /**********/

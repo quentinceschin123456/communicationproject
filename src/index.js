@@ -47,7 +47,8 @@ function launchMenu(applicationState) {
     document.getElementById('textInput').style.visibility = "visible";
     document.getElementById('input').style.visibility = "visible";
     displayAvailableCommands(applicationState);
-    removeScenariosDisplayText();
+    var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
+    setToDisplayNone(listScenarioDisplayText);
     initializeCommandTypingEvent(applicationState);
 }
 
@@ -118,7 +119,8 @@ function commandsSelection(commandKey, commandOptions, applicationState) {
 }
 
 function selectScenario(commandOptions) {
-    removeScenariosDisplayText()
+    var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
+    setToDisplayNone(listScenarioDisplayText);
     if (document.getElementsByClassName('menuScenariosSelected')[0]) {
         document.getElementsByClassName('menuScenariosSelected')[0].classList.remove('menuScenariosSelected');
     }
@@ -201,33 +203,25 @@ function commandsScenariosUtilities(commandKey, commandOptions, applicationState
 /**********/
 
 function displayAvailableCommands(applicationState) {
-    console.log(applicationState);
-    var documentation = document.getElementById('textDocumentation');
+    var allDocumentTexts = document.getElementsByClassName("textDocumentation")
+    setToDisplayNone(allDocumentTexts);
     switch(applicationState) {
-        case "scenariosSelection": {
-            documentation.innerHTML =  "<h2>Sélectionner un scénario : </h2>";
-            documentation.innerHTML += "<strong>select --enigmas : </strong>Scénario Enigmes<br>";
-            documentation.innerHTML += "<strong>select --hacking : </strong>Scénario Hacking<br>";
-            documentation.innerHTML += "<strong>select --games &nbsp; : </strong>Scénario Jeux<br>";
-            documentation.innerHTML += "<h2>Charger un scénario : </h2>";
-            documentation.innerHTML += "<strong>launch</strong> : Charge le scénario sélectionné";
+        case "scenariosSelection": {            
+            document.getElementById('docMenu').style.display = "block";
             break;
         }
         case "scenarioEnigmes": {
-            documentation.innerHTML = "<h2>Commandes du scénario : </h2>";
-            documentation.innerHTML += "No commands founded for Enigmes";
+            document.getElementById('docScenarioEnigmes').style.display = "block";
             displayUtilitiesCommands(documentation);
             break;
         }
         case "scenarioHacking": {
-            documentation.innerHTML = "<h2>Commandes du scénario : </h2>";
-            documentation.innerHTML += "No commands founded for Hacking";
+            document.getElementById('docScenarioHacking').style.display = "block";
             displayUtilitiesCommands(documentation);
             break;
         }
         case "scenarioJeux": {
-            documentation.innerHTML = "<h2>Commandes du scénario : </h2>";
-            documentation.innerHTML += "No commands founded for Jeux";
+            document.getElementById('docScenarioJeux').style.display = "block";
             displayUtilitiesCommands(documentation);
             break;
         }
@@ -236,17 +230,15 @@ function displayAvailableCommands(applicationState) {
 }
 
 function displayUtilitiesCommands(documentation) {
-    documentation.innerHTML += "<h2>Commandes utilitaires : </h2>";
-    documentation.innerHTML += "<strong>menu : </strong>Retourne au menu<br>";
+    document.getElementById('docUtilities').style.display = "block";
 }
 
 /**********/
 /*---------------------- UTILITAIRE ----------------------*/
 /**********/
 
-function removeScenariosDisplayText() {
-    var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
-    Array.from(listScenarioDisplayText).forEach(element => {
+function setToDisplayNone(elementsToHide) {
+    Array.from(elementsToHide).forEach(element => {
         element.style.display = "none";
     });
 }
