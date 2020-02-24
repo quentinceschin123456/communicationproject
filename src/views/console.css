@@ -200,7 +200,7 @@ body {
 
 #commandInput {
     flex-direction: column;
-    font-size: x-large;
+    font-size: larger;
 }
 
 #textInput {
