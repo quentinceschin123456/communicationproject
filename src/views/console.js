@@ -8,7 +8,7 @@
         scenarioEnigmesState: 'initialisation',
         scenarioHackingState: 'initialisation',
         scenarioJeuxState: 'initialisation'
-    }
+    };
     displayAvailableCommands(state.applicationState);
     var count = 1;
     var loadingFunc = setInterval(() => {
@@ -160,10 +160,11 @@ function launchScenario(state) {
             case "Jeux":
                 {
                     state.applicationState = "scenarioJeux";
+                    state.scenarioJeuxState = launchScenarioJeux(state);
                     break;
                 }
             default:
-                console.log("launcher - in defalut case")
+                console.log("launcher - in defalut case") // CRADE
                 break;
         }
         displayAvailableCommands(state.applicationState);
