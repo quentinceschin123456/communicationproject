@@ -5,25 +5,25 @@ function getInputedText(){
 function hackingScenario() {
     var text = getInputedText();
     console.log(text)
-    switch (text) {
-        case "menu": {
-            document.getElementById("menu").style.display = "flex";
-            document.getElementById("displayScreenTitle").style.display = "flex";
-            displayAvailableCommands("scenariosSelection");
-            writeCommandResults("Retour à l'écran principal de l'application.");
-            break;
-        }
-        case "bypass": {
-            document.getElementById("menu").style.display = "flex";
-            document.getElementById("displayScreenTitle").style.display = "flex";
-            displayAvailableCommands("scenariosSelection");
-            writeCommandResults("Retour à l'écran principal de l'application.");
-            break;
-        }
+    // switch (text) {
+    //     case "menu": {
+    //         document.getElementById("menu").style.display = "flex";
+    //         document.getElementById("displayScreenTitle").style.display = "flex";
+    //         displayAvailableCommands("scenariosSelection");
+    //         writeCommandResults("Retour à l'écran principal de l'application.");
+    //         break;
+    //     }
+    //     case "bypass": {
+    //         document.getElementById("menu").style.display = "flex";
+    //         document.getElementById("displayScreenTitle").style.display = "flex";
+    //         displayAvailableCommands("scenariosSelection");
+    //         writeCommandResults("Retour à l'écran principal de l'application.");
+    //         break;
+    //     }
     
-        default:
-            break;
-    }
+    //     default:
+    //         break;
+    // }
 }
 
 

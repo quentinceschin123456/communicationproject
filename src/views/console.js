@@ -90,7 +90,6 @@ function stateTraitment(command, state) {
                 break;
             }
         default:
-
             break;
     }
     scrollDown("commandResults");
@@ -182,7 +181,21 @@ function launchScenario(state) {
 
 function commandsEnigmes() {}
 
-function commandsHacking() {}
+function commandsHacking(commandKey, commandOptions, applicationState) {
+    switch (commandKey) {
+        case "bypass":
+            {
+                applicationState = "scenariosSelection";
+                document.getElementById("menu").style.display = "flex";
+                document.getElementById("displayScreenTitle").style.display = "flex";
+                displayAvailableCommands(applicationState);
+                writeCommandResults("Retour à l'écran principal de l'application.");
+                break;
+            }
+
+    }
+    return applicationState;
+}
 
 function commandsJeux() {}
 
