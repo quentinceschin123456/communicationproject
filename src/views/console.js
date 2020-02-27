@@ -124,35 +124,28 @@ function selectScenario(commandOptions) {
         document.getElementsByClassName('menuScenariosSelected')[0].classList.remove('menuScenariosSelected');
     }
     switch (commandOptions[0]) {
-        case "--enigmas":
-            {
-                displayScenario("firstScenario", "enigmesText");
-                break;
-            }
-        case "--hacking":
-            {
-                displayScenario("secondScenario", "hackingText");
-                break;
-            }
-        case "--games":
-            {
-                displayScenario("thirdScenario", "gamesText");
-                break;
-            }
-        default:
-            {
-                writeCommandResults("Une option manque ou est mal écrite. Options disponibles pour la commande 'select' : ");
-                writeCommandResults(" * select --enigmas");
-                writeCommandResults(" * select --hacking");
-                writeCommandResults(" * select --games");
-                break;
-            }
+        case "--enigmas": {
+            displayScenario("firstScenario", "enigmesText");
+            break;
+        }
+        case "--hacking": {
+            displayScenario("secondScenario", "hackingText");
+            break;
+        }
+        case "--games": {
+            displayScenario("thirdScenario", "gamesText");
+            break;
+        }
+        default: {
+            writeCommandResults("Une option manque ou est mal écrite.");
+            break;
+        }
     }
 }
 
 function launchScenario(state) {
     if (document.getElementsByClassName('menuScenariosSelected')[0]) {
-        writeCommandResults("Chargement des modules des interfaces utilisateurs\nVérification des données\nLancement du scénario");
+        writeCommandResults("Chargement des modules des interfaces utilisateurs... Vérification des données... Lancement du scénario...");
         switch (document.getElementsByClassName('menuScenariosSelected')[0].textContent.trim()) {
             case "Enigmes":
                 {
@@ -260,7 +253,12 @@ function setToDisplayNone(elementsToHide) {
 
 function writeCommandResults(text) {
     var textResults = document.getElementById("textResults");
-    textResults.innerText += "\n" + text;
+    var newText = document.createElement('DIV');
+    if (text[0] !== ">") {
+        newText.classList = 'anim-typewriter';
+    }
+    newText.innerHTML = "<div>" + text + "</div>";
+    textResults.appendChild(newText);
 }
 
 function cutCommand(command) {
@@ -279,8 +277,7 @@ function scrollDown(id) {
 
 function displayScenario(idTitle, idText) {
     var title = document.getElementById(idTitle).textContent.trim();
-    writeCommandResults("Sélection du scénario " + title + ".");
-    writeCommandResults("Affichage des informations supplémentaires pour le scénario choisi.");
+    writeCommandResults("Sélection du scénario " + title + "... Affichage des informations supplémentaires pour le scénario choisi...");
     document.getElementById("displayScreenTitle").textContent = title;
     document.getElementById(idText).style.display = "block";
     document.getElementById(idTitle).classList.add('menuScenariosSelected');
