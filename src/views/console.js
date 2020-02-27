@@ -150,6 +150,7 @@ function launchScenario(state) {
             case "Enigmes":
                 {
                     state.applicationState = "scenarioEnigmes";
+                    runScenarioEnigmes();
                     break;
                 }
             case "Hacking":
