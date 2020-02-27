@@ -2,9 +2,8 @@ function getInputedText() {
     return document.getElementsByTagName("INPUT")[0].value;
 }
 
-function hackingScenario() {
+function hackingScenario(scenarioState) {
     // var text = getInputedText();
-    var scenarioState = "";
     console.log(scenarioState)
     switch (scenarioState) {
         case "intialisation":

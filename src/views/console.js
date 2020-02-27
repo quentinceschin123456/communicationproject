@@ -150,24 +150,24 @@ function selectScenario(commandOptions) {
     }
 }
 
-function launchScenario(applicationState) {
+function launchScenario(state) {
     if (document.getElementsByClassName('menuScenariosSelected')[0]) {
         writeCommandResults("Chargement des modules des interfaces utilisateurs\nVérification des données\nLancement du scénario");
         switch (document.getElementsByClassName('menuScenariosSelected')[0].textContent.trim()) {
             case "Enigmes":
                 {
-                    applicationState = "scenarioEnigmes";
+                    state.applicationState = "scenarioEnigmes";
                     break;
                 }
             case "Hacking":
                 {
-                    applicationState = "scenarioHacking";
-                    scenarioState = hackingScenario(scenarioState);
+                    state.applicationState = "scenarioHacking";
+                    state.scenarioHackingState = hackingScenario(state.scenarioHackingState);
                     break;
                 }
             case "Jeux":
                 {
-                    applicationState = "scenarioJeux";
+                    state.applicationState = "scenarioJeux";
                     break;
                 }
             default:
