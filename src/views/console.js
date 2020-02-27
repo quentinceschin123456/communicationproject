@@ -6,37 +6,23 @@
 (function init() {
     var applicationState = "initialisation";
     displayAvailableCommands(applicationState);
-    var bar, perc, start, update;
-
-    bar = document.getElementsByClassName('percentage')[0];
-
-    perc = 0;
-
-    update = function () {
-        bar.style.width = perc + '%';
-        bar.setAttribute("perc", Math.floor(perc) + '%');
-        perc += 0.2;
-        if (Math.floor(perc) === 5) {
-            bar.classList.add('active');
+    var count = 1;
+    var loadingFunc = setInterval(() => {
+        if (count < 11) {
+            document.getElementById('loadingBar' + count).style.visibility = "visible";
+            count++;
+        } else {
+            clearInterval(loadingFunc);
+            document.getElementById('loadingBarComponent').style.display = "none";
+            document.getElementById('loadingText').classList.add('loadingTextPlus');
+            document.getElementById('loadingText').textContent = "Bonjour Administrateur";
         }
-        if (Math.floor(perc) === 95) {
-            bar.classList.remove('active');
-        }
-        if (perc >= 100) {
-            return perc = 0;
-        }
-    };
+    }, 350);
 
-    start = function () {
-        var run;
-        return run = setInterval(update, 10);
-    };
-
-    start();
     setTimeout(() => {
         document.getElementById('loadingScreen').style.display = "none";
         launchMenu(applicationState);
-    }, 1000);
+    }, 5000);
 })();
 
 function launchMenu(applicationState) {
