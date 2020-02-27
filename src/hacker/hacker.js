@@ -1,13 +1,29 @@
 function getInputedText(){
-    return document.getElementsByTagName("INPUT")[0];
+    return document.getElementsByTagName("INPUT")[0].value;
 }
 
 function hackingScenario() {
-
-    
-
     var text = getInputedText();
+    console.log(text)
+    switch (text) {
+        case "menu": {
+            document.getElementById("menu").style.display = "flex";
+            document.getElementById("displayScreenTitle").style.display = "flex";
+            displayAvailableCommands("scenariosSelection");
+            writeCommandResults("Retour à l'écran principal de l'application.");
+            break;
+        }
+        case "bypass": {
+            document.getElementById("menu").style.display = "flex";
+            document.getElementById("displayScreenTitle").style.display = "flex";
+            displayAvailableCommands("scenariosSelection");
+            writeCommandResults("Retour à l'écran principal de l'application.");
+            break;
+        }
     
+        default:
+            break;
+    }
 }
 
 
@@ -39,7 +55,7 @@ function documentationHackGeneral(){
 // cat info.txt
 // mais avant d'être arrivé à lister les fichiers -> deuxieme attaque
 // 2 ensemble de commande
-// ls -> cat info.txt + cat readme.md qui dit qu'il faut aller dans recrutement ... 
+// ls -aR -> cat info.txt + cat readme.md qui dit qu'il faut aller dans recrutement ... 
 // cd /root/Desktop/Recrutement MAIS attaque
 // 3 eme sequense de commande
 // cd /root/Desktop/Recrutement + ls

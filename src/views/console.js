@@ -90,6 +90,7 @@ function stateTraitment(command, state) {
                 break;
             }
         default:
+
             break;
     }
     scrollDown("commandResults");
@@ -124,22 +125,26 @@ function selectScenario(commandOptions) {
         document.getElementsByClassName('menuScenariosSelected')[0].classList.remove('menuScenariosSelected');
     }
     switch (commandOptions[0]) {
-        case "--enigmas": {
-            displayScenario("firstScenario", "enigmesText");
-            break;
-        }
-        case "--hacking": {
-            displayScenario("secondScenario", "hackingText");
-            break;
-        }
-        case "--games": {
-            displayScenario("thirdScenario", "gamesText");
-            break;
-        }
-        default: {
-            writeCommandResults("Une option manque ou est mal écrite.");
-            break;
-        }
+        case "--enigmas":
+            {
+                displayScenario("firstScenario", "enigmesText");
+                break;
+            }
+        case "--hacking":
+            {
+                displayScenario("secondScenario", "hackingText");
+                break;
+            }
+        case "--games":
+            {
+                displayScenario("thirdScenario", "gamesText");
+                break;
+            }
+        default:
+            {
+                writeCommandResults("Une option manque ou est mal écrite.");
+                break;
+            }
     }
 }
 
