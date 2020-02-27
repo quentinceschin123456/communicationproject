@@ -273,8 +273,7 @@ input:focus {
     /*border-right: 2px solid rgba(255, 255, 255, .75);*/
     white-space: nowrap;
     overflow: hidden;
-    animation: typewriter 10s steps(100) 1s 1 normal both,
-        blinkTextCursor 500ms steps(44) infinite normal;
+    animation: typewriter 4s steps(40) 0s 1 normal both;
 }
 
 @keyframes typewriter {
@@ -284,15 +283,5 @@ input:focus {
 
     to {
         width: 100%;
-    }
-}
-
-@keyframes blinkTextCursor {
-    from {
-        border-right-color: rgba(255, 255, 255, .75);
-    }
-
-    to {
-        border-right-color: transparent;
     }
 }
