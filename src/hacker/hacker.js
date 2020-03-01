@@ -2,41 +2,43 @@ function getInputedText() {
     return document.getElementsByTagName("INPUT")[0].value;
 }
 
-function hackingScenario(commandKey, commandOptions, scenarioState) {
-    switch (scenarioState.name) {
+function hackingScenario(commandKey, commandOptions, state) {
+    switch (state.scenarioHackingState.name) {
         case "intialisation":
             {
-                scenarioState = "defend1";
+                state.scenarioHackingState.name = "defend1";
                 break;
             }
         case "defend1":
             {
-                scenarioState = matchCommande(commandKey, commandOptions, scenarioState)
+                state = matchCommandeDefend1(commandKey, commandOptions, state)
                 break;
             }
         case "recovery1":
             {
-                scenarioState = matchCommandeDefend1(commandKey, commandOptions, scenarioState);
+                state.scenarioHackingState.name = "defend2";
                 break;
             }
         case "defend2":
             {
-                scenarioState = "recovery2";
+                state = matchCommandeDefend2(commandKey, commandOptions, state)
+                // scenarioHackingState = "recovery2";
                 break;
             }
         case "recovery2":
             {
-                scenarioState = "defend3";
+                // scenarioHackingState = "defend3";
                 break;
             }
         case "defend3":
             {
-                scenarioState = "recovery3";
+                state = matchCommandeDefend3(commandKey, commandOptions, state)
+                // scenarioHackingState = "recovery3";
                 break;
             }
         case "recovery3":
             {
-                scenarioState = "end";
+                // scenarioHackingState = "end";
                 break;
             }
 
@@ -46,45 +48,100 @@ function hackingScenario(commandKey, commandOptions, scenarioState) {
             }
         default:
             console.log("hackingScenario - invalid scenario state");
-            scenarioState.name = "intialisation";
+            state.scenarioHackingState.name = "intialisation";
             break;
     }
-    console.log(scenarioState)
-    return scenarioState;
+    console.log(state.scenarioHackingState)
+    return state;
 }
 
 
-function matchHackingSubState(commandKey, commandOptions, scenarioState) {
-    switch (scenarioState.name) {
-        case value:
+function matchCommandeDefend1(commandKey, commandOptions, state) {
 
-            break;
-
-        default:
-            break;
-    }
-}
-
-function matchCommandeDefend1(commandKey, commandOptions, scenarioState) {
-
-    if (!isPreviousCmdSucced) {
-        return scenarioState;
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return state;
     }
     // première réponse
-    if (isPreviousCmdSucced && scenarioState.previousCmd == "") {
-        scenarioState.previousCmd = "block";
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "") {
+        var div = document.getElementById('hackingText');
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
     }
-    if (isPreviousCmdSucced && scenarioState.previousCmd == "block") {
-        scenarioState.previousCmd = "changeIp";
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
+        state.scenarioHackingState.previousCmd = "changeIp";
     }
-    if (isPreviousCmdSucced && scenarioState.previousCmd == "changeIp") {
-        scenarioState.previousCmd = "delete";
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
+        state.scenarioHackingState.previousCmd = "delete";
     }
-    if (isPreviousCmdSucced && scenarioState.previousCmd == "delete") {
-        scenarioState.previousCmd = "";
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
+        state.scenarioHackingState.previousCmd = "";
     }
 
-    return scenarioState;
+    return state;
+}
+
+function matchCommandeDefend2(commandKey, commandOptions, state) {
+
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return state;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "") {
+        var div = document.getElementById('hackingText');
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
+        state.scenarioHackingState.previousCmd = "changeIp";
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
+        state.scenarioHackingState.previousCmd = "delete";
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
+        state.scenarioHackingState.previousCmd = "";
+    }
+
+    return state;
+}
+
+
+function matchCommandeDefend3(commandKey, commandOptions, state) {
+
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return scenarioHackingState;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "") {
+        var div = document.getElementById('hackingText');
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
+        state.scenarioHackingState.previousCmd = "changeIp";
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
+        state.scenarioHackingState.previousCmd = "delete";
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
+        state.scenarioHackingState.previousCmd = "";
+    }
+
+    return state;
 }
 
 function documentationHack1() {
@@ -103,21 +160,6 @@ function documentationHackGeneral() {
 
 }
 
-function commandsHacking(commandKey, commandOptions, applicationState) {
-    switch (commandKey) {
-        case "bypass":
-            {
-                applicationState = "scenariosSelection";
-                document.getElementById("menu").style.display = "flex";
-                document.getElementById("displayScreenTitle").style.display = "flex";
-                displayAvailableCommands(applicationState);
-                writeCommandResults("Retour à l'écran principal de l'application.");
-                break;
-            }
-
-    }
-    return applicationState;
-}
 
 // au lancement afficher un texte pour indiquer que le pc est hacké
 // 1 ensemble de commande défensif

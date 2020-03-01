@@ -10,6 +10,7 @@
             name: 'initialisation',
             previousCmd: '',
             isPreviousCmdSucced: true,
+            stepTab: ["intialisation", "defend1", "recovery1", "defend2", "recovery2", "defend3", "recovery3", "end"],
         },
         scenarioJeuxState: 'initialisation'
     }
@@ -83,8 +84,8 @@ function stateTraitment(command, state) {
             }
         case "scenarioHacking":
             {
-                state.scenarioHackingState = hackingScenario(commandObj.commandKey, commandObj.commandOptions, scenarioHackingState);
-                state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
+                state = hackingScenario(commandObj.commandKey, commandObj.commandOptions, state);
+                //state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
         case "scenarioJeux":
@@ -187,22 +188,6 @@ function launchScenario(state) {
 
 function commandsEnigmes() {}
 
-function commandsHacking(commandKey, commandOptions, applicationState) {
-    switch (commandKey) {
-        case "bypass":
-            {
-                applicationState = "scenariosSelection";
-                document.getElementById("menu").style.display = "flex";
-                document.getElementById("displayScreenTitle").style.display = "flex";
-                displayAvailableCommands(applicationState);
-                writeCommandResults("Retour à l'écran principal de l'application.");
-                break;
-            }
-
-    }
-    return applicationState;
-}
-
 function commandsJeux() {}
 
 function commandsScenariosUtilities(commandKey, commandOptions, state) {
@@ -216,7 +201,11 @@ function commandsScenariosUtilities(commandKey, commandOptions, state) {
                 writeCommandResults("Retour à l'écran principal de l'application.");
                 break;
             }
-
+        case "bypass":
+            {
+                // c'est chiant à faire donc si tu vois ce commentaire j'ai eu la fleme
+                break;
+            }
         default:
             {
                 writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
