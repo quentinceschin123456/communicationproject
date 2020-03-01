@@ -85,8 +85,7 @@ function stateTraitment(command, state) {
             }
         case "scenarioJeux":
             {
-                commandsJeux();
-                state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
+                state = commandsJeux(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
         default:
@@ -180,15 +179,12 @@ function commandsEnigmes() {}
 
 function commandsHacking() {}
 
-function commandsJeux() {}
-
 function commandsScenariosUtilities(commandKey, commandOptions, state) {
     switch (commandKey) {
         case "menu":
             {
                 state.applicationState = "scenariosSelection";
-                document.getElementById("menu").style.display = "flex";
-                document.getElementById("displayScreenTitle").style.display = "flex";
+                launchMenu(state)
                 displayAvailableCommands(state.applicationState);
                 writeCommandResults("Retour à l'écran principal de l'application.");
                 break;
