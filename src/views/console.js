@@ -209,7 +209,7 @@ function commandsScenariosUtilities(commandKey, commandOptions, state) {
                 state.applicationState = "scenariosSelection";
                 document.getElementById("menu").style.display = "flex";
                 document.getElementById("displayScreenTitle").style.display = "flex";
-                displayAvailableCommands(state.applicationState);
+                displayAvailableCommands(state);
                 writeCommandResults("Retour à l'écran principal de l'application.");
                 break;
             }
@@ -227,10 +227,10 @@ function commandsScenariosUtilities(commandKey, commandOptions, state) {
 /*---------------------- DOCUMENTATION ----------------------*/
 /**********/
 
-function displayAvailableCommands(applicationState) {
+function displayAvailableCommands(state) {
     var allDocumentTexts = document.getElementsByClassName("textDocumentation")
     setToDisplayNone(allDocumentTexts);
-    switch (applicationState) {
+    switch (state.applicationState) {
         case "scenariosSelection":
             {
                 document.getElementById('docMenu').style.display = "block";
@@ -244,7 +244,52 @@ function displayAvailableCommands(applicationState) {
             }
         case "scenarioHacking":
             {
-                document.getElementById('docScenarioHacking').style.display = "block";
+                switch (state.scenarioHackingState) {
+                    case "intialisation":
+                        {
+
+                            break;
+                        }
+                    case "defend1":
+                        {
+                            documentationHack1();
+                            break;
+                        }
+                    case "recovery1":
+                        {
+
+                            break;
+                        }
+                    case "defend2":
+                        {
+                            documentationHack2();
+                            break;
+                        }
+                    case "recovery2":
+                        {
+
+                            break;
+                        }
+                    case "defend3":
+                        {
+                            documentationHack3();
+                            break;
+                        }
+                    case "recovery3":
+                        {
+
+                            break;
+                        }
+
+                    case "end":
+                        {
+                            break;
+                        }
+
+                    default:
+                        document.getElementById('docScenarioHacking').style.display = "block";
+                        break;
+                }
                 displayUtilitiesCommands(documentation);
                 break;
             }
