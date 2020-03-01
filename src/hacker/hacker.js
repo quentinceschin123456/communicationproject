@@ -2,10 +2,8 @@ function getInputedText() {
     return document.getElementsByTagName("INPUT")[0].value;
 }
 
-function hackingScenario(scenarioState) {
-    // var text = getInputedText();
-    console.log(scenarioState)
-    switch (scenarioState) {
+function hackingScenario(commandKey, commandOptions, scenarioState) {
+    switch (scenarioState.name) {
         case "intialisation":
             {
                 scenarioState = "defend1";
@@ -13,12 +11,12 @@ function hackingScenario(scenarioState) {
             }
         case "defend1":
             {
-                scenarioState = "recovery1";
+                scenarioState = matchCommande(commandKey, commandOptions, scenarioState)
                 break;
             }
         case "recovery1":
             {
-                scenarioState = "defend2";
+                scenarioState = matchCommandeDefend1(commandKey, commandOptions, scenarioState);
                 break;
             }
         case "defend2":
@@ -48,7 +46,7 @@ function hackingScenario(scenarioState) {
             }
         default:
             console.log("hackingScenario - invalid scenario state");
-            scenarioState = "intialisation";
+            scenarioState.name = "intialisation";
             break;
     }
     console.log(scenarioState)
@@ -56,8 +54,37 @@ function hackingScenario(scenarioState) {
 }
 
 
-function nextCommand(currentState) {
+function matchHackingSubState(commandKey, commandOptions, scenarioState) {
+    switch (scenarioState.name) {
+        case value:
 
+            break;
+
+        default:
+            break;
+    }
+}
+
+function matchCommandeDefend1(commandKey, commandOptions, scenarioState) {
+
+    if (!isPreviousCmdSucced) {
+        return scenarioState;
+    }
+    // première réponse
+    if (isPreviousCmdSucced && scenarioState.previousCmd == "") {
+        scenarioState.previousCmd = "block";
+    }
+    if (isPreviousCmdSucced && scenarioState.previousCmd == "block") {
+        scenarioState.previousCmd = "changeIp";
+    }
+    if (isPreviousCmdSucced && scenarioState.previousCmd == "changeIp") {
+        scenarioState.previousCmd = "delete";
+    }
+    if (isPreviousCmdSucced && scenarioState.previousCmd == "delete") {
+        scenarioState.previousCmd = "";
+    }
+
+    return scenarioState;
 }
 
 function documentationHack1() {

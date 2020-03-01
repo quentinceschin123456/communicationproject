@@ -6,7 +6,11 @@
     var state = {
         applicationState: 'initialisation',
         scenarioEnigmesState: 'initialisation',
-        scenarioHackingState: 'initialisation',
+        scenarioHackingState: {
+            name: 'initialisation',
+            previousCmd: '',
+            isPreviousCmdSucced: true,
+        },
         scenarioJeuxState: 'initialisation'
     }
     displayAvailableCommands(state.applicationState);
@@ -79,7 +83,7 @@ function stateTraitment(command, state) {
             }
         case "scenarioHacking":
             {
-                commandsHacking();
+                state.scenarioHackingState = hackingScenario(commandObj.commandKey, commandObj.commandOptions, scenarioHackingState);
                 state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
@@ -162,7 +166,6 @@ function launchScenario(state) {
             case "Hacking":
                 {
                     state.applicationState = "scenarioHacking";
-                    state.scenarioHackingState = hackingScenario(state.scenarioHackingState);
                     break;
                 }
             case "Jeux":
