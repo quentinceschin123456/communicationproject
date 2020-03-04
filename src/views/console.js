@@ -7,7 +7,10 @@
         applicationState: 'initialisation',
         scenarioEnigmesState: 'initialisation',
         scenarioHackingState: 'initialisation',
-        scenarioJeuxState: 'initialisation'
+        scenarioJeuxState: {
+            currentState: 'initialisation',
+            stateArray: ['initialisation', 'firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end']
+        }
     };
     displayAvailableCommands(state.applicationState);
     var count = 1;
@@ -85,8 +88,7 @@ function stateTraitment(command, state) {
             }
         case "scenarioJeux":
             {
-                commandsJeux();
-                state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
+                state = commandsJeux(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
         default:
@@ -160,7 +162,7 @@ function launchScenario(state) {
             case "Jeux":
                 {
                     state.applicationState = "scenarioJeux";
-                    state.scenarioJeuxState = launchScenarioJeux(state);
+                    state = launchScenarioJeux(state);
                     break;
                 }
             default:
@@ -179,8 +181,6 @@ function launchScenario(state) {
 function commandsEnigmes() {}
 
 function commandsHacking() {}
-
-function commandsJeux() {}
 
 function commandsScenariosUtilities(commandKey, commandOptions, state) {
     switch (commandKey) {
