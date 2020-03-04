@@ -187,8 +187,7 @@ function commandsScenariosUtilities(commandKey, commandOptions, state) {
         case "menu":
             {
                 state.applicationState = "scenariosSelection";
-                document.getElementById("menu").style.display = "flex";
-                document.getElementById("displayScreenTitle").style.display = "flex";
+                launchMenu(state)
                 displayAvailableCommands(state.applicationState);
                 writeCommandResults("Retour à l'écran principal de l'application.");
                 break;
