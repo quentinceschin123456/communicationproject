@@ -183,13 +183,30 @@ function matchCommandeRecovery1(commandKey, commandOptions, state) {
     }
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
-
-        if (commandKey == "block" && commandOptions == "--all-port") {
-            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
-            state.scenarioHackingState.previousCmd = "block";
+        if (commandKey == "netscan") {
+            writeCommandResults("IP : 192.168.1.156")
+            state.scenarioHackingState.previousCmd = "netscan";
         } else {
-
             commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "netscan") {
+        if (commandKey == "ssh" && commandOptions[0] == "--forcePassword" && commandOptions[1] == "root@192.168.1.156") {
+            writeCommandResults("Connection ssh réussi, le mot de passe est 'root'");
+            writeCommandResults("Les fichiers présent sont : <li>info.txt</li><li>root.pwd</li><li>issous.png</li></<li>");
+            state.scenarioHackingState.previousCmd = "ssh";
+        } else {
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "ssh") {
+        if (commandKey == "cat" && commandOptions == "info.txt") {
+            writeCommandResults("Ouverture du fichier info.txt");
+
+            //  TODO animation hack + new text
+            state.scenarioHackingState.previousCmd = "cat";
+        } else {
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
         }
     }
 }
@@ -197,6 +214,16 @@ function matchCommandeRecovery1(commandKey, commandOptions, state) {
 function matchCommandeRecovery2(commandKey, commandOptions, state) {
     if (!state.scenarioHackingState.isPreviousCmdSucced) {
         return scenarioHackingState;
+    }
+
+    if (state.scenarioHackingState.isPreviousCmdSucced) {
+        if (commandKey == "cat" && commandOptions == "info.txt") {
+            writeCommandResults("Ouverture du fichier info.txt");
+            document.getElementById("hackingText").innerHTML = getFirstBlocQuentin();
+            state.scenarioHackingState.previousCmd = "cat";
+        } else {
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
     }
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
@@ -297,6 +324,19 @@ function textRecovery3() {
 
 function textEnd() {
 
+}
+
+
+function getFirstBlocQuentin() {
+    return "";
+}
+
+function getSecondBlocQuentin() {
+    return "";
+}
+
+function getThirdFirstBlocQuentin() {
+    return "";
 }
 
 
