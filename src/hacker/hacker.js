@@ -1,7 +1,3 @@
-function getInputedText() {
-    return document.getElementsByTagName("INPUT")[0].value;
-}
-
 function hackingScenario(commandKey, commandOptions, state) {
     switch (state.scenarioHackingState.name) {
         case "initialisation":
@@ -17,38 +13,43 @@ function hackingScenario(commandKey, commandOptions, state) {
         case "recovery1":
             {
                 state.scenarioHackingState.name = "defend2";
+                state = matchCommandeRecovery1(commandKey, commandOptions, state)
+
                 break;
             }
         case "defend2":
             {
                 state = matchCommandeDefend2(commandKey, commandOptions, state)
-                // scenarioHackingState = "recovery2";
+                // state.scenarioHackingState.name = "recovery2";
                 break;
             }
         case "recovery2":
             {
-                // scenarioHackingState = "defend3";
+                // state.scenarioHackingState.name = "defend3";
+                state = matchCommandeRecovery2(commandKey, commandOptions, state)
                 break;
             }
         case "defend3":
             {
                 state = matchCommandeDefend3(commandKey, commandOptions, state)
-                // scenarioHackingState = "recovery3";
+                // state.scenarioHackingState.name = "recovery3";
                 break;
             }
         case "recovery3":
             {
-                // scenarioHackingState = "end";
+                // state.scenarioHackingState.name = "end";
+                state = matchCommandeRecovery3(commandKey, commandOptions, state)
                 break;
             }
 
         case "end":
             {
+                state = matchCommandeEnd(commandKey, commandOptions, state)
                 break;
             }
         default:
             console.log("hackingScenario - invalid scenario state");
-            state.scenarioHackingState.name = "intialisation";
+            state.scenarioHackingState.name = "initialisation";
             break;
     }
     console.log(state.scenarioHackingState)
@@ -62,7 +63,7 @@ function matchCommandeInit(commandKey, commandOptions, state) {
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
         if (commandKey == "start" && commandOptions == "--debugger-sys") {
-            writeCommandResults("Vous venez de débloquer le debugger avancé systême.")
+            writeCommandResults("Vous venez de débloquer le debugger avancé système. Vous pouvez utiliser l'ensemble des commandes systèmes");
             state.scenarioHackingState.previousCmd = "start";
             state.scenarioHackingState.name = "defend1";
             document.getElementById("hackingText").innerHTML = textDefend1();
@@ -82,21 +83,36 @@ function matchCommandeDefend1(commandKey, commandOptions, state) {
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
         if (commandKey == "block" && commandOptions == "--all-port") {
-            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            writeCommandResults("Tous les ports de connexions ont bien été fermés.")
             state.scenarioHackingState.previousCmd = "block";
         } else {
             state = commandsScenariosUtilities(commandKey, commandOptions, state);
         }
     }
     if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
-        state.scenarioHackingState.previousCmd = "changeIp";
+        if (commandKey == "changeIp") {
+            writeCommandResults("Nouvelle Ip allouée : 197.12.68.49");
+            state.scenarioHackingState.previousCmd = "changeIp";
+        } else {
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
     }
     if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
-        state.scenarioHackingState.previousCmd = "delete";
+        if (commandKey == "rm" && commandOptions[0] == "-rf" && commandOptions[1] == "/root/spy/*") {
+            writeCommandResults("Les fichiers espions ont bien été effacé.");
+            state.scenarioHackingState.previousCmd = "delete";
+        } else {
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
     }
     if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
-        state.scenarioHackingState.previousCmd = "";
-        state.scenarioHackingState.name = "recovery1";
+        if (commandKey == "open" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été ouvert.")
+            state.scenarioHackingState.previousCmd = "";
+            state.scenarioHackingState.name = "recovery1";
+        } else {
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
     }
 
     return state;
@@ -109,7 +125,6 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
     }
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
-        var div = document.getElementById('hackingText');
         if (commandKey == "block" && commandOptions == "--all-port") {
             writeCommandResults("Tout les ports de connexions ont bien été fermés.")
             state.scenarioHackingState.previousCmd = "block";
@@ -126,6 +141,7 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
     }
     if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
         state.scenarioHackingState.previousCmd = "";
+        state.scenarioHackingState.name = "recovery2";
     }
 
     return state;
@@ -139,7 +155,7 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
     }
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
-        var div = document.getElementById('hackingText');
+
         if (commandKey == "block" && commandOptions == "--all-port") {
             writeCommandResults("Tout les ports de connexions ont bien été fermés.")
             state.scenarioHackingState.previousCmd = "block";
@@ -159,6 +175,74 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
     }
 
     return state;
+}
+
+function matchCommandeRecovery1(commandKey, commandOptions, state) {
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return scenarioHackingState;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced) {
+
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+}
+
+function matchCommandeRecovery2(commandKey, commandOptions, state) {
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return scenarioHackingState;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced) {
+
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+}
+
+function matchCommandeRecovery3(commandKey, commandOptions, state) {
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return scenarioHackingState;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced) {
+
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+}
+
+function matchCommandeEnd(commandKey, commandOptions, state) {
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return scenarioHackingState;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced) {
+
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
 }
 
 function documentationHack1() {
@@ -229,4 +313,4 @@ function textEnd() {
 // cd /root/Desktop/Recrutement + ls
 // cat info.txt 
 // scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/
-// lien de téléchargement du fichier =
+// lien de téléchargement du fichier
