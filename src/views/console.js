@@ -10,7 +10,7 @@
             name: 'initialisation',
             previousCmd: '',
             isPreviousCmdSucced: true,
-            stepTab: ["intialisation", "defend1", "recovery1", "defend2", "recovery2", "defend3", "recovery3", "end"],
+            stepTab: ["initialisation", "defend1", "recovery1", "defend2", "recovery2", "defend3", "recovery3", "end"],
         },
         scenarioJeuxState: 'initialisation'
     }
@@ -167,6 +167,7 @@ function launchScenario(state) {
             case "Hacking":
                 {
                     state.applicationState = "scenarioHacking";
+                    document.getElementById("hackingText").innerHTML = textInitialisation();
                     break;
                 }
             case "Jeux":
