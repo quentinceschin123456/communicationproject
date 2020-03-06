@@ -1,0 +1,23 @@
+#morpionGameBoard {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.lign {
+    display: flex;
+    flex: 1;
+}
+
+.case {
+    display: flex;
+    border: 1px solid #05FC69;
+    height: 50px;
+    width: 50px;
+}
+
+.selectedCase {
+    flex: 1;
+    margin: 5px;
+    border: 2px solid #05FC69;
+}

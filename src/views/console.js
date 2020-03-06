@@ -8,8 +8,8 @@
         scenarioEnigmesState: 'initialisation',
         scenarioHackingState: 'initialisation',
         scenarioJeuxState: {
-            currentState: 'initialisation',
-            stateArray: ['initialisation', 'firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end']
+            currentState: 'firstGameRules',
+            stateArray: ['firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end']
         }
     };
     displayAvailableCommands(state.applicationState);
@@ -162,7 +162,7 @@ function launchScenario(state) {
             case "Jeux":
                 {
                     state.applicationState = "scenarioJeux";
-                    state = launchScenarioJeux(state);
+                    state = launchGameStep(state);
                     break;
                 }
             default:
@@ -217,19 +217,19 @@ function displayAvailableCommands(applicationState) {
         case "scenarioEnigmes":
             {
                 document.getElementById('docScenarioEnigmes').style.display = "block";
-                displayUtilitiesCommands(documentation);
+                displayUtilitiesCommands();
                 break;
             }
         case "scenarioHacking":
             {
                 document.getElementById('docScenarioHacking').style.display = "block";
-                displayUtilitiesCommands(documentation);
+                displayUtilitiesCommands();
                 break;
             }
         case "scenarioJeux":
             {
                 document.getElementById('docScenarioJeux').style.display = "block";
-                displayUtilitiesCommands(documentation);
+                displayUtilitiesCommands();
                 break;
             }
         default:
@@ -237,7 +237,7 @@ function displayAvailableCommands(applicationState) {
     }
 }
 
-function displayUtilitiesCommands(documentation) {
+function displayUtilitiesCommands() {
     document.getElementById('docUtilities').style.display = "block";
 }
 
