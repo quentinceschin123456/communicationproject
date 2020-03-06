@@ -12,7 +12,6 @@ function hackingScenario(commandKey, commandOptions, state) {
             }
         case "recovery1":
             {
-                state.scenarioHackingState.name = "defend2";
                 state = matchCommandeRecovery1(commandKey, commandOptions, state)
 
                 break;
@@ -205,6 +204,7 @@ function matchCommandeRecovery1(commandKey, commandOptions, state) {
 
             //  TODO animation hack + new text
             state.scenarioHackingState.previousCmd = "cat";
+            state.scenarioHackingState.name = "defend2";
         } else {
             state = commandsScenariosUtilities(commandKey, commandOptions, state);
         }
@@ -216,6 +216,7 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
         return scenarioHackingState;
     }
 
+    //première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
         if (commandKey == "cat" && commandOptions == "info.txt") {
             writeCommandResults("Ouverture du fichier info.txt");
@@ -223,17 +224,6 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
             state.scenarioHackingState.previousCmd = "cat";
         } else {
             state = commandsScenariosUtilities(commandKey, commandOptions, state);
-        }
-    }
-    // première réponse
-    if (state.scenarioHackingState.isPreviousCmdSucced) {
-
-        if (commandKey == "block" && commandOptions == "--all-port") {
-            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
-            state.scenarioHackingState.previousCmd = "block";
-        } else {
-
-            commandsScenariosUtilities(commandKey, commandOptions, state);
         }
     }
 }
