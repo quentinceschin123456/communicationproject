@@ -6,7 +6,7 @@ function hackingScenario(commandKey, commandOptions, state) {
     switch (state.scenarioHackingState.name) {
         case "intialisation":
             {
-                state.scenarioHackingState.name = "defend1";
+                state = matchCommandeInit(commandKey, commandOptions, state);
                 break;
             }
         case "defend1":
@@ -55,6 +55,32 @@ function hackingScenario(commandKey, commandOptions, state) {
     return state;
 }
 
+function matchCommandeInit(commandKey, commandOptions, state) {
+    if (!state.scenarioHackingState.isPreviousCmdSucced) {
+        return state;
+    }
+    // première réponse
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "") {
+        if (commandKey == "block" && commandOptions == "--all-port") {
+            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+            state.scenarioHackingState.previousCmd = "block";
+        } else {
+
+            commandsScenariosUtilities(commandKey, commandOptions, state);
+        }
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
+        state.scenarioHackingState.previousCmd = "changeIp";
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
+        state.scenarioHackingState.previousCmd = "delete";
+    }
+    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
+        state.scenarioHackingState.previousCmd = "";
+    }
+
+    return state;
+}
 
 function matchCommandeDefend1(commandKey, commandOptions, state) {
 
