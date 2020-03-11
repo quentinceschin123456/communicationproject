@@ -120,32 +120,36 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
     if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "defend2") {
         return state;
     }
-    // première réponse
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "") {
-        if (commandKey == "block" && commandOptions == "--all-port") {
-            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
-            state.scenarioHackingState.previousCmd = "block";
-        } else {
-
-            state = commandsScenariosUtilities(commandKey, commandOptions, state);
-        }
-    }
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
-        state.scenarioHackingState.previousCmd = "changeIp";
-    }
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
-        state.scenarioHackingState.previousCmd = "delete";
-    }
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
-        state.scenarioHackingState.previousCmd = "";
-        state.scenarioHackingState.name = "recovery2";
-    }
 
     switch (state.scenarioHackingState.previousCmd) {
         case "":
+            if (commandKey == "restore" && commandOptions[0] == "--all" && commandOptions[1] == "firewall") {
+                writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+                state.scenarioHackingState.previousCmd = "restore";
+            } else {
 
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
             break;
+        case "restore":
+            if (commandKey == "rsa" && commandOptions[0] == "-gc" && commandOptions[1] == "--new-key") {
+                writeCommandResults("Régénration des clées privées rsa. Les clées publiques restent inchangées")
+                state.scenarioHackingState.previousCmd = "rsa";
+            } else {
 
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            break;
+        case "rsa":
+            if (commandKey == "apply" && commandOptions[0] == "--rsa-key" && commandOptions[1] == "fireWall") {
+                writeCommandResults("Encodage des sources des fireWall terminée.")
+                state.scenarioHackingState.previousCmd = "";
+                state.scenarioHackingState.name = "recovery2";
+            } else {
+
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            break;
         default:
             break;
     }
@@ -286,7 +290,7 @@ function matchCommandeRecovery3(commandKey, commandOptions, state) {
         switch (state.scenarioHackingState.previousCmd) {
             case "":
                 if (commandKey == "exit") {
-                    writeCommandResults("Tout les ports de connexions ont bien été fermés.")
+                    writeCommandResults("Déconnexion de l'hôte distant.Retour sur localUser")
                     state.scenarioHackingState.previousCmd = "exit";
                 } else {
 
@@ -298,6 +302,8 @@ function matchCommandeRecovery3(commandKey, commandOptions, state) {
                     writeCommandResults("Téléchargment des fichiers...")
                     writeCommandResults("Fichiers Récupérés.")
                     state.scenarioHackingState.previousCmd = "";
+                    state.scenarioHackingState.name = "end";
+
                 } else {
 
                     state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -315,14 +321,24 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
 
     switch (state.scenarioHackingState.previousCmd) {
         case "":
-            if (commandKey == "block" && commandOptions == "--all-port") {
-                writeCommandResults("Tout les ports de connexions ont bien été fermés.")
-                state.scenarioHackingState.previousCmd = "block";
+            if (commandKey == "reset") {
+                writeCommandResults("Le scenrario a bien été réinitialisé.")
+                state.scenarioHackingState.previousCmd = "";
+                state.scenarioHackingState.name = "initialisation";
             } else {
 
-                commandsScenariosUtilities(commandKey, commandOptions, state);
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            if (commandKey == "getText") {
+                writeCommandResults("Voici l'ensemble des paragraphes ainsi qu'un lien de téléchargement pour le CV.")
+                state.scenarioHackingState.previousCmd = "";
+                state.scenarioHackingState.name = "initialisation";
+            } else {
+
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
             break;
+
     }
     return state;
 }
@@ -412,4 +428,4 @@ function getThirdFirstBlocQuentin() {
 // cd /root/Desktop/Recrutement + ls
 // cat info.txt 
 // scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/
-// lien de téléchargement du fichier
+// lien de téléchargement du fichier.
