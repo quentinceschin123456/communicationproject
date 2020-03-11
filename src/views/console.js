@@ -9,7 +9,8 @@
         scenarioHackingState: 'initialisation',
         scenarioJeuxState: {
             currentState: 'firstGameRules',
-            stateArray: ['firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end']
+            stateArray: ['firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end'],
+            gameState: '' 
         }
     };
     displayAvailableCommands(state.applicationState);

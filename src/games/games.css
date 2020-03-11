@@ -17,7 +17,15 @@
 }
 
 .selectedCase {
+    border: 2px solid #05FC69;
+}
+
+.innerCase {
     flex: 1;
     margin: 5px;
-    border: 2px solid #05FC69;
+    display: flex;
+}
+
+.marginAuto {
+    margin: auto;
 }
