@@ -137,6 +137,7 @@ function launchGameStep(state) {
             displayGame(state.scenarioJeuxState.currentState, state.scenarioJeuxState.gameState.htmlMatrice);
             bindClickMatrice();
             writeCommandResults("//--- Jeux n°1 ---//")
+            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
@@ -155,6 +156,7 @@ function launchGameStep(state) {
         case "secondGame": {
             displayGame(state.scenarioJeuxState.currentState);
             writeCommandResults("//--- Jeux n°2 ---//")
+            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
@@ -173,6 +175,7 @@ function launchGameStep(state) {
         case "thirdGame": {
             displayGame(state.scenarioJeuxState.currentState);
             writeCommandResults("//--- Jeux n°3 ---//")
+            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
@@ -269,7 +272,9 @@ function lockMovement(state) {
             } 
 
             if (state.scenarioJeuxState.gameState.isFinished) {
-                state = launchGameStep(skipCurrentState(state));
+                setTimeout(() => {
+                    state = launchGameStep(skipCurrentState(state));
+                }, 1500);
             }
         } else {
             state.scenarioJeuxState.gameState.errorMessage = "Un joueur a déjà un pion sur cette case !";
@@ -363,19 +368,19 @@ function endMorpionGame(state) {
     if (!state.scenarioJeuxState.gameState.isFinished) {
         for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
             for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {
-                if ((i === 0 && j === 0) || (i === 1 && j === 1) || (i === 2 && j === 2) &&  state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'O') {
+                if (((i === 0 && j === 0) || (i === 1 && j === 1) || (i === 2 && j === 2)) && state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'O') {
                     diagonalLeftCountJ2++;
                 }
-                if ((i === 0 && j === 0) || (i === 1 && j === 1) || (i === 2 && j === 2) &&  state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'X') {
+                if (((i === 0 && j === 0) || (i === 1 && j === 1) || (i === 2 && j === 2)) && state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'X') {
                     diagonalLeftCountJ1++;
                 }
                 if (diagonalLeftCountJ1 === 3 || diagonalLeftCountJ2 === 3) {
                     state.scenarioJeuxState.gameState.isFinished = true;
                 }
-                if ( (i === 0 && j === 2) || (i === 1 && j === 1) || (i === 2 && j === 0) && state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'O') {
+                if ( ((i === 0 && j === 2) || (i === 1 && j === 1) || (i === 2 && j === 0)) && state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'O') {
                     diagonalRightCountJ2++;
                 }
-                if ( (i === 0 && j === 2) || (i === 1 && j === 1) || (i === 2 && j === 0) && state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'X') {
+                if ( ((i === 0 && j === 2) || (i === 1 && j === 1) || (i === 2 && j === 0)) && state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'X') {
                     diagonalRightCountJ1++;
                 }
                 if (diagonalRightCountJ1 === 3 || diagonalRightCountJ2 === 3) {
