@@ -165,28 +165,25 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
     }
     switch (state.scenarioHackingState.previousCmd) {
         case "":
-            if (commandKey == "netscan") {
-                writeCommandResults("IP : 192.168.1.156")
-                state.scenarioHackingState.previousCmd = "netscan";
-            } else {
-                commandsScenariosUtilities(commandKey, commandOptions, state);
-            }
-            break;
-        case "netscan":
-            if (commandKey == "ssh" && commandOptions[0] == "--forcePassword" && commandOptions[1] == "root@192.168.1.156") {
-                writeCommandResults("Connection ssh réussi, le mot de passe est 'root'");
-                writeCommandResults("Les fichiers présent sont : <li>info.txt</li><li>root.pwd</li><li>issous.png</li></<li>");
-                state.scenarioHackingState.previousCmd = "ssh";
+            if (commandKey == "exec" && commandOptions == "windowsDefender.exe") {
+                writeCommandResults("Windows Defender actif...")
+                state.scenarioHackingState.previousCmd = "exec";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
             break;
-        case "ssh":
-            if (commandKey == "cat" && commandOptions == "info.txt") {
-                writeCommandResults("Ouverture du fichier info.txt");
-
-                //  TODO animation hack + new text
-                state.scenarioHackingState.previousCmd = "";
+        case "exec":
+            if (commandKey == "listen" && commandOptions == "-a") {
+                writeCommandResults("Ecoute de tout les fichiers en attente d'une analyse.");
+                state.scenarioHackingState.previousCmd = "listen";
+            } else {
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            break;
+        case "listen":
+            if (commandKey == "start" && commandOptions[0] == "analysis") {
+                writeCommandResults("Su^^ression de toutes les menaces terminées. Votre système est sécurisé.");
+                state.scenarioHackingState.previousCmd = "delete";
                 state.scenarioHackingState.name = "recovery3";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
