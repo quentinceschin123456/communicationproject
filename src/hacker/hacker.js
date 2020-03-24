@@ -184,7 +184,7 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
             break;
         case "exec":
             if (commandKey == "listen" && commandOptions == "-a") {
-                writeCommandResults("Ecoute de tout les fichiers en attente d'une analyse.");
+                writeCommandResults("Ecoute de tous les fichiers en attente d'une analyse.");
                 state.scenarioHackingState.previousCmd = "listen";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -192,7 +192,7 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
             break;
         case "listen":
             if (commandKey == "start" && commandOptions[0] == "analysis") {
-                writeCommandResults("Su^^ression de toutes les menaces terminées. Votre système est sécurisé.");
+                writeCommandResults("Suppression de toutes les menaces terminées. Votre système est sécurisé.");
                 state.scenarioHackingState.previousCmd = "delete";
                 state.scenarioHackingState.name = "recovery3";
                 hackerDocElement.style.display = "block";
@@ -379,7 +379,7 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
 }
 
 function documentationHackDefend1() {
-    var str = "<h2>Blocker une tentative d'accès private : </h2>";
+    var str = "<h2>Bloquer une tentative d'accès pirate : </h2>";
     str += "<strong>block --all-port : </strong>Ferme tous les ports écoutant un réseau distant out local<br>";
     str += "<strong>changeIp : </strong>Change votre adresse virtuelle<br>";
     str += "<strong>rm -rf /root/spy/* : </strong>Efface le contenu du répertoire spy contenant des écouteurs de clavier<br>";
@@ -389,11 +389,21 @@ function documentationHackDefend1() {
 }
 
 function documentationHackDefend2() {
+    var str = "<h2>Régénérer ses ressources secrètes  : </h2>";
+    str += "<strong>restore --all firewall : </strong>Ré-initialise les parefeux en d'une nouvelle génération<br>";
+    str += "<strong>rsa -gc --new-key : </strong>Créé une clé puublique et une clé privé selon le protocole RSA<br>";
+    str += "<strong>apply --rsa-key fireWall: </strongGénére les parties secrètes des parefeux grâce à une clé privée<br>";
 
+    return str;
 }
 
 function documentationHackDefend3() {
+    var str = "<h2>Lancement d'une analyse complète : </h2>";
+    str += "<strong>exec windowsDefender.exe : </strong>Lance windows defender en mode administateur<br>";
+    str += "<strong>listen -a : </strong>Ecoute le contenu du disque.<br>";
+    str += "<strong>start analysis : </strong>Lance une analyse complàte des fichiers selectionnés.<br>";
 
+    return str;
 }
 
 function documentationHackRecovery1() {
