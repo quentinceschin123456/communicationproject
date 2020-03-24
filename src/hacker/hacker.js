@@ -352,15 +352,33 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
     return state;
 }
 
-function documentationHack1() {
+function documentationHackDefend1() {
+    var str = "<h2>Blocker une tentative d'accès private : </h2>";
+    str += "<strong>block --all-port : </strong>Ferme tous les ports écoutant un réseau distant out local<br>";
+    str += "<strong>changeIp : </strong>Change votre adresse virtuelle<br>";
+    str += "<strong>rm -rf /root/spy/* : </strong>Efface le contenu du répertoire spy contenant des écouteurs de clavier<br>";
+    str += "<strong>open --all-port : </strong>Ouvre tous les ports<br>";
+
+    return str;
+}
+
+function documentationHackDefend2() {
 
 }
 
-function documentationHack2() {
+function documentationHackDefend3() {
 
 }
 
-function documentationHack3() {
+function documentationHackRecovery1() {
+
+}
+
+function documentationHackRecovery2() {
+
+}
+
+function documentationHackRecovery3() {
 
 }
 
@@ -407,7 +425,7 @@ function textRecovery3() {
 }
 
 function textEnd() {
-
+    // il faut récap tout les textes + lien du cv + dire que l'on veut reset
 }
 
 
@@ -422,19 +440,3 @@ function getSecondBlocQuentin() {
 function getThirdFirstBlocQuentin() {
     return "";
 }
-
-
-// au lancement afficher un texte pour indiquer que le pc est hacké
-// 1 ensemble de commande défensif
-// netscan + ssh --forcePassword root@192.168.1.156
-// message success
-// cat info.txt
-// mais avant d'être arrivé à lister les fichiers -> deuxieme attaque
-// 2 ensemble de commande
-// ls -aR -> cat info.txt + cat readme.md qui dit qu'il faut aller dans recrutement ... 
-// cd /root/Desktop/Recrutement MAIS attaque
-// 3 eme sequense de commande
-// cd /root/Desktop/Recrutement + ls
-// cat info.txt 
-// scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/
-// lien de téléchargement du fichier.
