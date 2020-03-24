@@ -304,8 +304,8 @@ function updateHTMLMatrice(caseCell, pion) {
 function morpionTurnIA(state) {
     var isCellEmpty = false;
     do {
-        var ligneRandom = Math.floor(Math.random() * 2);
-        var colonneRandom = Math.floor(Math.random() * 2);
+        var ligneRandom = Math.floor(Math.random() * 3);
+        var colonneRandom = Math.floor(Math.random() * 3);
         if (state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] === '') {
             isCellEmpty = true;
         }
@@ -331,6 +331,7 @@ function endMorpionGame(state) {
     var lignCountJ2 = 0;
     var columnCountJ2 = 0;    
     
+    console.log("APRES COMPTEUR DE LIGNE");
      for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
         for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {   
             if (state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'O') {
@@ -343,10 +344,15 @@ function endMorpionGame(state) {
                 state.scenarioJeuxState.gameState.isFinished = true;
             }
         }
+        console.log("Ligne", i);
+        console.log("LIJ1",lignCountJ1);
+        console.log("LIJ2",lignCountJ2);
         lignCountJ1 = 0;
         lignCountJ2 = 0;
     }
 
+    
+    console.log("APRES COMPTEUR DE COLONNE");
     if (!state.scenarioJeuxState.gameState.isFinished) {
         for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
             for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {
@@ -360,11 +366,15 @@ function endMorpionGame(state) {
                     state.scenarioJeuxState.gameState.isFinished = true;
                 }
             }
+            console.log("Colonne", i);
+            console.log("COJ1",columnCountJ1);
+            console.log("COJ2",columnCountJ2);
             columnCountJ1 = 0;
             columnCountJ2 = 0;
         }
     }
-
+    
+    console.log("APRES COMPTEUR DE DIAGONALE");
     if (!state.scenarioJeuxState.gameState.isFinished) {
         for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
             for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {
@@ -388,17 +398,13 @@ function endMorpionGame(state) {
                 }
             }
         }
+        console.log("DLJ1",diagonalLeftCountJ1);
+        console.log("DRJ1",diagonalRightCountJ1);
+        console.log("DLJ2",diagonalLeftCountJ2);
+        console.log("DRJ2",diagonalRightCountJ2);
     }
 
-    console.log(diagonalLeftCountJ1);
-    console.log(diagonalRightCountJ1);
-    console.log(lignCountJ1);
-    console.log(columnCountJ1);
 
-    console.log(diagonalLeftCountJ2);
-    console.log(diagonalRightCountJ2);
-    console.log(lignCountJ2);
-    console.log(columnCountJ2);
 
     return state;
 }
