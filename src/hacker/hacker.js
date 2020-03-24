@@ -1,3 +1,5 @@
+var hackerDocElement = document.getElementById("docScenarioHacking");
+
 function hackingScenario(commandKey, commandOptions, state) {
     switch (state.scenarioHackingState.name) {
         case "initialisation":
@@ -61,6 +63,8 @@ function matchCommandeInit(commandKey, commandOptions, state) {
             writeCommandResults("Vous venez de débloquer le debugger avancé système. Vous pouvez utiliser l'ensemble des commandes systèmes");
             state.scenarioHackingState.previousCmd = "";
             state.scenarioHackingState.name = "defend1";
+            hackerDocElement.style.display = "block";
+            hackerDocElement.innerHTML = documentationHackDefend1();
             document.getElementById("hackingText").innerHTML = textDefend1();
         } else {
             state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -105,6 +109,9 @@ function matchCommandeDefend1(commandKey, commandOptions, state) {
                 writeCommandResults("Tout les ports de connexions ont bien été ouverts.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery1";
+                hackerDocElement.style.display = "block";
+                hackerDocElement.innerHTML = documentationHackRecovery1();
+                document.getElementById("hackingText").innerHTML = textRecovery1();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -145,6 +152,9 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
                 writeCommandResults("Encodage des sources des fireWall terminée.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery2";
+                hackerDocElement.style.display = "block";
+                hackerDocElement.innerHTML = documentationHackRecovery2();
+                document.getElementById("hackingText").innerHTML = textRecovery2();
             } else {
 
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -185,6 +195,9 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
                 writeCommandResults("Su^^ression de toutes les menaces terminées. Votre système est sécurisé.");
                 state.scenarioHackingState.previousCmd = "delete";
                 state.scenarioHackingState.name = "recovery3";
+                hackerDocElement.style.display = "block";
+                hackerDocElement.innerHTML = documentationHackRecovery3();
+                document.getElementById("hackingText").innerHTML = textRecovery3();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -224,6 +237,9 @@ function matchCommandeRecovery1(commandKey, commandOptions, state) {
                 //  TODO animation hack + new text
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "defend2";
+                hackerDocElement.style.display = "block";
+                hackerDocElement.innerHTML = documentationHackDefend2();
+                document.getElementById("hackingText").innerHTML = textDefend2();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -280,6 +296,9 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 document.getElementById("hackingText").innerHTML = getReadMeText();
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "defend3";
+                hackerDocElement.style.display = "block";
+                hackerDocElement.innerHTML = documentationHackDefend3();
+                document.getElementById("hackingText").innerHTML = textDefend3();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -312,6 +331,9 @@ function matchCommandeRecovery3(commandKey, commandOptions, state) {
                     writeCommandResults("Fichiers Récupérés.")
                     state.scenarioHackingState.previousCmd = "";
                     state.scenarioHackingState.name = "end";
+                    hackerDocElement.style.display = "block";
+                    hackerDocElement.innerHTML = documentationHackEnd();
+                    document.getElementById("hackingText").innerHTML = textEnd();
 
                 } else {
 
@@ -334,6 +356,10 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
                 writeCommandResults("Le scenrario a bien été réinitialisé.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "initialisation";
+                hackerDocElement.style.display = "block";
+                hackerDocElement.innerHTML = documentationHackInit();
+                document.getElementById("hackingText").innerHTML = textInitialisation();
+
             } else {
 
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -341,7 +367,7 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
             if (commandKey == "getText") {
                 writeCommandResults("Voici l'ensemble des paragraphes ainsi qu'un lien de téléchargement pour le CV.")
                 state.scenarioHackingState.previousCmd = "";
-                state.scenarioHackingState.name = "initialisation";
+                document.getElementById("hackingText").innerHTML = textEnd();
             } else {
 
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -379,6 +405,14 @@ function documentationHackRecovery2() {
 }
 
 function documentationHackRecovery3() {
+
+}
+
+function documentationHackEnd() {
+
+}
+
+function documentationHackInit() {
 
 }
 
