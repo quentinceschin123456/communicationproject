@@ -160,30 +160,41 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
 
 function matchCommandeDefend3(commandKey, commandOptions, state) {
 
-    if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "defend3") {
-        return state;
+    if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "recovery1") {
+        return scenarioHackingState;
     }
-    // première réponse
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "") {
+    switch (state.scenarioHackingState.previousCmd) {
+        case "":
+            if (commandKey == "netscan") {
+                writeCommandResults("IP : 192.168.1.156")
+                state.scenarioHackingState.previousCmd = "netscan";
+            } else {
+                commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            break;
+        case "netscan":
+            if (commandKey == "ssh" && commandOptions[0] == "--forcePassword" && commandOptions[1] == "root@192.168.1.156") {
+                writeCommandResults("Connection ssh réussi, le mot de passe est 'root'");
+                writeCommandResults("Les fichiers présent sont : <li>info.txt</li><li>root.pwd</li><li>issous.png</li></<li>");
+                state.scenarioHackingState.previousCmd = "ssh";
+            } else {
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            break;
+        case "ssh":
+            if (commandKey == "cat" && commandOptions == "info.txt") {
+                writeCommandResults("Ouverture du fichier info.txt");
 
-        if (commandKey == "block" && commandOptions == "--all-port") {
-            writeCommandResults("Tout les ports de connexions ont bien été fermés.")
-            state.scenarioHackingState.previousCmd = "block";
-        } else {
-
-            commandsScenariosUtilities(commandKey, commandOptions, state);
-        }
+                //  TODO animation hack + new text
+                state.scenarioHackingState.previousCmd = "";
+                state.scenarioHackingState.name = "recovery3";
+            } else {
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+            }
+            break;
+        default:
+            break;
     }
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "block") {
-        state.scenarioHackingState.previousCmd = "changeIp";
-    }
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "changeIp") {
-        state.scenarioHackingState.previousCmd = "delete";
-    }
-    if (state.scenarioHackingState.isPreviousCmdSucced && state.scenarioHackingState.previousCmd == "delete") {
-        state.scenarioHackingState.previousCmd = "";
-    }
-
     return state;
 }
 
@@ -266,11 +277,12 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
             break;
-        case "cat-read":
+        case "cat":
             if (commandKey == "cd" && commandOptions == "Recrutement") {
                 writeCommandResults("Déplacement vers /root/Desktop/Recrutement");
                 document.getElementById("hackingText").innerHTML = getReadMeText();
-                state.scenarioHackingState.previousCmd = "cat";
+                state.scenarioHackingState.previousCmd = "";
+                state.scenarioHackingState.name = "defend3";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
