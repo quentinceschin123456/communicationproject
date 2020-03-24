@@ -255,6 +255,7 @@ function bindClickMatrice() {
 // PIONS //
 
 function lockMovement(state) {
+    
     if (!state.scenarioJeuxState.gameState.isFinished) {
         var selectedCase = document.getElementsByClassName('selectedCase')[0];
         if(selectedCase.innerHTML === '') {
@@ -302,20 +303,34 @@ function updateHTMLMatrice(caseCell, pion) {
 }
 
 function morpionTurnIA(state) {
-    var isCellEmpty = false;
-    do {
-        var ligneRandom = Math.floor(Math.random() * 3);
-        var colonneRandom = Math.floor(Math.random() * 3);
-        if (state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] === '') {
-            isCellEmpty = true;
+
+    var hasAValidCase = false
+    for (var i = 0; i <= state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
+        for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {
+            if (state.scenarioJeuxState.gameState.rawMatrice[i][] === '') {
+                hasAValidCase = true;
+            }
         }
-    } while(!isCellEmpty);
-    var pion = (state.scenarioJeuxState.gameState.gamerTurn ? '<div class="marginAuto">X</div>' : '<div class="marginAuto">O</div>');
-    state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] = pion;
-    var selectedCase = document.getElementById('case-' + ligneRandom + '-' + colonneRandom);
-    updateHTMLMatrice(selectedCase, pion);
-    state.scenarioJeuxState.gameState.gamerTurn = !state.scenarioJeuxState.gameState.gamerTurn;
-    state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] = 'O';
+    }
+
+    if(hasAValidCase) {
+        var isCellEmpty = false;
+        do {
+            var ligneRandom = Math.floor(Math.random() * 3);
+            var colonneRandom = Math.floor(Math.random() * 3);
+            if (state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] === '') {
+                isCellEmpty = true;
+            }
+        } while(!isCellEmpty);
+        var pion = (state.scenarioJeuxState.gameState.gamerTurn ? '<div class="marginAuto">X</div>' : '<div class="marginAuto">O</div>');
+        state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] = pion;
+        var selectedCase = document.getElementById('case-' + ligneRandom + '-' + colonneRandom);
+        updateHTMLMatrice(selectedCase, pion);
+        state.scenarioJeuxState.gameState.gamerTurn = !state.scenarioJeuxState.gameState.gamerTurn;
+        state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] = 'O';
+    } else {
+        state.scenarioJeuxState.gameState.isFinished = true;
+    }
     return state;
 }
 
