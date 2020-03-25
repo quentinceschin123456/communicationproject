@@ -55,7 +55,6 @@ function initializeCommandTypingEvent(state) {
             var command = input.value.trim();
             if (command !== "") {
                 writeCommandResults("> " + command);
-                scrollDown("commandResults");
                 state = stateTraitment(command, state);
                 input.value = "";
             }
@@ -95,7 +94,6 @@ function stateTraitment(command, state) {
         default:
             break;
     }
-    scrollDown("commandResults");
     return state;
 }
 
@@ -137,6 +135,7 @@ function selectScenario(commandOptions) {
         }
         case "--games": {
             displayScenario("thirdScenario", "gamesText");
+            document.getElementById("gamesText").innerHTML = displayScenarioTextGame();
             break;
         }
         default: {
@@ -260,6 +259,7 @@ function writeCommandResults(text) {
     }
     newText.innerHTML = "<div>" + text + "</div>";
     textResults.appendChild(newText);
+    scrollDown("commandResults");
 }
 
 function cutCommand(command) {
