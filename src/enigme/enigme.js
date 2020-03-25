@@ -79,7 +79,10 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
             {
                 parentDiv.addContent("<h1>Voilà un petit morceau :</h1>");
                 if (commentaire != "") {
-                    parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
+                    parentDiv.addContent("\
+                        <div style='height:400px;width:1200px;overflow:auto;'>\
+                            "+ commentaire +"\
+                        </div>");
                     parentDiv.addContent("<h3>Saisissez la commande \"<bold>next</bold>\" pour passer à la prochaine enigme.</h3>");
                 }
                 printInHTML(parentDiv.render);
@@ -118,7 +121,10 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
             {
                 parentDiv.addContent("<h1>Voilà un autre petit morceau :</h1>");
                 if (commentaire != "") {
-                    parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
+                    parentDiv.addContent("\
+                        <div style='height:400px;width:1200px;overflow:auto;'>\
+                            "+ commentaire +"\
+                        </div>");
                     parentDiv.addContent("<h3>Saisissez la commande \"<bold>next</bold>\" pour passer à la prochaine enigme.</h3>");
                 }
                 printInHTML(parentDiv.render);
@@ -155,10 +161,14 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
         case scenarioState_enum[6]:
             {
                 parentDiv.addContent("<h1>Vous avez réussit !</h1>");
-                parentDiv.addContent("\
-                <h3>Je dois admettre que vous êtes plutôt doué !\
-                <h3>Voici tous les morceaux réunit : </h3>\
-                <img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                parentDiv.addContent("<h3>Je dois admettre que vous êtes plutôt doué !</h3>");
+                if (commentaire != "") {
+                    parentDiv.addContent("\
+                        <div style='height:400px;width:1200px;overflow:auto;'>\
+                            "+ commentaire +"\
+                        </div>");
+                }
+                parentDiv.addContent("<img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
                 printInHTML(parentDiv.render);
                 break;
             }
@@ -204,13 +214,53 @@ function goToMenu(state) {
     writeCommandResults("Retour à l'écran principal de l'application.");
 }
 
+function getJsonPart(level) {
+    tempStr = "";
+    switch(level) {
+        case 1:
+        {
+            for(i = 0; i<=2; i++){
+                tempStr += "<p><h2>" + jsonResource[i].name + "</h2>";
+                tempStr += "<p>Mes attentes :</br>" + jsonResource[i].VosAttentes + "</p>";
+                tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[i].VosCompetenceProfessionnelles + "</p>";
+                tempStr += "</p>";
+            }
+            break;
+        }
+        case 2:
+        {
+            for(i = 0; i<=2; i++){
+                tempStr += "<p><h2>" + jsonResource[i].name + "</h2>";
+                tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[i].VosTraitsDePersonnalités + "</p>";
+                tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[i].VosCentreInteret + "</p>";
+                tempStr += "</p>";
+            }
+            break;
+        }
+        case 3:
+        {
+            for(i = 0; i<=2; i++){
+                tempStr += "<p><h2>" + jsonResource[i].name + "</h2>";
+                tempStr += "<p>Mes attentes :</br>" + jsonResource[i].VosAttentes + "</p>";
+                tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[i].VosCompetenceProfessionnelles + "</p>";
+                tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[i].VosTraitsDePersonnalités + "</p>";
+                tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[i].VosCentreInteret + "</p>";
+                tempStr += "<p>Mon itinéraire pro-passé :</br>" + jsonResource[i].VotreItineraireProPasse + "</p>";
+                tempStr += "</p>";
+            }
+            break;
+        }
+    }
+    return tempStr;
+}
+
 /* ------------------------------------------------*/
 function commandsEnigmes(commandKey, commandOptions, state) {
     if (state.application == "scenarioEnigmes" | scenarioState == scenarioState_enum[0]) {
         switch (commandKey) {
             case "next":
                 {
-                    incToNextScenario();
+                    incToNextScenario(); // Passage à l'étape suivante
                     break;
                 }
             case "menu":
@@ -235,12 +285,12 @@ function commandsEnigmes(commandKey, commandOptions, state) {
         }
         if (commandKey == "next" && nbTry > 3) {
             incToNextScenario();
-            nextStepScenarioEnigmes(scenarioState, ST_NONE, "Voici un morceau qui parle de ...");
+            nextStepScenarioEnigmes(scenarioState, ST_NONE, getJsonPart(1)); // Passage à l'étape suivante
             return state;
         }
         if (scenarioStep1Responses_enum.includes(commandKey.toLowerCase())) {
             incToNextScenario();
-            nextStepScenarioEnigmes(scenarioState, ST_NONE, "Voici un morceau qui parle de ...");
+            nextStepScenarioEnigmes(scenarioState, ST_NONE, getJsonPart(1)); // Passage à l'étape suivante
             return state;
         } else {
             nbTry += 1;
@@ -258,7 +308,7 @@ function commandsEnigmes(commandKey, commandOptions, state) {
             case "next":
                 {
                     incToNextScenario();
-                    nextStepScenarioEnigmes(scenarioState, ST_NONE, "");
+                    nextStepScenarioEnigmes(scenarioState, ST_NONE, ""); // Passage à l'étape suivante
                     return state;
                 }
             case "menu":
@@ -281,12 +331,12 @@ function commandsEnigmes(commandKey, commandOptions, state) {
         }
         if (commandKey == "next" && nbTry > 3) {
             incToNextScenario();
-            nextStepScenarioEnigmes(scenarioState, ST_NONE, "Voici un morceau qui parle de ...");
+            nextStepScenarioEnigmes(scenarioState, ST_NONE, getJsonPart(2)); // Passage à l'étape suivante
             return state;
         }
         if (scenarioStep2Responses_enum.includes(commandKey.toLowerCase())) {
             incToNextScenario();
-            nextStepScenarioEnigmes(scenarioState, ST_NONE, "Voici un morceau qui parle de ...");
+            nextStepScenarioEnigmes(scenarioState, ST_NONE, getJsonPart(2)); // Passage à l'étape suivante
             return state;
         } else {
             nbTry += 1;
@@ -326,12 +376,12 @@ function commandsEnigmes(commandKey, commandOptions, state) {
         }
         if (commandKey == "next" && nbTry > 3) {
             incToNextScenario();
-            nextStepScenarioEnigmes(scenarioState, ST_NONE, "Voici un morceau qui parle de ...");
+            nextStepScenarioEnigmes(scenarioState, ST_NONE, getJsonPart(3));
             return state;
         }
         if (scenarioStep3Responses_enum.includes(commandKey.toLowerCase())) {
             incToNextScenario();
-            nextStepScenarioEnigmes(scenarioState, ST_NONE, "");
+            nextStepScenarioEnigmes(scenarioState, ST_NONE, getJsonPart(3));
             return state;
         } else {
             nbTry += 1;
