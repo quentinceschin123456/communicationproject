@@ -87,11 +87,11 @@ function displayGameRules(currentState) {
             break;
         }
         case "secondGameRules" : {
-            screen.innerHTML = "Expliquer règles dames yolo";
+            screen.innerHTML = "<strong>L'informajoueur : </strong>\"Savez vous ce que l'on dit de moi dans les alentours ? Que je suis le meilleur pour cacher mes pensées... <br>Et j'ai justement un jeu où vous allez devoir deviner ce que je pense !<br><br><br><br>Le jeu est simple, je choisis un nombre dans un interval que je vais vous donner et vous devrez le retrouver. Pour vous aider, je vous indiquerez uniquement si le nombre que vous me proposez est plus petit ou plus grand. <br><br>/!\\ Attention, vous ne pourrez pas essayer indéfiniment de trouver la solution. Seules 7 tentatives vous seront accordées !\"<br><br><br><br><i>Il s'installe en tailleur et tient ses tempes avec chacune de ses mains en fermant les yeux.<br><br>Après un moment de concentration intense, il rouvre ses yeux et vous fixe de son regard perçant.<br><br><br><br>C'est à vous de faire votre première tentative de divination.</i>";
             break;
         }
         case "thirdGameRules" : {
-            screen.innerHTML = "Expliquer règles contamination yolo";
+            screen.innerHTML = "<strong>L'informajoueur : </strong>\"Sur ce jeu là vous allez transpirer c'est moi qui vous le dit !\"<br><br><i>Il vous sourit à pleines dents avec ce qui lui reste de son dentier.</i><br><br><br><br><strong>L'informajoueur : </strong>\"Nous allons donc jouer à un jeu japonais, appelé le \"Shifumi\".<br>Dans votre langue natale, il me semble qu'on appelle ce jeu le \"Pierre - Feuille - Ciseaux\"...<br><br><br><br>Chaque élément a une force et une faiblesse. Voici toutes les combinaisons possibles : <br> - la Pierre gagne contre les Ciseaux, mais elle perd contre la Feuille <br> - les Ciseaux gagnent contre la Feuille et perdent contre la Pierre <br> - la Feuille gagne contre la Pierre et perd contre les Ciseaux <br> C'est pas bien compliqué dit comme ça, mais y a toute une réflexion tactique derrière à avoir !\"<br><br><br><br><i>Il semble vous attendre de pied ferme sur cette épreuve.</i>";
             break;
         }
     }
@@ -109,12 +109,12 @@ function displayGame(currentState, htmlMatrice) {
         }
         case "secondGame" : { 
             screen.innerHTML = "<h2 class='gamesTextAlign'>DEVINE LE NOMBRE</h2>";
-            screen.innerHTML += "<div class='gamesTextAlign'>Trouvez le nombre auquel je pense entre 0 et 100</div>";
-            screen.innerHTML += "<br><br><br><br><div id='guessInfos' class='gamesTextAlign'>Ici sera indiqué si le nombre est inférieur ou supérieur à celui que vous me donnerez.</div>";
+            screen.innerHTML += "<br><br><br><br><div class='gamesTextAlign'><strong>Information</strong> : Le nombre est situé entre 0 et 100</div>";
+            screen.innerHTML += "<br><br><br><br><div id='guessInfos' class='gamesTextAlign'><i>Ici sera indiqué si le nombre est inférieur ou supérieur à celui que vous me donnerez.</i></div>";
             break;
         }
         case "thirdGame" : {
-            screen.innerHTML = "CONTAMINATION";
+            screen.innerHTML = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
             break;
         }
     }
@@ -132,7 +132,10 @@ function displayGameRewards(currentState) {
             break;
         }
         case "secondReward" : {
-            screen.innerHTML = "Texte 3 + Texte 4";
+            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Ce petit jeux était bien trop simple ! Même un enfant pourrait y arriver !\"<br><br><i>Il ouvre violemment un second tiroir et en sort une petite fiche qu'il vous jette à nouveau sous les yeux et que vous lisez attentivement.</i>";
+            screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 3</div>";
+            screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 4</div>";
+            screen.innerHTML += "<br><br><strong>L'informajoueur : </strong>\"Un conseil ne prenez pas la confiance trop vite. Vous m'avez peut être battu sur deux de mes  jeux, mais j'ai encore une carte dans ma manche ! Un jeu où vous ne pourrez jamais, oh grand jamais me vaincre ! Dites \"adieu\" au reste de vos précieuses informations... héhéhé...\"<br><br><br><br><i>Il se frotte les mains tout en ricanant malsainement.<br><br>Çela ne vous laisse présager rien de bon...</i>";
             break;
         }
         case "thirdReward" : {
@@ -511,6 +514,7 @@ function buildGameGuess() {
 function restartGuessGame(state) {
     state.scenarioJeuxState.gameState = buildGameGuess();
     displayGame(state.scenarioJeuxState.currentState);
+    writeCommandResults("Choix d'un nouveau nombre à trouver...");
     return state;
 }
 
@@ -519,13 +523,13 @@ function guessWithThisNumber(state, typedNumber) {
     state.scenarioJeuxState.gameState.nbAttempt++;
     
     var htmlInfo = document.getElementById('guessInfos');
-    if(state.scenarioJeuxState.gameState.nbAttempt <= 10) {
+    if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
         if(typedNumber < state.scenarioJeuxState.gameState.number) {
-            htmlInfo.innerHTML = "Le nombre est plus grand que " + typedNumber;
+            htmlInfo.innerHTML = "+ Le nombre est plus grand que " + typedNumber;
         } else if (typedNumber > state.scenarioJeuxState.gameState.number) {
-            htmlInfo.innerHTML = "Le nombre est plus petit que " + typedNumber;
+            htmlInfo.innerHTML = "- Le nombre est plus petit que " + typedNumber;
         } else {
-            htmlInfo.innerHTML = "Bravo vous avez trouvé le nombre qui est bel et bien " + typedNumber;
+            htmlInfo.innerHTML = "Bravo, le nombre est bel et bien " + typedNumber;
             state.scenarioJeuxState.gameState.isFinished = "numberFound";
         }
     } else {
@@ -551,7 +555,7 @@ function endGuessGame(state) {
                 screen.innerHTML += "<div class='gamesTextAlign'><strong>L'informajoueur : </strong>\"Personne n'arrive à lire mes pensées les plus profondes ! Et ce n'est pas une amatrice en la matière qui réussira à m'extorquer mes pensées ! Pour vous le prouver, je vous laisse retenter si vous n'avez pas honte d'un énième échec héhéhé...\"</div>"
                 writeCommandResults("//--- Vous avez perdu ---//");
             }
-        }, 1500);
+        }, 3000);
     } else {
 
     }
