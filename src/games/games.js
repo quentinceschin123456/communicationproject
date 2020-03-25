@@ -1,6 +1,6 @@
-/*-----------------*/
-/*---- ENGINE -----*/
-/*-----------------*/
+/*------------------------*/
+/*---- COMMON ENGINE -----*/
+/*------------------------*/
 
 /* SELECT GAMES SCENARIO */
 
@@ -24,11 +24,11 @@ function commandsJeux(commandKey, commandOptions, state) {
         case "restart": {
             switch(state.scenarioJeuxState.currentState) {
                 case "firstGame" : {
-                    state = restartGame(state);
+                    state = restartMorpionGame(state);
                     break;
                 }
                 case "secondGame" : {
-                    
+                    state = restartGuessGame(state);
                     break;
                 }
                 case "thirdGame" : {
@@ -48,10 +48,6 @@ function commandsJeux(commandKey, commandOptions, state) {
                     state = lockMovement(state);
                     break;
                 }
-                case "secondGame" : {
-                    
-                    break;
-                }
                 case "thirdGame" : {
                    
                     break;
@@ -60,6 +56,16 @@ function commandsJeux(commandKey, commandOptions, state) {
                     writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
                     break
                 }
+            }
+            break;
+        }
+        case "try-number" : {
+            if (state.scenarioJeuxState.currentState === "secondGame") {
+                state = guessWithThisNumber(state, commandOptions[0]);
+                writeCommandResults("Tentative n°" + state.scenarioJeuxState.gameState.nbAttempt);
+                state = endGuessGame(state);
+            } else {
+                writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
             }
             break;
         }
@@ -102,7 +108,9 @@ function displayGame(currentState, htmlMatrice) {
             break;
         }
         case "secondGame" : { 
-            screen.innerHTML = "DAMES";
+            screen.innerHTML = "<h2 class='gamesTextAlign'>DEVINE LE NOMBRE</h2>";
+            screen.innerHTML += "<div class='gamesTextAlign'>Trouvez le nombre auquel je pense entre 0 et 100</div>";
+            screen.innerHTML += "<br><br><br><br><div id='guessInfos' class='gamesTextAlign'>Ici sera indiqué si le nombre est inférieur ou supérieur à celui que vous me donnerez.</div>";
             break;
         }
         case "thirdGame" : {
@@ -154,7 +162,7 @@ function launchGameStep(state) {
             break;
         }
         case "firstGame": {
-            state = restartGame(state);
+            state = restartMorpionGame(state);
             writeCommandResults("//--- Jeux n°1 ---//")
             docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
@@ -174,9 +182,9 @@ function launchGameStep(state) {
             break;
         }
         case "secondGame": {
-            displayGame(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Jeux n°2 ---//")
-            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
+            state = restartGuessGame(state);
+            writeCommandResults("//--- Jeux n°2 ---//");
+            docmnt.innerHTML += "<strong>try-number X: </strong>Proposer le nombre X<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
@@ -273,7 +281,7 @@ function retrieveHTMLMatrice(rawMatrice) {
     return htmlMatrice;
 }
 
-function buildGameObject(size) {
+function buildGameMorpion(size) {
     var rawMatrice = setBoardGame(size);
     var boardGame = {
         rawMatrice: rawMatrice,
@@ -305,8 +313,8 @@ function bindClickMatrice() {
 
 /* ENGINE MORPION */
 
-function restartGame(state) {
-    state.scenarioJeuxState.gameState = buildGameObject(3);
+function restartMorpionGame(state) {
+    state.scenarioJeuxState.gameState = buildGameMorpion(3);
     displayGame(state.scenarioJeuxState.currentState, state.scenarioJeuxState.gameState.htmlMatrice);
     bindClickMatrice();
     writeCommandResults("Nettoyage du plateau...");
@@ -489,3 +497,63 @@ function endMorpionGame(state) {
 /*--------------------------*/
 /*---- DEVINE UN NOMBRE ----*/
 /*--------------------------*/
+
+function buildGameGuess() {
+    var gameState = {
+        number: Math.floor(Math.random() * 100),
+        nbAttempt: 0,
+        isFinished: "not"
+    };
+
+    return gameState;
+}
+
+function restartGuessGame(state) {
+    state.scenarioJeuxState.gameState = buildGameGuess();
+    displayGame(state.scenarioJeuxState.currentState);
+    return state;
+}
+
+function guessWithThisNumber(state, typedNumber) {
+
+    state.scenarioJeuxState.gameState.nbAttempt++;
+    
+    var htmlInfo = document.getElementById('guessInfos');
+    if(state.scenarioJeuxState.gameState.nbAttempt <= 10) {
+        if(typedNumber < state.scenarioJeuxState.gameState.number) {
+            htmlInfo.innerHTML = "Le nombre est plus grand que " + typedNumber;
+        } else if (typedNumber > state.scenarioJeuxState.gameState.number) {
+            htmlInfo.innerHTML = "Le nombre est plus petit que " + typedNumber;
+        } else {
+            htmlInfo.innerHTML = "Bravo vous avez trouvé le nombre qui est bel et bien " + typedNumber;
+            state.scenarioJeuxState.gameState.isFinished = "numberFound";
+        }
+    } else {
+        htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
+        state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+    }
+    return state;
+}
+
+function endGuessGame(state) {
+    if(state.scenarioJeuxState.gameState.isFinished !== "not") {
+        setTimeout(() => {
+            var screen = document.getElementById('gamesText');
+            screen.innerHTML = "<h2 class='gamesTextAlign'>DEVINE LE NOMBRE</h2><br><br><br><br>";              
+            if (state.scenarioJeuxState.gameState.isFinished === "numberFound") {
+                screen.innerHTML += "<div class='gamesTextAlign gamesTextUnderline'>Vous gagnez à nouveau contre l'informajoueur !</div>";
+                setTimeout(() => {
+                    state = launchGameStep(skipCurrentState(state));
+                }, 1500);
+            } else {
+                screen.innerHTML += "<div class='gamesTextAlign gamesTextUnderline'>Le mental de l'informajoueur est trop fort !</div>" ;
+                screen.innerHTML += "<br><br><br><br>";
+                screen.innerHTML += "<div class='gamesTextAlign'><strong>L'informajoueur : </strong>\"Personne n'arrive à lire mes pensées les plus profondes ! Et ce n'est pas une amatrice en la matière qui réussira à m'extorquer mes pensées ! Pour vous le prouver, je vous laisse retenter si vous n'avez pas honte d'un énième échec héhéhé...\"</div>"
+                writeCommandResults("//--- Vous avez perdu ---//");
+            }
+        }, 1500);
+    } else {
+
+    }
+    return state;
+}
