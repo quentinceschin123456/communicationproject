@@ -407,23 +407,45 @@ function documentationHackDefend3() {
 }
 
 function documentationHackRecovery1() {
+    var str = "<h2>Manipulation distante : </h2>";
+    str += "<strong>netscan : </strong> Affiche les adresses IPv4 connectées au client  <br>";
+    str += "<strong>ssh --forcePassword root@192.168.1.156 : </strong>Connecte le terminal à l'hôte distant désigné.<br>";
+    str += "<strong>cat info.txt : </strong>Lis le contenu du fichier désigné.<br>";
 
+    return str;
 }
 
 function documentationHackRecovery2() {
+    var str = "<h2>Manipulation distante : </h2>";
+    str += "<strong>ls -aR : </strong>Liste tout les fichiers et les dossires de l'arborescence<br>";
+    str += "<strong>cat info.txt : </strong>Lis le contenu du fichier désigné.<br>";
+    str += "<strong>cat readme.md : </strong>Lis le contenu du fichier désigné.<br>";
+    str += "<strong>cd Recrutement : </strong>Déplacement vers le dossier ciblé.<br>";
 
+    return str;
 }
 
 function documentationHackRecovery3() {
+    var str = "<h2>Téléchargement distant : </h2>";
+    str += "<strong>exit : </strong> Se déconnecte de la sessions ssh en cours. <br>";
+    str += "<strong>scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/ : </strong>Télécharge le fichier depuis un hôte distant.<br>";
 
+    return str;
 }
 
 function documentationHackEnd() {
+    var str = "<h2>Téléchargement distant : </h2>";
+    str += "<strong>reset : </strong> Recommence le scenério de hacking depuis le debut. <br>";
+    str += "<strong>getText : </strong>Affiche un lien de téléchargement pour le cv ainsi que tous les textes.<br>";
 
+    return str;
 }
 
 function documentationHackInit() {
+    var str = "<h2>Lancement d'outil logiciel : </h2>";
+    str += "<strong>start --debugger-sys: </strong> Lance le debugger système. <br>";
 
+    return str;
 }
 
 function documentationHackGeneral() {
