@@ -459,39 +459,39 @@ function getReadMeText() {
 function textInitialisation() {
     return '<strong>HACKING : </strong><br> <br>' +
         'Bienvenu au cybercafé "TrapedMouse", je suis anonymous et je détiens un accès à l \'intégralité de vos données.' +
-        '<br> ' +
-        '<br >' +
-        'Donnez moi 500 bitcoins si vous ne souhaitez pas que détruise vos précieuses informations.' +
-        '</div>';
+        '<br>' +
+        '<br>' +
+        'Donnez moi 500 bitcoins si vous ne souhaitez pas que détruise vos précieuses informations.';
 }
 
 
 function textDefend1() {
-
+    return '';
 }
 
 function textRecovery1() {
-
+    return '';
 }
 
 function textDefend2() {
-
+    return '';
 }
 
 function textRecovery2() {
-
+    return '';
 }
 
 function textDefend3() {
-
+    return '';
 }
 
 function textRecovery3() {
-
+    return '';
 }
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
+    return '';
 }
 
 
