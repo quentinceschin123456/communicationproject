@@ -1,5 +1,9 @@
 /**********/
+
+
 /*---------------------- BODY / STRUCTURE / GENERIC ----------------------*/
+
+
 /**********/
 
 body {
@@ -43,8 +47,13 @@ body {
     font-family: monospace;
 }
 
+
 /**********/
+
+
 /*---------------------- LOADING ----------------------*/
+
+
 /**********/
 
 #loadingScreen {
@@ -101,8 +110,14 @@ body {
     border-radius: 20px;
     padding: 5px 25px;
 }
+
+
 /**********/
+
+
 /*---------------------- MENU ----------------------*/
+
+
 /**********/
 
 #menu {
@@ -138,8 +153,13 @@ body {
     padding: 1em;
 }
 
+
 /**********/
+
+
 /*---------------------- SCREEN ----------------------*/
+
+
 /**********/
 
 #displayScreen {
@@ -168,8 +188,13 @@ body {
     font-size: large;
 }
 
+
 /**********/
+
+
 /*---------------------- COMMAND RESULT ----------------------*/
+
+
 /**********/
 
 #commandResults {
@@ -178,12 +203,15 @@ body {
     overflow-y: auto;
 }
 
-#textResults {
+#textResults {}
 
-}
 
 /**********/
+
+
 /*---------------------- COMMAND INPUT ----------------------*/
+
+
 /**********/
 
 #commandInput {
@@ -216,8 +244,13 @@ input:focus {
     margin: auto;
 }
 
+
 /**********/
+
+
 /*---------------------- DOCUMENTATION ----------------------*/
+
+
 /**********/
 
 #documentation {
@@ -242,8 +275,13 @@ input:focus {
     display: none;
 }
 
+
 /**********/
+
+
 /*---------------------- SCROLLBAR ----------------------*/
+
+
 /**********/
 
 ::-webkit-scrollbar {
@@ -263,13 +301,18 @@ input:focus {
 }
 
 
+/**********/
+
+
+/*---------------------- TYPE ANIMATION ----------------------*/
+
 
 /**********/
-/*---------------------- TYPE ANIMATION ----------------------*/
-/**********/
+
 
 /* Animation */
-.anim-typewriter {    
+
+.anim-typewriter {
     /*border-right: 2px solid rgba(255, 255, 255, .75);*/
     white-space: nowrap;
     overflow: hidden;
@@ -280,8 +323,25 @@ input:focus {
     from {
         width: 0;
     }
-
     to {
         width: 100%;
     }
+}
+
+
+/********************HACKER************************/
+
+.hack-skull {
+    width: 100%;
+    height: auto;
+}
+
+#hackingText {
+    display: flex;
+    flex-direction: column;
+}
+
+#hackingTextImg {
+    max-width: 400px;
+    align-self: center;
 }

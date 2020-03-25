@@ -63,9 +63,10 @@ function matchCommandeInit(commandKey, commandOptions, state) {
             writeCommandResults("Vous venez de débloquer le debugger avancé système. Vous pouvez utiliser l'ensemble des commandes systèmes");
             state.scenarioHackingState.previousCmd = "";
             state.scenarioHackingState.name = "defend1";
-            hackerDocElement.style.display = "block";
-            hackerDocElement.innerHTML = documentationHackDefend1();
-            document.getElementById("hackingText").innerHTML = textDefend1();
+            // hackerDocElement.style.display = "flex";
+            // hackerDocElement.innerHTML = documentationHackDefend1();
+            document.getElementById("hackingTextBox").innerHTML = textDefend1();
+            setSkullImg();
         } else {
             state = commandsScenariosUtilities(commandKey, commandOptions, state);
         }
@@ -109,9 +110,9 @@ function matchCommandeDefend1(commandKey, commandOptions, state) {
                 writeCommandResults("Tout les ports de connexions ont bien été ouverts.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery1";
-                hackerDocElement.style.display = "block";
-                hackerDocElement.innerHTML = documentationHackRecovery1();
-                document.getElementById("hackingText").innerHTML = textRecovery1();
+                // hackerDocElement.style.display = "flex";
+                // hackerDocElement.innerHTML = documentationHackRecovery1();
+                document.getElementById("hackingTextBox").innerHTML = textRecovery1();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -152,9 +153,9 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
                 writeCommandResults("Encodage des sources des fireWall terminée.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery2";
-                hackerDocElement.style.display = "block";
-                hackerDocElement.innerHTML = documentationHackRecovery2();
-                document.getElementById("hackingText").innerHTML = textRecovery2();
+                // hackerDocElement.style.display = "flex";
+                // hackerDocElement.innerHTML = documentationHackRecovery2();
+                document.getElementById("hackingTextBox").innerHTML = textRecovery2();
             } else {
 
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -195,9 +196,9 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
                 writeCommandResults("Suppression de toutes les menaces terminées. Votre système est sécurisé.");
                 state.scenarioHackingState.previousCmd = "delete";
                 state.scenarioHackingState.name = "recovery3";
-                hackerDocElement.style.display = "block";
-                hackerDocElement.innerHTML = documentationHackRecovery3();
-                document.getElementById("hackingText").innerHTML = textRecovery3();
+                // hackerDocElement.style.display = "flex";
+                // hackerDocElement.innerHTML = documentationHackRecovery3();
+                document.getElementById("hackingTextBox").innerHTML = textRecovery3();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -237,9 +238,10 @@ function matchCommandeRecovery1(commandKey, commandOptions, state) {
                 //  TODO animation hack + new text
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "defend2";
-                hackerDocElement.style.display = "block";
-                hackerDocElement.innerHTML = documentationHackDefend2();
-                document.getElementById("hackingText").innerHTML = textDefend2();
+                // hackerDocElement.style.display = "flex";
+                // hackerDocElement.innerHTML = documentationHackDefend2();
+                document.getElementById("hackingTextBox").innerHTML = textDefend2();
+                setSkullImg();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -266,7 +268,7 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 // file list
                 writeCommandResults("--------");
                 writeCommandResults("");
-                document.getElementById("hackingText").innerHTML = getFirstBlocQuentin();
+                document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
                 state.scenarioHackingState.previousCmd = "cat";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -275,7 +277,7 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
         case "ls":
             if (commandKey == "cat" && commandOptions == "info.txt") {
                 writeCommandResults("Ouverture du fichier info.txt");
-                document.getElementById("hackingText").innerHTML = getFirstBlocQuentin();
+                document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
                 state.scenarioHackingState.previousCmd = "cat-info";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -284,7 +286,7 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
         case "cat-info":
             if (commandKey == "cat" && commandOptions == "readme.md") {
                 writeCommandResults("Ouverture du fichier readme.md");
-                document.getElementById("hackingText").innerHTML = getReadMeText();
+                document.getElementById("hackingTextBox").innerHTML = getReadMeText();
                 state.scenarioHackingState.previousCmd = "cat";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -293,12 +295,13 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
         case "cat":
             if (commandKey == "cd" && commandOptions == "Recrutement") {
                 writeCommandResults("Déplacement vers /root/Desktop/Recrutement");
-                document.getElementById("hackingText").innerHTML = getReadMeText();
+                document.getElementById("hackingTextBox").innerHTML = getReadMeText();
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "defend3";
-                hackerDocElement.style.display = "block";
-                hackerDocElement.innerHTML = documentationHackDefend3();
-                document.getElementById("hackingText").innerHTML = textDefend3();
+                // hackerDocElement.style.display = "flex";
+                // hackerDocElement.innerHTML = documentationHackDefend3();
+                document.getElementById("hackingTextBox").innerHTML = textDefend3();
+                setSkullImg();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -331,9 +334,9 @@ function matchCommandeRecovery3(commandKey, commandOptions, state) {
                     writeCommandResults("Fichiers Récupérés.")
                     state.scenarioHackingState.previousCmd = "";
                     state.scenarioHackingState.name = "end";
-                    hackerDocElement.style.display = "block";
-                    hackerDocElement.innerHTML = documentationHackEnd();
-                    document.getElementById("hackingText").innerHTML = textEnd();
+                    // hackerDocElement.style.display = "flex";
+                    // hackerDocElement.innerHTML = documentationHackEnd();
+                    document.getElementById("hackingTextBox").innerHTML = textEnd();
 
                 } else {
 
@@ -356,18 +359,14 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
                 writeCommandResults("Le scenrario a bien été réinitialisé.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "initialisation";
-                hackerDocElement.style.display = "block";
-                hackerDocElement.innerHTML = documentationHackInit();
-                document.getElementById("hackingText").innerHTML = textInitialisation();
-
-            } else {
-
-                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+                // hackerDocElement.style.display = "flex";
+                // hackerDocElement.innerHTML = documentationHackInit();
+                document.getElementById("hackingTextBox").innerHTML = textInitialisation();
             }
             if (commandKey == "getText") {
                 writeCommandResults("Voici l'ensemble des paragraphes ainsi qu'un lien de téléchargement pour le CV.")
                 state.scenarioHackingState.previousCmd = "";
-                document.getElementById("hackingText").innerHTML = textEnd();
+                document.getElementById("hackingTextBox").innerHTML = textEnd();
             } else {
 
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -466,7 +465,11 @@ function textInitialisation() {
 
 
 function textDefend1() {
-    return '';
+    return 'Bienvenu au cybercafé "TrapedMouse", je suis anonymous et je détiens un accès à l \'intégralité de vos données.' +
+        '<br>' +
+        '<br>' +
+        'Donnez moi 500 bitcoins si vous ne souhaitez pas que détruise vos précieuses informations.' +
+        '<br>';
 }
 
 function textRecovery1() {
@@ -474,19 +477,29 @@ function textRecovery1() {
 }
 
 function textDefend2() {
-    return '';
+    return '<br>' +
+        '<img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
 }
 
 function textRecovery2() {
-    return '';
+    return '<br>';
 }
 
 function textDefend3() {
-    return '';
+    return '<br>' +
+        '<img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
 }
 
 function textRecovery3() {
     return '';
+}
+
+function getSkullImg() {
+    return '<br><img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
+}
+
+function setSkullImg() {
+    document.getElementById('hackingTextImg').innerHTML = getSkullImg();
 }
 
 function textEnd() {

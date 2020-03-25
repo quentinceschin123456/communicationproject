@@ -85,6 +85,7 @@ function stateTraitment(command, state) {
         case "scenarioHacking":
             {
                 state = hackingScenario(commandObj.commandKey, commandObj.commandOptions, state);
+                displayAvailableCommands(state);
                 //state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
@@ -167,7 +168,7 @@ function launchScenario(state) {
             case "Hacking":
                 {
                     state.applicationState = "scenarioHacking";
-                    document.getElementById("hackingText").innerHTML = textInitialisation();
+                    document.getElementById("hackingTextBox").innerHTML = textInitialisation();
                     break;
                 }
             case "Jeux":
@@ -178,7 +179,7 @@ function launchScenario(state) {
             default:
                 break;
         }
-        displayAvailableCommands(state.applicationState);
+        displayAvailableCommands(state);
         document.getElementById("menu").style.display = "none";
         document.getElementById("displayScreenTitle").style.display = "none";
     } else {
@@ -237,45 +238,48 @@ function displayAvailableCommands(state) {
             }
         case "scenarioHacking":
             {
-                switch (state.scenarioHackingState) {
-                    case "intialisation":
+                var hackerDocElement = document.getElementById("docScenarioHacking");
+                hackerDocElement.style.display = "block";
+                switch (state.scenarioHackingState.name) {
+                    case "initialisation":
                         {
-
+                            hackerDocElement.innerHTML = documentationHackInit();
                             break;
                         }
                     case "defend1":
                         {
-                            documentationHack1();
+                            hackerDocElement.innerHTML = documentationHackDefend1();
                             break;
                         }
                     case "recovery1":
                         {
-
+                            hackerDocElement.innerHTML = documentationHackRecovery1();
                             break;
                         }
                     case "defend2":
                         {
-                            documentationHack2();
+                            hackerDocElement.innerHTML = documentationHackDefend2();
                             break;
                         }
                     case "recovery2":
                         {
-
+                            hackerDocElement.innerHTML = documentationHackRecovery2();
                             break;
                         }
                     case "defend3":
                         {
-                            documentationHack3();
+                            hackerDocElement.innerHTML = documentationHackDefend3();
                             break;
                         }
                     case "recovery3":
                         {
-
+                            hackerDocElement.innerHTML = documentationHackRecovery3();
                             break;
                         }
 
                     case "end":
                         {
+                            hackerDocElement.innerHTML = documentationHackEnd();
                             break;
                         }
 
@@ -339,6 +343,10 @@ function displayScenario(idTitle, idText) {
     var title = document.getElementById(idTitle).textContent.trim();
     writeCommandResults("Sélection du scénario " + title + "... Affichage des informations supplémentaires pour le scénario choisi...");
     document.getElementById("displayScreenTitle").textContent = title;
-    document.getElementById(idText).style.display = "block";
+    if (idText === "hackingText") {
+        document.getElementById(idText).style.display = "flex";
+    } else {
+        document.getElementById(idText).style.display = "block";
+    }
     document.getElementById(idTitle).classList.add('menuScenariosSelected');
 }
