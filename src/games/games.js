@@ -1,3 +1,16 @@
+/*-----------------*/
+/*---- ENGINE -----*/
+/*-----------------*/
+
+/* SELECT GAMES SCENARIO */
+
+function displayScenarioTextGame() {
+    var htmlTextGame = "<strong>??? : </strong>\"J'ai entendu dire que vous êtes à la recherche d'informations sur... <i>Corentin</i>...<br><br>Nous savons tous les deux que moi : \"L'Informajoueur\" ; je suis votre unique chance d'obtenir ce que vous cherchez... Mais vais-je réellement vous donner ce que vous voulez sans contre partie ? <br>Evidemment que non !<br><br>Néanmoins ce n'est pas d'argent dont nous parlerons... voyez vous, je suis plutôt joueur ;)<br><br>Venez donc tester vos limites et gagner, peut être, les informations que vous êtes venue chercher...\""
+    return htmlTextGame;
+}
+
+/* COMMANDS GAMES SCENARIO */
+
 function commandsJeux(commandKey, commandOptions, state) {
     switch (commandKey) {
         case "continue": {
@@ -58,19 +71,24 @@ function commandsJeux(commandKey, commandOptions, state) {
     return state;
 }
 
-function skipCurrentState(state) {
-    var indice = state.scenarioJeuxState.stateArray.indexOf(state.scenarioJeuxState.currentState) + 1;
-    if (indice < state.scenarioJeuxState.stateArray.length) {
-        state.scenarioJeuxState.currentState = state.scenarioJeuxState.stateArray[indice];
-    } else {
-        state.scenarioJeuxState.currentState = state.scenarioJeuxState.stateArray[state.scenarioJeuxState.stateArray.length - 1];
-    }
-    return state;
-}
+/* DISPLAY GAMES SCENARIO */
 
-function displayScenarioTextGame() {
-    var htmlTextGame = "<strong>??? : </strong>\"J'ai entendu dire que vous êtes à la recherche d'informations sur... <i>Corentin</i>...<br><br>Nous savons tous les deux que moi : \"L'Informajoueur\" ; je suis votre unique chance d'obtenir ce que vous cherchez... Mais vais-je réellement vous donner ce que vous voulez sans contre partie ? <br>Evidemment que non !<br><br>Néanmoins ce n'est pas d'argent dont nous parlerons... voyez vous, je suis plutôt joueur ;)<br><br>Venez donc tester vos limites et gagner, peut être, les informations que vous êtes venue chercher...\""
-    return htmlTextGame;
+function displayGameRules(currentState) {
+    var screen = document.getElementById('gamesText');
+    switch(currentState) {
+        case "firstGameRules" : {
+            screen.innerHTML =  "<strong>L'informajoueur : </strong>\"Pour nous échauffer, rien de tel qu'une petite partie de <i>Morpion</i> !<br><br>Pour gagner, il suffit de remplir une ligne, une colonne ou une diagonale avec nos pions respectifs.<br><br>Comme je suis bon joueur, je vous laisse commencer. De toutes manières il n'y a aucunes raisons pour que vous en ressortiez victorieuse héhéhé...\"<br><br><br><br><i>Il pose un plateau de 3 par 3 cases sur la table basse qui vous sépare, et s'emploie à récupérer les neufs pions du jeu dans un tiroir.<br><br>Il se retourne vers vous une fois le matériel trouvé et n'attend plus que votre première action.</i>";
+            break;
+        }
+        case "secondGameRules" : {
+            screen.innerHTML = "Expliquer règles dames yolo";
+            break;
+        }
+        case "thirdGameRules" : {
+            screen.innerHTML = "Expliquer règles contamination yolo";
+            break;
+        }
+    }
 }
 
 function displayGame(currentState, htmlMatrice) {
@@ -120,23 +138,7 @@ function displayGameRewards(currentState) {
     }
 }
 
-function displayGameRules(currentState) {
-    var screen = document.getElementById('gamesText');
-    switch(currentState) {
-        case "firstGameRules" : {
-            screen.innerHTML =  "<strong>L'informajoueur : </strong>\"Pour nous échauffer, rien de tel qu'une petite partie de <i>Morpion</i> !<br><br>Pour gagner, il suffit de remplir une ligne, une colonne ou une diagonale avec nos pions respectifs.<br><br>Comme je suis bon joueur, je vous laisse commencer. De toutes manières il n'y a aucunes raisons pour que vous en ressortiez victorieuse héhéhé...\"<br><br><br><br><i>Il pose un plateau de 3 par 3 cases sur la table basse qui vous sépare, et s'emploie à récupérer les neufs pions du jeu dans un tiroir.<br><br>Il se retourne vers vous une fois le matériel trouvé et n'attend plus que votre première action.</i>";
-            break;
-        }
-        case "secondGameRules" : {
-            screen.innerHTML = "Expliquer règles dames yolo";
-            break;
-        }
-        case "thirdGameRules" : {
-            screen.innerHTML = "Expliquer règles contamination yolo";
-            break;
-        }
-    }
-}
+/* STATE GAMES SCENARIO */
 
 function launchGameStep(state) {
     var docmnt = document.getElementById('docScenarioJeux');
@@ -218,8 +220,22 @@ function launchGameStep(state) {
     return state;
 }
 
+function skipCurrentState(state) {
+    var indice = state.scenarioJeuxState.stateArray.indexOf(state.scenarioJeuxState.currentState) + 1;
+    if (indice < state.scenarioJeuxState.stateArray.length) {
+        state.scenarioJeuxState.currentState = state.scenarioJeuxState.stateArray[indice];
+    } else {
+        state.scenarioJeuxState.currentState = state.scenarioJeuxState.stateArray[state.scenarioJeuxState.stateArray.length - 1];
+    }
+    return state;
+}
 
-// PLATEAU //
+/*-----------------*/
+/*---- MORPION ----*/
+/*-----------------*/
+
+
+/* INIT BOARDGAME MORPION */
 
 function setBoardGame(size) {
     var matrice = new Array();
@@ -252,11 +268,25 @@ function buildHTMLMatrice(matrice) {
     return htmlMatrice;
 }
 
-
 function retrieveHTMLMatrice(rawMatrice) {
     var htmlMatrice = buildHTMLMatrice(rawMatrice);
     return htmlMatrice;
 }
+
+function buildGameObject(size) {
+    var rawMatrice = setBoardGame(size);
+    var boardGame = {
+        rawMatrice: rawMatrice,
+        htmlMatrice: retrieveHTMLMatrice(rawMatrice),
+        gamerTurn: true,
+        isFinished: "not",
+        errorMessage: '',
+    }
+
+    return boardGame;
+}
+
+/* LISTENERS BOARDGAME MORPION */
 
 function bindClickMatrice() {
     var allCase = document.getElementsByClassName('case');
@@ -273,8 +303,17 @@ function bindClickMatrice() {
     });
 }
 
-// PIONS //
+/* ENGINE MORPION */
 
+function restartGame(state) {
+    state.scenarioJeuxState.gameState = buildGameObject(3);
+    displayGame(state.scenarioJeuxState.currentState, state.scenarioJeuxState.gameState.htmlMatrice);
+    bindClickMatrice();
+    writeCommandResults("Nettoyage du plateau...");
+    return state;
+}
+
+// Player move
 function lockMovement(state) {
     
     if (state.scenarioJeuxState.gameState.isFinished === "not") {
@@ -324,24 +363,7 @@ function lockMovement(state) {
     return state;
 }
 
-
-function buildGameObject(size) {
-    var rawMatrice = setBoardGame(size);
-    var boardGame = {
-        rawMatrice: rawMatrice,
-        htmlMatrice: retrieveHTMLMatrice(rawMatrice),
-        gamerTurn: true,
-        isFinished: "not",
-        errorMessage: '',
-    }
-
-    return boardGame;
-}
-
-function updateHTMLMatrice(caseCell, pion) {
-    caseCell.innerHTML = pion;
-}
-
+// AI move
 function morpionTurnIA(state) {
 
     var hasAValidCase = false
@@ -373,6 +395,10 @@ function morpionTurnIA(state) {
     return state;
 }
 
+function updateHTMLMatrice(caseCell, pion) {
+    caseCell.innerHTML = pion;
+}
+
 function endMorpionGame(state) {
 
     var diagonalLeftCountJ1 = 0;
@@ -385,8 +411,7 @@ function endMorpionGame(state) {
     var lignCountJ2 = 0;
     var columnCountJ2 = 0;    
     
-    console.log("APRES COMPTEUR DE LIGNE");
-     for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
+    for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
         for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {   
             if (state.scenarioJeuxState.gameState.rawMatrice[i][j] === 'O') {
                 lignCountJ2++;
@@ -400,15 +425,10 @@ function endMorpionGame(state) {
                 state.scenarioJeuxState.gameState.isFinished = "yesPlayerTwoWon";
             }
         }
-        console.log("Ligne", i);
-        console.log("LIJ1",lignCountJ1);
-        console.log("LIJ2",lignCountJ2);
         lignCountJ1 = 0;
         lignCountJ2 = 0;
     }
-
     
-    console.log("APRES COMPTEUR DE COLONNE");
     if (state.scenarioJeuxState.gameState.isFinished === "not") {
         for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
             for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {
@@ -424,15 +444,11 @@ function endMorpionGame(state) {
                     state.scenarioJeuxState.gameState.isFinished = "yesPlayerTwoWon";
                 }
             }
-            console.log("Colonne", i);
-            console.log("COJ1",columnCountJ1);
-            console.log("COJ2",columnCountJ2);
             columnCountJ1 = 0;
             columnCountJ2 = 0;
         }
     }
     
-    console.log("APRES COMPTEUR DE DIAGONALE");
     if (state.scenarioJeuxState.gameState.isFinished === "not") {
         for (var i = 0; i < state.scenarioJeuxState.gameState.rawMatrice.length; i++) {
             for (var j = 0; j < state.scenarioJeuxState.gameState.rawMatrice.length; j++) {
@@ -460,21 +476,16 @@ function endMorpionGame(state) {
                 }
             }
         }
-        console.log("DLJ1",diagonalLeftCountJ1);
-        console.log("DRJ1",diagonalRightCountJ1);
-        console.log("DLJ2",diagonalLeftCountJ2);
-        console.log("DRJ2",diagonalRightCountJ2);
     }
-
-
-
     return state;
 }
 
-function restartGame(state) {
-    state.scenarioJeuxState.gameState = buildGameObject(3);
-    displayGame(state.scenarioJeuxState.currentState, state.scenarioJeuxState.gameState.htmlMatrice);
-    bindClickMatrice();
-    writeCommandResults("Nettoyage du plateau...");
-    return state;
-}
+/*--------------------------------*/
+/*---- PIERRE FEUILLE CISEAUX ----*/
+/*--------------------------------*/
+
+
+
+/*--------------------------*/
+/*---- DEVINE UN NOMBRE ----*/
+/*--------------------------*/
