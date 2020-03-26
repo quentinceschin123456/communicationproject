@@ -1,0 +1,44 @@
+#morpionGameBoard {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lign {
+    display: flex;
+    flex: 1;
+}
+
+.case {
+    display: flex;
+    border: 1px solid #05FC69;
+    height: 50px;
+    width: 50px;
+}
+
+.selectedCase {
+    border: 2px solid #05FC69;
+}
+
+.innerCase {
+    flex: 1;
+    margin: 5px;
+    display: flex;
+}
+
+.marginAuto {
+    margin: auto;
+}
+
+.gamesTextAlign {
+    text-align: center;
+}
+
+.gamesTextUnderline {
+    text-decoration: underline;
+}
+
+.gamesTextFontFamily {
+    font-family: serif;
+}

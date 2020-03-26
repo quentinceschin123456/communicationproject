@@ -7,8 +7,12 @@
         applicationState: 'initialisation',
         scenarioEnigmesState: 'initialisation',
         scenarioHackingState: 'initialisation',
-        scenarioJeuxState: 'initialisation'
-    }
+        scenarioJeuxState: {
+            currentState: 'firstGameRules',
+            stateArray: ['firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end'],
+            gameState: '' 
+        }
+    };
     displayAvailableCommands(state.applicationState);
     var count = 1;
     var loadingFunc = setInterval(() => {
@@ -51,7 +55,6 @@ function initializeCommandTypingEvent(state) {
             var command = input.value.trim();
             if (command !== "") {
                 writeCommandResults("> " + command);
-                scrollDown("commandResults");
                 state = stateTraitment(command, state);
                 input.value = "";
             }
@@ -85,14 +88,12 @@ function stateTraitment(command, state) {
             }
         case "scenarioJeux":
             {
-                commandsJeux();
-                state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
+                state = commandsJeux(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
         default:
             break;
     }
-    scrollDown("commandResults");
     return state;
 }
 
@@ -134,6 +135,7 @@ function selectScenario(commandOptions) {
         }
         case "--games": {
             displayScenario("thirdScenario", "gamesText");
+            document.getElementById("gamesText").innerHTML = displayScenarioTextGame();
             break;
         }
         default: {
@@ -161,10 +163,11 @@ function launchScenario(state) {
             case "Jeux":
                 {
                     state.applicationState = "scenarioJeux";
+                    state = launchGameStep(state);
                     break;
                 }
             default:
-                console.log("launcher - in defalut case")
+                console.log("launcher - in defalut case") // CRADE
                 break;
         }
         displayAvailableCommands(state.applicationState);
@@ -178,15 +181,12 @@ function launchScenario(state) {
 
 function commandsHacking() {}
 
-function commandsJeux() {}
-
 function commandsScenariosUtilities(commandKey, commandOptions, state) {
     switch (commandKey) {
         case "menu":
             {
                 state.applicationState = "scenariosSelection";
-                document.getElementById("menu").style.display = "flex";
-                document.getElementById("displayScreenTitle").style.display = "flex";
+                launchMenu(state)
                 displayAvailableCommands(state.applicationState);
                 writeCommandResults("Retour à l'écran principal de l'application.");
                 break;
@@ -216,19 +216,19 @@ function displayAvailableCommands(applicationState) {
         case "scenarioEnigmes":
             {
                 document.getElementById('docScenarioEnigmes').style.display = "block";
-                displayUtilitiesCommands(documentation);
+                displayUtilitiesCommands();
                 break;
             }
         case "scenarioHacking":
             {
                 document.getElementById('docScenarioHacking').style.display = "block";
-                displayUtilitiesCommands(documentation);
+                displayUtilitiesCommands();
                 break;
             }
         case "scenarioJeux":
             {
                 document.getElementById('docScenarioJeux').style.display = "block";
-                displayUtilitiesCommands(documentation);
+                displayUtilitiesCommands();
                 break;
             }
         default:
@@ -236,7 +236,7 @@ function displayAvailableCommands(applicationState) {
     }
 }
 
-function displayUtilitiesCommands(documentation) {
+function displayUtilitiesCommands() {
     document.getElementById('docUtilities').style.display = "block";
 }
 
@@ -258,6 +258,7 @@ function writeCommandResults(text) {
     }
     newText.innerHTML = "<div>" + text + "</div>";
     textResults.appendChild(newText);
+    scrollDown("commandResults");
 }
 
 function cutCommand(command) {
