@@ -6,7 +6,12 @@
     var state = {
         applicationState: 'initialisation',
         scenarioEnigmesState: 'initialisation',
-        scenarioHackingState: 'initialisation',
+        scenarioHackingState: {
+            name: 'initialisation',
+            previousCmd: '',
+            isPreviousCmdSucced: true,
+            stepTab: ["initialisation", "defend1", "recovery1", "defend2", "recovery2", "defend3", "recovery3", "end"],
+        },
         scenarioJeuxState: {
             currentState: 'firstGameRules',
             stateArray: ['firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end'],
@@ -40,7 +45,7 @@ function launchMenu(state) {
     document.getElementById('documentation').style.display = "block";
     document.getElementById('textInput').style.visibility = "visible";
     document.getElementById('input').style.visibility = "visible";
-    displayAvailableCommands(state.applicationState);
+    displayAvailableCommands(state);
     var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
     setToDisplayNone(listScenarioDisplayText);
     initializeCommandTypingEvent(state);
@@ -82,8 +87,9 @@ function stateTraitment(command, state) {
             }
         case "scenarioHacking":
             {
-                commandsHacking();
-                state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
+                state = hackingScenario(commandObj.commandKey, commandObj.commandOptions, state);
+                displayAvailableCommands(state);
+                //state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
         case "scenarioJeux":
@@ -147,7 +153,7 @@ function selectScenario(commandOptions) {
 
 function launchScenario(state) {
     if (document.getElementsByClassName('menuScenariosSelected')[0]) {
-        writeCommandResults("Chargement des modules des interfaces utilisateurs... Vérification des données... Lancement du scénario...");
+        writeCommandResults("Chargement des modules des interfaces utilisateurs\nVérification des données\nLancement du scénario");
         switch (document.getElementsByClassName('menuScenariosSelected')[0].textContent.trim()) {
             case "Enigmes":
                 {
@@ -158,6 +164,7 @@ function launchScenario(state) {
             case "Hacking":
                 {
                     state.applicationState = "scenarioHacking";
+                    document.getElementById("hackingTextBox").innerHTML = textInitialisation();
                     break;
                 }
             case "Jeux":
@@ -170,7 +177,7 @@ function launchScenario(state) {
                 console.log("launcher - in defalut case") // CRADE
                 break;
         }
-        displayAvailableCommands(state.applicationState);
+        displayAvailableCommands(state);
         document.getElementById("menu").style.display = "none";
         document.getElementById("displayScreenTitle").style.display = "none";
     } else {
@@ -179,16 +186,19 @@ function launchScenario(state) {
     return state;
 }
 
-function commandsHacking() {}
-
 function commandsScenariosUtilities(commandKey, commandOptions, state) {
     switch (commandKey) {
         case "menu":
             {
                 state.applicationState = "scenariosSelection";
                 launchMenu(state)
-                displayAvailableCommands(state.applicationState);
+                displayAvailableCommands(state);
                 writeCommandResults("Retour à l'écran principal de l'application.");
+                break;
+            }
+        case "bypass":
+            {
+                // c'est chiant à faire donc si tu vois ce commentaire j'ai eu la fleme
                 break;
             }
         default:
@@ -204,10 +214,10 @@ function commandsScenariosUtilities(commandKey, commandOptions, state) {
 /*---------------------- DOCUMENTATION ----------------------*/
 /**********/
 
-function displayAvailableCommands(applicationState) {
+function displayAvailableCommands(state) {
     var allDocumentTexts = document.getElementsByClassName("textDocumentation")
     setToDisplayNone(allDocumentTexts);
-    switch (applicationState) {
+    switch (state.applicationState) {
         case "scenariosSelection":
             {
                 document.getElementById('docMenu').style.display = "block";
@@ -221,7 +231,55 @@ function displayAvailableCommands(applicationState) {
             }
         case "scenarioHacking":
             {
-                document.getElementById('docScenarioHacking').style.display = "block";
+                var hackerDocElement = document.getElementById("docScenarioHacking");
+                hackerDocElement.style.display = "block";
+                switch (state.scenarioHackingState.name) {
+                    case "initialisation":
+                        {
+                            hackerDocElement.innerHTML = documentationHackInit();
+                            break;
+                        }
+                    case "defend1":
+                        {
+                            hackerDocElement.innerHTML = documentationHackDefend1();
+                            break;
+                        }
+                    case "recovery1":
+                        {
+                            hackerDocElement.innerHTML = documentationHackRecovery1();
+                            break;
+                        }
+                    case "defend2":
+                        {
+                            hackerDocElement.innerHTML = documentationHackDefend2();
+                            break;
+                        }
+                    case "recovery2":
+                        {
+                            hackerDocElement.innerHTML = documentationHackRecovery2();
+                            break;
+                        }
+                    case "defend3":
+                        {
+                            hackerDocElement.innerHTML = documentationHackDefend3();
+                            break;
+                        }
+                    case "recovery3":
+                        {
+                            hackerDocElement.innerHTML = documentationHackRecovery3();
+                            break;
+                        }
+
+                    case "end":
+                        {
+                            hackerDocElement.innerHTML = documentationHackEnd();
+                            break;
+                        }
+
+                    default:
+                        document.getElementById('docScenarioHacking').style.display = "block";
+                        break;
+                }
                 displayUtilitiesCommands();
                 break;
             }
@@ -279,6 +337,10 @@ function displayScenario(idTitle, idText) {
     var title = document.getElementById(idTitle).textContent.trim();
     writeCommandResults("Sélection du scénario " + title + "... Affichage des informations supplémentaires pour le scénario choisi...");
     document.getElementById("displayScreenTitle").textContent = title;
-    document.getElementById(idText).style.display = "block";
+    if (idText === "hackingText") {
+        document.getElementById(idText).style.display = "flex";
+    } else {
+        document.getElementById(idText).style.display = "block";
+    }
     document.getElementById(idTitle).classList.add('menuScenariosSelected');
 }
