@@ -73,8 +73,8 @@ function stateTraitment(command, state) {
             }
         case "scenarioEnigmes":
             {
-                commandsEnigmes();
-                state = commandsScenariosUtilities(commandObj.commandKey, commandObj.commandOptions, state);
+                //commandsEnigmes();
+                state = commandsEnigmes(commandObj.commandKey, commandObj.commandOptions, state);
                 break;
             }
         case "scenarioHacking":
@@ -150,6 +150,7 @@ function launchScenario(state) {
             case "Enigmes":
                 {
                     state.applicationState = "scenarioEnigmes";
+                    runScenarioEnigmes();
                     break;
                 }
             case "Hacking":
@@ -174,8 +175,6 @@ function launchScenario(state) {
     }
     return state;
 }
-
-function commandsEnigmes() {}
 
 function commandsHacking() {}
 
