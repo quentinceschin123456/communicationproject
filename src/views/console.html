@@ -4,10 +4,15 @@
 <head>
     <title>Communication</title>
     <link rel="stylesheet" type="text/css" href="console.css">
+    <link rel="stylesheet" type="text/css" href="../games/games.css">
 </head>
 
 <body>
-
+    <script src="../games/games.js"></script>
+    <script src="../enigme/enigme.js"></script>
+    <script src="../enigme/src/ressource.js"></script>
+    <script src="../hacker/hacker.js"></script>
+    <script src="console.js"></script>
     <div id="firstContainer" class="fontFamily">
         <div id="leftContainer">
             <div id="menuContainer" class="colors paddingContainer">
@@ -48,9 +53,11 @@
                     <div id="displayScreenText">
                         <div id="enigmesText" class="scenariosDisplayText">
                             <strong>ENIGMES : </strong><br>
-                            <br> Bla bla bla
                             <br>
-                            <br> Bla bla...
+                                Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérable énigmes.
+                            <br>
+                            <img src= "../enigme/src/merlin0.png" style="display: block;margin: auto; height: 350px;"/>
+                            Si vous vous sentez prêt à l'aider, saissisez la commande "launch".
                         </div>
                         <div id="hackingText" class="scenariosDisplayText">
                             <div id="hackingTextBox">
@@ -59,14 +66,8 @@
                                 <br> TeL est prit qui croyait prendre.
                                 <br> Suivez scrupuleusement la documentation pour réussir.
                             </div>
-                            <div id="hackingTextImg">
-                            </div>
                         </div>
                         <div id="gamesText" class="scenariosDisplayText">
-                            <strong>JEUX : </strong><br>
-                            <br> Bla bla bla
-                            <br>
-                            <br> Bla bla...
                         </div>
                     </div>
                 </div>
@@ -103,7 +104,7 @@
                     </div>
                     <div id="docScenarioEnigmes" class="textDocumentation">
                         <h2>Commandes du scénario : </h2>
-                        No commands founded for Enigmes
+                        <strong>next : </strong>Passer à l'étape suivante<br>
                     </div>
                     <div id="docScenarioHacking" class="textDocumentation">
                         <h2>Commandes du scénario : </h2>
@@ -120,10 +121,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <script src="console.js"></script>
-    <script src="../hacker/hacker.js"></script>
-</body>
-
+    </body>
 </html>
