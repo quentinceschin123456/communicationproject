@@ -80,7 +80,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Voilà un petit morceau :</h1>");
                 if (commentaire != "") {
                     parentDiv.addContent("\
-                        <div style='height:400px;width:1200px;overflow:auto;'>\
+                        <div style='height:400px;width:1200px;overflow:auto;background-image:url(../enigme/src/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;'>\
                             "+ commentaire +"\
                         </div>");
                     parentDiv.addContent("<h3>Saisissez la commande \"<bold>next</bold>\" pour passer à la prochaine enigme.</h3>");
@@ -219,35 +219,29 @@ function getJsonPart(level) {
     switch(level) {
         case 1:
         {
-            for(i = 0; i<=2; i++){
-                tempStr += "<p><h2>" + jsonResource[i].name + "</h2>";
-                tempStr += "<p>Mes attentes :</br>" + jsonResource[i].VosAttentes + "</p>";
-                tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[i].VosCompetenceProfessionnelles + "</p>";
-                tempStr += "</p>";
-            }
+            tempStr += "<p><h2>" + jsonResource[0].name + "</h2>";
+            tempStr += "<p>Mes attentes :</br>" + jsonResource[0].VosAttentes + "</p>";
+            tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
+            tempStr += "</p>";
             break;
         }
         case 2:
         {
-            for(i = 0; i<=2; i++){
-                tempStr += "<p><h2>" + jsonResource[i].name + "</h2>";
-                tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[i].VosTraitsDePersonnalités + "</p>";
-                tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[i].VosCentreInteret + "</p>";
-                tempStr += "</p>";
-            }
+            tempStr += "<p><h2>" + jsonResource[0].name + "</h2>";
+            tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[0].VosCentreInteret + "</p>";
+            tempStr += "</p>";
             break;
         }
         case 3:
         {
-            for(i = 0; i<=2; i++){
-                tempStr += "<p><h2>" + jsonResource[i].name + "</h2>";
-                tempStr += "<p>Mes attentes :</br>" + jsonResource[i].VosAttentes + "</p>";
-                tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[i].VosCompetenceProfessionnelles + "</p>";
-                tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[i].VosTraitsDePersonnalités + "</p>";
-                tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[i].VosCentreInteret + "</p>";
-                tempStr += "<p>Mon itinéraire pro-passé :</br>" + jsonResource[i].VotreItineraireProPasse + "</p>";
-                tempStr += "</p>";
-            }
+            tempStr += "<p><h2>" + jsonResource[0].name + "</h2>";
+            tempStr += "<p>Mes attentes :</br>" + jsonResource[0].VosAttentes + "</p>";
+            tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
+            tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[0].VosCentreInteret + "</p>";
+            tempStr += "<p>Mon itinéraire pro-passé :</br>" + jsonResource[0].VotreItineraireProPasse + "</p>";
+            tempStr += "</p>";
             break;
         }
     }
