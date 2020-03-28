@@ -12,6 +12,14 @@
             <div id="leftContainer">
                 <div id="menuContainer" class="colors paddingContainer">
 
+                    <div id="loadingScreen">
+                        Loading...
+                        <div class="bar">
+                            <div class="percentage has-tip" style="width: 50%" data-perc="50%">
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="menu">
                         <div id="firstScenario" class="menuScenarios">
                             <div class="scenariosMenuText">Enigmes</div>
@@ -58,8 +66,8 @@
                 </div>
                 <div id="commandResults" class="colors paddingContainer">
                     <div id="textResults">
-                        Microsoft Windows  [version 10.0.18362.657] 
-                        (c) 2019 Microsoft Corporation. Tous droits réservés.
+                        <div class="anim-typewriter">Microsoft Windows  [version 10.0.18362.657]
+                        (c) 2019 Microsoft Corporation.<br> Tous droits réservés.</div>
                     </div>
                 </div>
                 <div id="commandInput" class="colors paddingContainer">
@@ -78,8 +86,31 @@
                     <div id="titleDocumentation">
                         Commandes disponibles :
                     </div>
-                    <div id="textDocumentation">
-                        <strong>Command :</strong> Affiche un arc en ciel
+                    <div id="textDocContainer">
+                        <div id="docMenu" class="textDocumentation">
+                            <h2>Sélectionner un scénario : </h2>
+                            <strong>select --enigmas : </strong>Scénario Enigmes<br>
+                            <strong>select --hacking : </strong>Scénario Hacking<br>
+                            <strong>select --games &nbsp; : </strong>Scénario Jeux<br>
+                            <h2>Charger un scénario : </h2>
+                            <strong>launch</strong> : Charge le scénario sélectionné
+                        </div>
+                        <div id="docScenarioEnigmes" class="textDocumentation">
+                            <h2>Commandes du scénario : </h2>
+                            No commands founded for Enigmes
+                        </div>
+                        <div id="docScenarioHacking" class="textDocumentation">
+                            <h2>Commandes du scénario : </h2>
+                            No commands founded for Hacking
+                        </div>
+                        <div id="docScenarioJeux" class="textDocumentation">
+                            <h2>Commandes du scénario : </h2>
+                            No commands founded for Jeux
+                        </div>
+                        <div id="docUtilities" class="textDocumentation">
+                            <h2>Commandes utilitaires : </h2>
+                            <strong>menu : </strong>Retourne au menu<br>
+                        </div>
                     </div>
                 </div>
             </div>

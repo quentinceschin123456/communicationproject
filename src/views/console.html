@@ -11,7 +11,25 @@
         <div id="firstContainer" class="fontFamily">
             <div id="leftContainer">
                 <div id="menuContainer" class="colors paddingContainer">
-
+                    <div id="loadingScreen">
+                        <div id="loadingText">Chargement...</div>
+                        <div id="loadingBarComponent">
+                            <div id="loadingContainer">
+                                <div id="loadingBarContainer">
+                                    <div id="loadingBar1" class="loadingBar"></div>
+                                    <div id="loadingBar2" class="loadingBar"></div>
+                                    <div id="loadingBar3" class="loadingBar"></div>
+                                    <div id="loadingBar4" class="loadingBar"></div>
+                                    <div id="loadingBar5" class="loadingBar"></div>
+                                    <div id="loadingBar6" class="loadingBar"></div>
+                                    <div id="loadingBar7" class="loadingBar"></div>
+                                    <div id="loadingBar8" class="loadingBar"></div>
+                                    <div id="loadingBar9" class="loadingBar"></div>
+                                    <div id="loadingBar10" class="loadingBar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="menu">
                         <div id="firstScenario" class="menuScenarios">
                             <div class="scenariosMenuText">Enigmes</div>
@@ -58,8 +76,8 @@
                 </div>
                 <div id="commandResults" class="colors paddingContainer">
                     <div id="textResults">
-                        Microsoft Windows  [version 10.0.18362.657] 
-                        (c) 2019 Microsoft Corporation. Tous droits réservés.
+                        <div class="anim-typewriter">Microsoft Windows  [version 10.0.18362.657]
+                        (c) 2019 Microsoft Corporation.<br> Tous droits réservés.</div>
                     </div>
                 </div>
                 <div id="commandInput" class="colors paddingContainer">
@@ -78,8 +96,31 @@
                     <div id="titleDocumentation">
                         Commandes disponibles :
                     </div>
-                    <div id="textDocumentation">
-                        <strong>Command :</strong> Affiche un arc en ciel
+                    <div id="textDocContainer">
+                        <div id="docMenu" class="textDocumentation">
+                            <h2>Sélectionner un scénario : </h2>
+                            <strong>select --enigmas : </strong>Scénario Enigmes<br>
+                            <strong>select --hacking : </strong>Scénario Hacking<br>
+                            <strong>select --games &nbsp; : </strong>Scénario Jeux<br>
+                            <h2>Charger un scénario : </h2>
+                            <strong>launch</strong> : Charge le scénario sélectionné
+                        </div>
+                        <div id="docScenarioEnigmes" class="textDocumentation">
+                            <h2>Commandes du scénario : </h2>
+                            No commands founded for Enigmes
+                        </div>
+                        <div id="docScenarioHacking" class="textDocumentation">
+                            <h2>Commandes du scénario : </h2>
+                            No commands founded for Hacking
+                        </div>
+                        <div id="docScenarioJeux" class="textDocumentation">
+                            <h2>Commandes du scénario : </h2>
+                            No commands founded for Jeux
+                        </div>
+                        <div id="docUtilities" class="textDocumentation">
+                            <h2>Commandes utilitaires : </h2>
+                            <strong>menu : </strong>Retourne au menu<br>
+                        </div>
                     </div>
                 </div>
             </div>
