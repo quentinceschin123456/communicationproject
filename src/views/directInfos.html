@@ -3,25 +3,92 @@
     
     <head>
         <title>Communication</title>
+        <link rel="stylesheet" type="text/css" href="./index.css">
         <style>
             .text{
-                color: red;
+                color: black;
+                padding: 10px;
+            }
+            .container {
+                display: flex;
+                flex-direction: row;
+                align-self: center;
+                justify-self: center;
+                justify-content: space-evenly;
+                background-color: burlywood;
+                border: 1px solid black;
+                min-width: 75%;
+            }
+            #blocCorentin {
+                flex-direction: row-reverse;
+            }
+            .asset{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+            #main{
+                display: flex;
+                flex-direction: column;
+            }
+            img{
+                height: auto;
+                width: 100%;
             }
         </style>
     </head>
 
     <body>
-        <div id="menu">
+    <div id="menu">
         <a href="/">accueil</a>
         <a href="/console">console</a>
         <a href="/directInfos">directInfos</a>
     </div>
-        <div class="text">
-Corentin GRANDCHAMPS :
-        LES INFOS
-    </div>
-<a href="../../ressources/scenarii_morpion.PNG">Télécharger le CV de Corentin GRANDCHAMPS</a>
+    <div id="main">
+    <div id="blocAncelin" class="container"> 
+        <div class="asset">
+            <img src="" alt="photoAncelin">
+            <a href="../../ressources/scenarii_morpion.PNG">Télécharger le CV de Ancelin GLORIES</a>
 
+        </div>
+        <div class="text" style="background-color: red;">
+            <div class="paragraphe"> paragraphe 1</div>
+            <div class="paragraphe"> paragraphe 2</div>
+            <div class="paragraphe"> paragraphe 3</div>
+            <div class="paragraphe"> paragraphe 4</div>
+            <div class="paragraphe"> paragraphe 5</div>
+            <div class="paragraphe"> paragraphe 6</div>
+        </div>
+    </div>
+    <div id="blocCorentin" class="container" >
+        <div class="asset">
+            <img src="" alt="photoCorentin">
+            <a href="../../ressources/scenarii_morpion.PNG">Télécharger le CV de Corentin GRANDCHAMPS</a>
+            </div>
+        <div class="text" style="background-color: royalblue;">
+            <div class="paragraphe"> paragraphe 1</div>
+            <div class="paragraphe"> paragraphe 2</div>
+            <div class="paragraphe"> paragraphe 3</div>
+            <div class="paragraphe"> paragraphe 4</div>
+            <div class="paragraphe"> paragraphe 5</div>
+            <div class="paragraphe"> paragraphe 6</div>
+        </div>
+    </div>
+    <div id="blocQuentin"  class="container"> 
+        <div class="asset">
+            <img src="" alt="photoQuentin">
+            <a href="../../ressources/scenarii_morpion.PNG">Télécharger le CV de Quentin CESCHIN</a>
+        </div>
+        <div class="text"  style="background-color: blueviolet;">
+            <div class="paragraphe"> paragraphe 1</div>
+            <div class="paragraphe"> paragraphe 2</div>
+            <div class="paragraphe"> paragraphe 3</div>
+            <div class="paragraphe"> paragraphe 4</div>
+            <div class="paragraphe"> paragraphe 5</div>
+            <div class="paragraphe"> paragraphe 6</div>
+        </div>
+    </div>
+</div>
     </body>
 
 </html>
