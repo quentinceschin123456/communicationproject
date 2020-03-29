@@ -32,7 +32,7 @@ function commandsJeux(commandKey, commandOptions, state) {
                     break;
                 }
                 case "thirdGame" : {
-                   
+                    state = restartShifumi(state); 
                     break;
                 }
                 default: {
@@ -48,10 +48,6 @@ function commandsJeux(commandKey, commandOptions, state) {
                     state = lockMovement(state);
                     break;
                 }
-                case "thirdGame" : {
-                   
-                    break;
-                }
                 default: {
                     writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
                     break
@@ -65,6 +61,14 @@ function commandsJeux(commandKey, commandOptions, state) {
                 writeCommandResults("Tentative n°" + state.scenarioJeuxState.gameState.nbAttempt);
                 state = endGuessGame(state);
             } else {
+                writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
+            }
+            break;
+        }
+        case "play" : {
+            if (state.scenarioJeuxState.currentState === "thirdGame") {
+                state = shifumiPLayerSelection(state, commandOptions[0]);
+            } else { 
                 writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
             }
             break;
@@ -97,13 +101,13 @@ function displayGameRules(currentState) {
     }
 }
 
-function displayGame(currentState, htmlMatrice) {
+function displayGame(state) {
     var screen = document.getElementById('gamesText');
 
-    switch(currentState) {
+    switch (state.scenarioJeuxState.currentState) {
         case "firstGame" : {
             screen.innerHTML = "<h2 class='gamesTextAlign'>MORPION</h2>";
-            screen.innerHTML += htmlMatrice;
+            screen.innerHTML += state.scenarioJeuxState.gameState.htmlMatrice;
             screen.innerHTML += "<br><br><br><br><div class='gamesTextAlign'>Astuce : Cliquez sur la case dans laquelle vous souhaitez placer votre pion, puis validez votre coup en saisissant la commande appropriée.</div>"
             break;
         }
@@ -115,6 +119,7 @@ function displayGame(currentState, htmlMatrice) {
         }
         case "thirdGame" : {
             screen.innerHTML = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
+            screen.innerHTML += "<br><br><br><br><div id='shifumiLine'><i>Saisissez votre choix pour le round à venir !</i></div>";
             break;
         }
     }
@@ -205,7 +210,7 @@ function launchGameStep(state) {
             break;
         }
         case "thirdGame": {
-            displayGame(state.scenarioJeuxState.currentState);
+            state = restartShifumi(state);
             writeCommandResults("//--- Jeux n°3 ---//")
             docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
@@ -318,7 +323,7 @@ function bindClickMatrice() {
 
 function restartMorpionGame(state) {
     state.scenarioJeuxState.gameState = buildGameMorpion(3);
-    displayGame(state.scenarioJeuxState.currentState, state.scenarioJeuxState.gameState.htmlMatrice);
+    displayGame(state);
     bindClickMatrice();
     writeCommandResults("Nettoyage du plateau...");
     return state;
@@ -389,8 +394,8 @@ function morpionTurnIA(state) {
     if(hasAValidCase) {
         var isCellEmpty = false;
         do {
-            var ligneRandom = Math.floor(Math.random() * 3);
-            var colonneRandom = Math.floor(Math.random() * 3);
+            var ligneRandom = getRandom(3);
+            var colonneRandom = getRandom(3);
             if (state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] === '') {
                 isCellEmpty = true;
             }
@@ -491,19 +496,13 @@ function endMorpionGame(state) {
     return state;
 }
 
-/*--------------------------------*/
-/*---- PIERRE FEUILLE CISEAUX ----*/
-/*--------------------------------*/
-
-
-
 /*--------------------------*/
 /*---- DEVINE UN NOMBRE ----*/
 /*--------------------------*/
 
 function buildGameGuess() {
     var gameState = {
-        number: Math.floor(Math.random() * 100),
+        number: getRandom(100),
         nbAttempt: 0,
         isFinished: "not"
     };
@@ -513,7 +512,7 @@ function buildGameGuess() {
 
 function restartGuessGame(state) {
     state.scenarioJeuxState.gameState = buildGameGuess();
-    displayGame(state.scenarioJeuxState.currentState);
+    displayGame(state);
     writeCommandResults("Choix d'un nouveau nombre à trouver...");
     return state;
 }
@@ -556,8 +555,208 @@ function endGuessGame(state) {
                 writeCommandResults("//--- Vous avez perdu ---//");
             }
         }, 3000);
-    } else {
+    } 
 
+    return state;
+}
+
+/*--------------------------------*/
+/*---- PIERRE FEUILLE CISEAUX ----*/
+/*--------------------------------*/
+
+function buildGameShifumi() {
+    var gameState = {
+        playerSelection : "",
+        informajoueurSelection: "",
+        isFinished: "not"
+    };
+
+    return gameState;
+}
+
+function restartShifumi(state) {
+    state.scenarioJeuxState.gameState = buildGameShifumi();
+    displayGame(state);
+    writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
+    return state;
+}
+
+function shifumiPLayerSelection(state, selectedMove) {
+    switch(selectedMove) {
+        case "pierre" : {
+            state.scenarioJeuxState.gameState.playerSelection = "pierre";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            displayShifumiResult(state);
+            // state = endShifumiGame(state);
+            break;
+        }
+        case "feuille" : {
+            state.scenarioJeuxState.gameState.playerSelection = "feuille";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            displayShifumiResult(state);
+            // state = endShifumiGame(state);
+            break;
+        }
+        case "ciseaux": {
+            state.scenarioJeuxState.gameState.playerSelection = "ciseaux";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            displayShifumiResult(state);
+            // state = endShifumiGame(state);
+            break;
+        }
+        case "puit": {
+            state.scenarioJeuxState.gameState.playerSelection = "puit";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            displayShifumiResult(state);
+            // state = endShifumiGame(state);
+            break;
+        }
+        default : {
+            writeCommandResults("Seuls les termes \"pierre\", \"feuille\", \"ciseaux\" (ou en trichant \"puit\") sont utilisables...");
+            state = restartShifumi(state);
+            break;
+        }
     }
     return state;
+}
+
+function shifumiInformajoueurSelection(state) {
+    var listSelection = ["pierre", "feuille", "ciseaux"];
+    var numberSelection = getRandom(3);
+    state.scenarioJeuxState.gameState.informajoueurSelection = listSelection[numberSelection];
+    return state;
+}
+
+function resolveShifumi(state) {
+    switch(state.scenarioJeuxState.gameState.playerSelection) {
+        case "pierre" : {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "equality";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "lost";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        case "feuille": {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "equality";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "lost";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        case "ciseaux": {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "lost";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "equality";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        case "puit": {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        default : {
+            break;
+        }
+    }
+    return state;
+}
+
+function endShifumiGame(state) {
+    if (state.scenarioJeuxState.gameState.isFinished !== "won") {
+        state = restartShifumi(state);
+    } else {
+        state = launchGameStep(skipCurrentState(state));
+    }
+    return state;
+}
+
+function displayShifumiResult(state) {
+    var htmlElement = document.getElementById("shifumiLine");
+    var htmlContent = state.scenarioJeuxState.gameState.playerSelection + " - versus - " + state.scenarioJeuxState.gameState.informajoueurSelection;
+    htmlElement.innerHTML = htmlContent;
+    setTimeout(() => {
+        switch (state.scenarioJeuxState.gameState.isFinished) {
+            case "equality" : {
+                htmlContent = "Égalité";
+                break;
+            }
+            case "lost": {
+                htmlContent = "Perdu";
+                break;
+            }
+            case "won": {
+                htmlContent = "Gagné";
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        htmlElement.innerHTML = htmlContent;
+    }, 2000);
+}
+
+/* COMMON FUNCTIONS */
+
+function getRandom(multiplicator) {
+    return Math.floor(Math.random() * multiplicator);
 }
