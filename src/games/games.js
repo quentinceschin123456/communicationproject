@@ -118,7 +118,7 @@ function displayGame(state) {
         }
         case "thirdGame" : {
             screen.innerHTML = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
-            screen.innerHTML += "<br><br><br><br><div id='shifumiLine'><i>Saisissez votre choix pour le round à venir !</i></div>";
+            screen.innerHTML += "<br><br><br><br><div id='shifumiLine' class='gamesTextAlign'><i>Saisissez votre choix pour le round à venir !</i></div>";
             break;
         }
     }
@@ -740,27 +740,34 @@ function endShifumiGame(state) {
 
 function displayShifumiResult(state) {
     var htmlElement = document.getElementById("shifumiLine");
-    var htmlContent = state.scenarioJeuxState.gameState.playerSelection + " - versus - " + state.scenarioJeuxState.gameState.informajoueurSelection;
+    var htmlContent = "<div class='gamesTextAlign'><img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.playerSelection + ".png'> - versus - <img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.informajoueurSelection + ".png'></div>";
+    htmlContent += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
+    
+
+
+    
     htmlElement.innerHTML = htmlContent;
     setTimeout(() => {
+        var resultHtmlElement = document.getElementById('shifumiResult');
+        var resultHtmlContent = "";
         switch (state.scenarioJeuxState.gameState.isFinished) {
             case "equality" : {
-                htmlContent = "Égalité";
+                resultHtmlContent = "<div class='gamesTextAlign'>Égalité</div>";
                 break;
             }
             case "lost": {
-                htmlContent = "Perdu";
+                resultHtmlContent = "<div class='gamesTextAlign'>Perdu</div>";
                 break;
             }
             case "won": {
-                htmlContent = "Gagné";
+                resultHtmlContent = "<div class='gamesTextAlign'>Gagné</div>";
                 break;
             }
             default: {
                 break;
             }
         }
-        htmlElement.innerHTML = htmlContent;
+        resultHtmlElement.innerHTML = resultHtmlContent;
     }, 2000);
 }
 

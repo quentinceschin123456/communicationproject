@@ -42,3 +42,8 @@
 .gamesTextFontFamily {
     font-family: serif;
 }
+
+.imageSize {
+    width: 130px;
+    height: auto;
+}
