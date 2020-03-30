@@ -58,7 +58,6 @@ function commandsJeux(commandKey, commandOptions, state) {
         case "try-number" : {
             if (state.scenarioJeuxState.currentState === "secondGame") {
                 state = guessWithThisNumber(state, commandOptions[0]);
-                writeCommandResults("Tentative n°" + state.scenarioJeuxState.gameState.nbAttempt);
                 state = endGuessGame(state);
             } else {
                 writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
@@ -518,22 +517,32 @@ function restartGuessGame(state) {
 }
 
 function guessWithThisNumber(state, typedNumber) {
-
-    state.scenarioJeuxState.gameState.nbAttempt++;
-    
-    var htmlInfo = document.getElementById('guessInfos');
-    if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
+    typedNumber = parseInt(typedNumber, 10);
+    if (!isNaN(typedNumber) && typedNumber === parseInt(typedNumber, 10)) {
+        state.scenarioJeuxState.gameState.nbAttempt++;
+        
+        var htmlInfo = document.getElementById('guessInfos');
         if(typedNumber < state.scenarioJeuxState.gameState.number) {
-            htmlInfo.innerHTML = "+ Le nombre est plus grand que " + typedNumber;
+            if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
+                htmlInfo.innerHTML = "+ Le nombre est plus grand que " + typedNumber;
+            } else {
+                htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
+                state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+            }
         } else if (typedNumber > state.scenarioJeuxState.gameState.number) {
-            htmlInfo.innerHTML = "- Le nombre est plus petit que " + typedNumber;
+            if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
+                htmlInfo.innerHTML = "- Le nombre est plus petit que " + typedNumber;
+            } else {
+                htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
+                state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+            }
         } else {
             htmlInfo.innerHTML = "Bravo, le nombre est bel et bien " + typedNumber;
             state.scenarioJeuxState.gameState.isFinished = "numberFound";
         }
+        writeCommandResults("Tentative n°" + state.scenarioJeuxState.gameState.nbAttempt);
     } else {
-        htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
-        state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+        writeCommandResults("Veuillez saisir un nombre s'il vous plait...");
     }
     return state;
 }
