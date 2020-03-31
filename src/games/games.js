@@ -740,7 +740,7 @@ function endShifumiGame(state) {
 
 function displayShifumiResult(state) {
     var htmlElement = document.getElementById("shifumiLine");
-    var htmlContent = "<div class='gamesTextAlign'><img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.playerSelection + ".png'> - versus - <img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.informajoueurSelection + ".png'></div>";
+    var htmlContent = "<div class='gamesTextAlign'><img class='imageSize' src='../../ressources/images/shifumi/p" + state.scenarioJeuxState.gameState.playerSelection + ".png'> - versus - <img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.informajoueurSelection + ".png'></div>";
     htmlContent += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
     
 
