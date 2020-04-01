@@ -13,7 +13,7 @@ function displayScenarioTextGame() {
 
 function commandsJeux(commandKey, commandOptions, state) {
     switch (commandKey) {
-        case "continue": {
+        case "ok-go": {
             state = launchGameStep(skipCurrentState(state));
             break;
         }
@@ -42,7 +42,7 @@ function commandsJeux(commandKey, commandOptions, state) {
             }
             break;
         }
-        case "lock-movement": {
+        case "lock": {
             switch(state.scenarioJeuxState.currentState) {
                 case "firstGame" : {
                     state = lockMovement(state);
@@ -55,7 +55,7 @@ function commandsJeux(commandKey, commandOptions, state) {
             }
             break;
         }
-        case "try-number" : {
+        case "try-nb" : {
             if (state.scenarioJeuxState.currentState === "secondGame") {
                 state = guessWithThisNumber(state, commandOptions[0]);
                 state = endGuessGame(state);
@@ -136,14 +136,17 @@ function displayGameRewards(currentState) {
             break;
         }
         case "secondReward" : {
-            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Ce petit jeux était bien trop simple ! Même un enfant pourrait y arriver !\"<br><br><i>Il ouvre violemment un second tiroir et en sort une petite fiche qu'il vous jette à nouveau sous les yeux et que vous lisez attentivement.</i>";
+            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Ce petit jeu était bien trop simple ! Même un enfant pourrait y arriver !\"<br><br><i>Il ouvre violemment un second tiroir et en sort une petite fiche qu'il vous jette à nouveau sous les yeux et que vous lisez attentivement.</i>";
             screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 3</div>";
             screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 4</div>";
-            screen.innerHTML += "<br><br><strong>L'informajoueur : </strong>\"Un conseil ne prenez pas la confiance trop vite. Vous m'avez peut être battu sur deux de mes  jeux, mais j'ai encore une carte dans ma manche ! Un jeu où vous ne pourrez jamais, oh grand jamais me vaincre ! Dites \"adieu\" au reste de vos précieuses informations... héhéhé...\"<br><br><br><br><i>Il se frotte les mains tout en ricanant malsainement.<br><br>Çela ne vous laisse présager rien de bon...</i>";
+            screen.innerHTML += "<br><br><strong>L'informajoueur : </strong>\"Un conseil ne prenez pas la confiance trop vite. Vous m'avez peut être battu sur deux de mes jeux, mais j'ai encore une carte dans ma manche ! Un jeu où vous ne pourrez jamais, oh grand jamais me vaincre ! Dites \"adieu\" au reste de vos précieuses informations... héhéhé...\"<br><br><br><br><i>Il se frotte les mains tout en ricanant malsainement.<br><br>Çela ne vous laisse présager rien de bon...</i>";
             break;
         }
         case "thirdReward" : {
-            screen.innerHTML = "Text 5 + Texte 6";
+            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Je n'en reviens pas... Moi BATTU ?!\"<br><br><i>Plein de mauvaise foi, il refuse clairement de vous donner le reste des informations. Même pire, il met bien en évidence la fiche que vous étiez censée gagner, et il commence à la déchirer !<br><br><br><br> Ni une, ni deux, vous vous jetez sur lui pour l'empêcher de réduire à néant vos efforts. Vous l'empoignez par le col et intimidé il lâche la fiche.</i>";
+            screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 5</div>";
+            screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 6</div>";
+            screen.innerHTML += "<br><br><i>Vous le regardez dans les yeux et lui faites comprendre qu'il a intérêt à passer à table. Par peur de perdre ses dernières dents, il s'exclame : </i><br><br><strong>L'informajoueur : </strong>\"J'ai un dernier papier à vous montrer ! Ne soyez pas violente s'il vous plait !\"<br><br><br><br><i>Vous le lâchez et il vous tend l'ultime papier... Un CV !</i>";
             break;
         }
         case "end" : {
@@ -163,63 +166,65 @@ function launchGameStep(state) {
             // 1 Modifier l'affichage principal
             displayGameRules(state.scenarioJeuxState.currentState);
             // 2 Ecrire dans le result command quelque chose
-            writeCommandResults("//--- Règles du jeux n°1 ---//")
+            writeCommandResults("//--- Règles du jeu n°1 ---//")
             // 3 Afficher les commandes utilisables
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "firstGame": {
             state = restartMorpionGame(state);
-            writeCommandResults("//--- Jeux n°1 ---//")
-            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
+            writeCommandResults("//--- Jeu n°1 ---//")
+            docmnt.innerHTML += "<strong>lock : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
         case "firstReward": {
             displayGameRewards(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Récompenses du jeux n°1 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Récompenses du jeu n°1 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "secondGameRules": {
             displayGameRules(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Règles du jeux n°2 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Règles du jeu n°2 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "secondGame": {
             state = restartGuessGame(state);
-            writeCommandResults("//--- Jeux n°2 ---//");
-            docmnt.innerHTML += "<strong>try-number X: </strong>Proposer le nombre X<br>";
+            writeCommandResults("//--- Jeu n°2 ---//");
+            docmnt.innerHTML += "<strong>try-nb X: </strong>Proposer le nombre X<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
         case "secondReward": {
             displayGameRewards(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Récompenses du jeux n°2 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Récompenses du jeu n°2 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "thirdGameRules": {
             displayGameRules(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Règles du jeux n°3 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Règles du jeu n°3 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "thirdGame": {
             state = restartShifumi(state);
-            writeCommandResults("//--- Jeux n°3 ---//")
-            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
+            writeCommandResults("//--- Jeu n°3 ---//")
+            docmnt.innerHTML += "<strong>play pierre : </strong>Jouer la pierre<br>";
+            docmnt.innerHTML += "<strong>play feuille : </strong>Jouer la feuille<br>";
+            docmnt.innerHTML += "<strong>play ciseaux : </strong>Jouer les ciseaux<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
         case "thirdReward": {
             displayGameRewards(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Récompenses du jeux n°3 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Récompenses du jeu n°3 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "end": {
@@ -596,32 +601,28 @@ function shifumiPLayerSelection(state, selectedMove) {
             state.scenarioJeuxState.gameState.playerSelection = "pierre";
             state = shifumiInformajoueurSelection(state);
             state = resolveShifumi(state);
-            displayShifumiResult(state);
-            // state = endShifumiGame(state);
+            state = displayShifumiResult(state);
             break;
         }
         case "feuille" : {
             state.scenarioJeuxState.gameState.playerSelection = "feuille";
             state = shifumiInformajoueurSelection(state);
             state = resolveShifumi(state);
-            displayShifumiResult(state);
-            // state = endShifumiGame(state);
+            state = displayShifumiResult(state);
             break;
         }
         case "ciseaux": {
             state.scenarioJeuxState.gameState.playerSelection = "ciseaux";
             state = shifumiInformajoueurSelection(state);
             state = resolveShifumi(state);
-            displayShifumiResult(state);
-            // state = endShifumiGame(state);
+            state = displayShifumiResult(state);
             break;
         }
         case "puit": {
             state.scenarioJeuxState.gameState.playerSelection = "puit";
             state = shifumiInformajoueurSelection(state);
             state = resolveShifumi(state);
-            displayShifumiResult(state);
-            // state = endShifumiGame(state);
+            state = displayShifumiResult(state);
             break;
         }
         default : {
@@ -740,27 +741,35 @@ function endShifumiGame(state) {
 
 function displayShifumiResult(state) {
     var htmlElement = document.getElementById("shifumiLine");
-    var htmlContent = "<div class='gamesTextAlign'><img class='imageSize' src='../../ressources/images/shifumi/p" + state.scenarioJeuxState.gameState.playerSelection + ".png'> - versus - <img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.informajoueurSelection + ".png'></div>";
+    var htmlContent = "<div class='gamesTextAlign'><img class='imageSize' src='../../ressources/images/shifumi/p" + state.scenarioJeuxState.gameState.playerSelection + ".png'><span> - contre - </span><img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.informajoueurSelection + ".png'></div>";
     htmlContent += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
-    
-
-
     
     htmlElement.innerHTML = htmlContent;
     setTimeout(() => {
         var resultHtmlElement = document.getElementById('shifumiResult');
         var resultHtmlContent = "";
+        var timeToWait = 3000;
         switch (state.scenarioJeuxState.gameState.isFinished) {
             case "equality" : {
-                resultHtmlContent = "<div class='gamesTextAlign'>Égalité</div>";
+                resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Égalité<br><br><strong>L'informajoueur :</strong> \"La victoire ne vous appartient toujours pas... Il en va de même pour les informations qu'il vous reste à découvrir !\"</div>";
+                writeCommandResults("//--- Ex aequo ---//")
                 break;
             }
             case "lost": {
-                resultHtmlContent = "<div class='gamesTextAlign'>Perdu</div>";
+                resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Perdu</div><br><br><strong>L'informajoueur :</strong> \"Vous n'êtes vraiment pas de taille... Me délecter de vos défaites m'accorde un plaisir que vous n'imaginez même pas héhé...\"</div>";
+                writeCommandResults("//--- Vous avez perdu ---//")
                 break;
             }
             case "won": {
-                resultHtmlContent = "<div class='gamesTextAlign'>Gagné</div>";
+                if (state.scenarioJeuxState.gameState.playerSelection === "puit") {
+                    resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>L'intervention mystique d'un Merlin sauvage vous fait gagner !</div><br><br><strong>L'informajoueur :</strong> \"Ce maudit vieillard vient encore perturber mes affaires !\"</div>";
+                    timeToWait = 5000;
+                } else {
+                    resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Gagné</div><br><br><strong>L'informajoueur :</strong> \"C'est impossible !\"</div>";
+                }
+                setTimeout(() => {
+                    state = launchGameStep(skipCurrentState(state));
+                }, timeToWait);
                 break;
             }
             default: {
@@ -768,7 +777,8 @@ function displayShifumiResult(state) {
             }
         }
         resultHtmlElement.innerHTML = resultHtmlContent;
-    }, 2000);
+    }, 1500);
+    return state;
 }
 
 /* COMMON FUNCTIONS */
