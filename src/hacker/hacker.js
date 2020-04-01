@@ -503,7 +503,7 @@ function textDefend3() {
 }
 
 function textRecovery3() {
-    return '';
+    return ' ';
 }
 
 function getSkullImg() {
