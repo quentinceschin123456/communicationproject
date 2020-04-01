@@ -110,8 +110,6 @@ function matchCommandeDefend1(commandKey, commandOptions, state) {
                 writeCommandResults("Tout les ports de connexions ont bien été ouverts.")
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery1";
-                // hackerDocElement.style.display = "flex";
-                // hackerDocElement.innerHTML = documentationHackRecovery1();
                 document.getElementById("hackingTextBox").innerHTML = textRecovery1();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -267,9 +265,8 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 // one folder
                 // file list
                 writeCommandResults("--------");
-                writeCommandResults("");
                 document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
-                state.scenarioHackingState.previousCmd = "cat";
+                state.scenarioHackingState.previousCmd = "ls";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
