@@ -117,8 +117,19 @@ function displayGame(state) {
             break;
         }
         case "thirdGame" : {
-            screen.innerHTML = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
-            screen.innerHTML += "<br><br><br><br><div id='shifumiLine' class='gamesTextAlign'><i>Saisissez votre choix pour le round à venir !</i></div>";
+            var html = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
+            html += "<br><br><br><br><div class='gamesTextAlign'><i id='shifumiLine' class='setVisible'>Saisissez votre choix pour le round à venir !</i>";
+            html += "<div class='gamesTextAlign'>";
+            html += "<img id='ppierre' class='imageSize setInvisible' src='../../ressources/images/shifumi/ppierre.png'>";
+            html += "<img id='pfeuille' class='imageSize setInvisible' src='../../ressources/images/shifumi/pfeuille.png'>";
+            html += "<img id='pciseaux' class='imageSize setInvisible' src='../../ressources/images/shifumi/pciseaux.png'>";
+            html += "<img id='ppuit' class='imageSize setInvisible' src='../../ressources/images/shifumi/ppuit.png'>";
+            html += "<span id='connector' class='setInvisible'> - contre - </span>";
+            html += "<img id='pierre' class='imageSize setInvisible' src='../../ressources/images/shifumi/pierre.png'>";
+            html += "<img id='feuille' class='imageSize setInvisible' src='../../ressources/images/shifumi/feuille.png'>";
+            html += "<img id='ciseaux' class='imageSize setInvisible' src='../../ressources/images/shifumi/ciseaux.png'></div>";
+            html += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
+            screen.innerHTML = html;
             break;
         }
     }
@@ -592,6 +603,21 @@ function restartShifumi(state) {
     state.scenarioJeuxState.gameState = buildGameShifumi();
     displayGame(state);
     writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
+    if (state.scenarioJeuxState.gameState.playerSelection && state.scenarioJeuxState.gameState.informajoueurSelection) {
+
+        var imageJoueur = document.getElementById("p" + state.scenarioJeuxState.gameState.playerSelection);
+        var connector   = document.getElementById("connector"); 
+        var imageEnnemi = document.getElementById(state.scenarioJeuxState.gameState.informajoueurSelection);
+        var shifumiLine = document.getElementById("shifumiLine");
+        imageJoueur.classList.toggle("setInvisible");
+        imageJoueur.classList.toggle("setVisible");
+        connector.classList.toggle("setInvisible");
+        connector.classList.toggle("setVisible");
+        imageEnnemi.classList.toggle("setInvisible");
+        imageJoueur.classList.toggle("setVisible");
+        shifumiLine.classList.toggle("setInvisible");
+        shifumiLine.classList.toggle("setVisible");
+    }
     return state;
 }
 
@@ -740,11 +766,22 @@ function endShifumiGame(state) {
 }
 
 function displayShifumiResult(state) {
-    var htmlElement = document.getElementById("shifumiLine");
-    var htmlContent = "<div class='gamesTextAlign'><img class='imageSize' src='../../ressources/images/shifumi/p" + state.scenarioJeuxState.gameState.playerSelection + ".png'><span> - contre - </span><img class='imageSize' src='../../ressources/images/shifumi/" + state.scenarioJeuxState.gameState.informajoueurSelection + ".png'></div>";
-    htmlContent += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
+
+    var imageJoueur = document.getElementById("p" + state.scenarioJeuxState.gameState.playerSelection);
+    var connector   = document.getElementById("connector"); 
+    var imageEnnemi = document.getElementById(state.scenarioJeuxState.gameState.informajoueurSelection);
+    var shifumiLine = document.getElementById("shifumiLine");
+
+    imageJoueur.classList.toggle("setInvisible");
+    imageJoueur.classList.toggle("setVisible");
+    connector.classList.toggle("setInvisible");
+    connector.classList.toggle("setVisible");
+    imageEnnemi.classList.toggle("setInvisible");
+    imageJoueur.classList.toggle("setVisible");
+    shifumiLine.classList.toggle("setInvisible");
+    shifumiLine.classList.toggle("setVisible");
+
     
-    htmlElement.innerHTML = htmlContent;
     setTimeout(() => {
         var resultHtmlElement = document.getElementById('shifumiResult');
         var resultHtmlContent = "";
