@@ -111,6 +111,7 @@ function matchCommandeDefend1(commandKey, commandOptions, state) {
                 state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery1";
                 document.getElementById("hackingTextBox").innerHTML = textRecovery1();
+                setRobotImg();
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
             }
@@ -264,12 +265,9 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 // file list
                 // one folder
                 // file list
-<<<<<<< Updated upstream
-                writeCommandResults("--------");
-=======
+
                 var cmdResult = "";
                 writeCommandResults(cmdResult);
->>>>>>> Stashed changes
                 document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
                 state.scenarioHackingState.previousCmd = "ls";
             } else {
@@ -499,7 +497,8 @@ function textRecovery2() {
 }
 
 function textDefend3() {
-    return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais meiux fais d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou' +
+    return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais meiux fais d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou <br>' +
+        'Bref je digresse, ' +
         '<img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
 }
 
@@ -519,6 +518,11 @@ function setSkullImg() {
 function setTasseImg() {
     document.getElementById('hackingTextImg').innerHTML = '<img class="hack-skull" src="../../ressources/images/tasse.png"></img>';
 }
+
+function setRobotImg() {
+    document.getElementById('hackingTextImg').innerHTML = '<img class="hack-skull" src="../../ressources/images/Robot.png"></img>';
+}
+
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
