@@ -13,7 +13,7 @@ function displayScenarioTextGame() {
 
 function commandsJeux(commandKey, commandOptions, state) {
     switch (commandKey) {
-        case "continue": {
+        case "ok-go": {
             state = launchGameStep(skipCurrentState(state));
             break;
         }
@@ -32,7 +32,7 @@ function commandsJeux(commandKey, commandOptions, state) {
                     break;
                 }
                 case "thirdGame" : {
-                   
+                    state = restartShifumi(state); 
                     break;
                 }
                 default: {
@@ -42,16 +42,12 @@ function commandsJeux(commandKey, commandOptions, state) {
             }
             break;
         }
-        case "lock-movement": {
+        case "lock": {
             switch(state.scenarioJeuxState.currentState) {
                 case "firstGame" : {
                     state = lockMovement(state);
                     break;
                 }
-                case "thirdGame" : {
-                   
-                    break;
-                }
                 default: {
                     writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
                     break
@@ -59,12 +55,19 @@ function commandsJeux(commandKey, commandOptions, state) {
             }
             break;
         }
-        case "try-number" : {
+        case "try-nb" : {
             if (state.scenarioJeuxState.currentState === "secondGame") {
                 state = guessWithThisNumber(state, commandOptions[0]);
-                writeCommandResults("Tentative n°" + state.scenarioJeuxState.gameState.nbAttempt);
                 state = endGuessGame(state);
             } else {
+                writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
+            }
+            break;
+        }
+        case "play" : {
+            if (state.scenarioJeuxState.currentState === "thirdGame") {
+                state = shifumiPLayerSelection(state, commandOptions[0]);
+            } else { 
                 writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
             }
             break;
@@ -97,13 +100,13 @@ function displayGameRules(currentState) {
     }
 }
 
-function displayGame(currentState, htmlMatrice) {
+function displayGame(state) {
     var screen = document.getElementById('gamesText');
 
-    switch(currentState) {
+    switch (state.scenarioJeuxState.currentState) {
         case "firstGame" : {
             screen.innerHTML = "<h2 class='gamesTextAlign'>MORPION</h2>";
-            screen.innerHTML += htmlMatrice;
+            screen.innerHTML += state.scenarioJeuxState.gameState.htmlMatrice;
             screen.innerHTML += "<br><br><br><br><div class='gamesTextAlign'>Astuce : Cliquez sur la case dans laquelle vous souhaitez placer votre pion, puis validez votre coup en saisissant la commande appropriée.</div>"
             break;
         }
@@ -114,7 +117,19 @@ function displayGame(currentState, htmlMatrice) {
             break;
         }
         case "thirdGame" : {
-            screen.innerHTML = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
+            var html = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
+            html += "<br><br><br><br><div class='gamesTextAlign'><i id='shifumiLine' class='setVisible'>Saisissez votre choix pour le round à venir !</i>";
+            html += "<div class='gamesTextAlign'>";
+            html += "<img id='ppierre' class='imageSize setInvisible' src='../../ressources/images/shifumi/ppierre.png'>";
+            html += "<img id='pfeuille' class='imageSize setInvisible' src='../../ressources/images/shifumi/pfeuille.png'>";
+            html += "<img id='pciseaux' class='imageSize setInvisible' src='../../ressources/images/shifumi/pciseaux.png'>";
+            html += "<img id='ppuit' class='imageSize setInvisible' src='../../ressources/images/shifumi/ppuit.png'>";
+            html += "<span id='connector' class='setInvisible'> - contre - </span>";
+            html += "<img id='pierre' class='imageSize setInvisible' src='../../ressources/images/shifumi/pierre.png'>";
+            html += "<img id='feuille' class='imageSize setInvisible' src='../../ressources/images/shifumi/feuille.png'>";
+            html += "<img id='ciseaux' class='imageSize setInvisible' src='../../ressources/images/shifumi/ciseaux.png'></div>";
+            html += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
+            screen.innerHTML = html;
             break;
         }
     }
@@ -132,14 +147,17 @@ function displayGameRewards(currentState) {
             break;
         }
         case "secondReward" : {
-            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Ce petit jeux était bien trop simple ! Même un enfant pourrait y arriver !\"<br><br><i>Il ouvre violemment un second tiroir et en sort une petite fiche qu'il vous jette à nouveau sous les yeux et que vous lisez attentivement.</i>";
+            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Ce petit jeu était bien trop simple ! Même un enfant pourrait y arriver !\"<br><br><i>Il ouvre violemment un second tiroir et en sort une petite fiche qu'il vous jette à nouveau sous les yeux et que vous lisez attentivement.</i>";
             screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 3</div>";
             screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 4</div>";
-            screen.innerHTML += "<br><br><strong>L'informajoueur : </strong>\"Un conseil ne prenez pas la confiance trop vite. Vous m'avez peut être battu sur deux de mes  jeux, mais j'ai encore une carte dans ma manche ! Un jeu où vous ne pourrez jamais, oh grand jamais me vaincre ! Dites \"adieu\" au reste de vos précieuses informations... héhéhé...\"<br><br><br><br><i>Il se frotte les mains tout en ricanant malsainement.<br><br>Çela ne vous laisse présager rien de bon...</i>";
+            screen.innerHTML += "<br><br><strong>L'informajoueur : </strong>\"Un conseil ne prenez pas la confiance trop vite. Vous m'avez peut être battu sur deux de mes jeux, mais j'ai encore une carte dans ma manche ! Un jeu où vous ne pourrez jamais, oh grand jamais me vaincre ! Dites \"adieu\" au reste de vos précieuses informations... héhéhé...\"<br><br><br><br><i>Il se frotte les mains tout en ricanant malsainement.<br><br>Çela ne vous laisse présager rien de bon...</i>";
             break;
         }
         case "thirdReward" : {
-            screen.innerHTML = "Text 5 + Texte 6";
+            screen.innerHTML = "<div><strong>L'informajoueur : </strong>\"Je n'en reviens pas... Moi BATTU ?!\"<br><br><i>Plein de mauvaise foi, il refuse clairement de vous donner le reste des informations. Même pire, il met bien en évidence la fiche que vous étiez censée gagner, et il commence à la déchirer !<br><br><br><br> Ni une, ni deux, vous vous jetez sur lui pour l'empêcher de réduire à néant vos efforts. Vous l'empoignez par le col et intimidé il lâche la fiche.</i>";
+            screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 5</div>";
+            screen.innerHTML += "<br><br><div class='gamesTextFontFamily'>Textes 6</div>";
+            screen.innerHTML += "<br><br><i>Vous le regardez dans les yeux et lui faites comprendre qu'il a intérêt à passer à table. Par peur de perdre ses dernières dents, il s'exclame : </i><br><br><strong>L'informajoueur : </strong>\"J'ai un dernier papier à vous montrer ! Ne soyez pas violente s'il vous plait !\"<br><br><br><br><i>Vous le lâchez et il vous tend l'ultime papier... Un CV !</i>";
             break;
         }
         case "end" : {
@@ -159,63 +177,65 @@ function launchGameStep(state) {
             // 1 Modifier l'affichage principal
             displayGameRules(state.scenarioJeuxState.currentState);
             // 2 Ecrire dans le result command quelque chose
-            writeCommandResults("//--- Règles du jeux n°1 ---//")
+            writeCommandResults("//--- Règles du jeu n°1 ---//")
             // 3 Afficher les commandes utilisables
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "firstGame": {
             state = restartMorpionGame(state);
-            writeCommandResults("//--- Jeux n°1 ---//")
-            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
+            writeCommandResults("//--- Jeu n°1 ---//")
+            docmnt.innerHTML += "<strong>lock : </strong>Valider l'action<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
         case "firstReward": {
             displayGameRewards(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Récompenses du jeux n°1 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Récompenses du jeu n°1 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "secondGameRules": {
             displayGameRules(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Règles du jeux n°2 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Règles du jeu n°2 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "secondGame": {
             state = restartGuessGame(state);
-            writeCommandResults("//--- Jeux n°2 ---//");
-            docmnt.innerHTML += "<strong>try-number X: </strong>Proposer le nombre X<br>";
+            writeCommandResults("//--- Jeu n°2 ---//");
+            docmnt.innerHTML += "<strong>try-nb X: </strong>Proposer le nombre X<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
         case "secondReward": {
             displayGameRewards(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Récompenses du jeux n°2 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Récompenses du jeu n°2 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "thirdGameRules": {
             displayGameRules(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Règles du jeux n°3 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Règles du jeu n°3 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "thirdGame": {
-            displayGame(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Jeux n°3 ---//")
-            docmnt.innerHTML += "<strong>lock-movement : </strong>Valider l'action<br>";
+            state = restartShifumi(state);
+            writeCommandResults("//--- Jeu n°3 ---//")
+            docmnt.innerHTML += "<strong>play pierre : </strong>Jouer la pierre<br>";
+            docmnt.innerHTML += "<strong>play feuille : </strong>Jouer la feuille<br>";
+            docmnt.innerHTML += "<strong>play ciseaux : </strong>Jouer les ciseaux<br>";
             docmnt.innerHTML += "<strong>restart : </strong>Recommencer la partie<br>";
             docmnt.innerHTML += "<strong>skip-game : </strong>Passer la phase de jeu<br>";
             break;
         }
         case "thirdReward": {
             displayGameRewards(state.scenarioJeuxState.currentState);
-            writeCommandResults("//--- Récompenses du jeux n°3 ---//")
-            docmnt.innerHTML += "<strong>continue : </strong>Dérouler le scénario<br>";
+            writeCommandResults("//--- Récompenses du jeu n°3 ---//")
+            docmnt.innerHTML += "<strong>ok-go : </strong>Dérouler le scénario<br>";
             break;
         }
         case "end": {
@@ -318,7 +338,7 @@ function bindClickMatrice() {
 
 function restartMorpionGame(state) {
     state.scenarioJeuxState.gameState = buildGameMorpion(3);
-    displayGame(state.scenarioJeuxState.currentState, state.scenarioJeuxState.gameState.htmlMatrice);
+    displayGame(state);
     bindClickMatrice();
     writeCommandResults("Nettoyage du plateau...");
     return state;
@@ -389,8 +409,8 @@ function morpionTurnIA(state) {
     if(hasAValidCase) {
         var isCellEmpty = false;
         do {
-            var ligneRandom = Math.floor(Math.random() * 3);
-            var colonneRandom = Math.floor(Math.random() * 3);
+            var ligneRandom = getRandom(3);
+            var colonneRandom = getRandom(3);
             if (state.scenarioJeuxState.gameState.rawMatrice[ligneRandom][colonneRandom] === '') {
                 isCellEmpty = true;
             }
@@ -491,19 +511,13 @@ function endMorpionGame(state) {
     return state;
 }
 
-/*--------------------------------*/
-/*---- PIERRE FEUILLE CISEAUX ----*/
-/*--------------------------------*/
-
-
-
 /*--------------------------*/
 /*---- DEVINE UN NOMBRE ----*/
 /*--------------------------*/
 
 function buildGameGuess() {
     var gameState = {
-        number: Math.floor(Math.random() * 100),
+        number: getRandom(100),
         nbAttempt: 0,
         isFinished: "not"
     };
@@ -513,28 +527,38 @@ function buildGameGuess() {
 
 function restartGuessGame(state) {
     state.scenarioJeuxState.gameState = buildGameGuess();
-    displayGame(state.scenarioJeuxState.currentState);
+    displayGame(state);
     writeCommandResults("Choix d'un nouveau nombre à trouver...");
     return state;
 }
 
 function guessWithThisNumber(state, typedNumber) {
-
-    state.scenarioJeuxState.gameState.nbAttempt++;
-    
-    var htmlInfo = document.getElementById('guessInfos');
-    if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
+    typedNumber = parseInt(typedNumber, 10);
+    if (!isNaN(typedNumber) && typedNumber === parseInt(typedNumber, 10)) {
+        state.scenarioJeuxState.gameState.nbAttempt++;
+        
+        var htmlInfo = document.getElementById('guessInfos');
         if(typedNumber < state.scenarioJeuxState.gameState.number) {
-            htmlInfo.innerHTML = "+ Le nombre est plus grand que " + typedNumber;
+            if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
+                htmlInfo.innerHTML = "+ Le nombre est plus grand que " + typedNumber;
+            } else {
+                htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
+                state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+            }
         } else if (typedNumber > state.scenarioJeuxState.gameState.number) {
-            htmlInfo.innerHTML = "- Le nombre est plus petit que " + typedNumber;
+            if(state.scenarioJeuxState.gameState.nbAttempt < 7) {
+                htmlInfo.innerHTML = "- Le nombre est plus petit que " + typedNumber;
+            } else {
+                htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
+                state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+            }
         } else {
             htmlInfo.innerHTML = "Bravo, le nombre est bel et bien " + typedNumber;
             state.scenarioJeuxState.gameState.isFinished = "numberFound";
         }
+        writeCommandResults("Tentative n°" + state.scenarioJeuxState.gameState.nbAttempt);
     } else {
-        htmlInfo.innerHTML = "Vous n'avez pas réussi à trouver le nombre. C'était " + state.scenarioJeuxState.gameState.number;
-        state.scenarioJeuxState.gameState.isFinished = "tooManyAttempts";
+        writeCommandResults("Veuillez saisir un nombre s'il vous plait...");
     }
     return state;
 }
@@ -556,8 +580,246 @@ function endGuessGame(state) {
                 writeCommandResults("//--- Vous avez perdu ---//");
             }
         }, 3000);
-    } else {
+    } 
 
+    return state;
+}
+
+/*--------------------------------*/
+/*---- PIERRE FEUILLE CISEAUX ----*/
+/*--------------------------------*/
+
+function buildGameShifumi() {
+    var gameState = {
+        playerSelection : "",
+        informajoueurSelection: "",
+        isFinished: "not"
+    };
+
+    return gameState;
+}
+
+function restartShifumi(state) {
+    state.scenarioJeuxState.gameState = buildGameShifumi();
+    displayGame(state);
+    writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
+    if (state.scenarioJeuxState.gameState.playerSelection && state.scenarioJeuxState.gameState.informajoueurSelection) {
+
+        var imageJoueur = document.getElementById("p" + state.scenarioJeuxState.gameState.playerSelection);
+        var connector   = document.getElementById("connector"); 
+        var imageEnnemi = document.getElementById(state.scenarioJeuxState.gameState.informajoueurSelection);
+        var shifumiLine = document.getElementById("shifumiLine");
+        imageJoueur.classList.toggle("setInvisible");
+        imageJoueur.classList.toggle("setVisible");
+        connector.classList.toggle("setInvisible");
+        connector.classList.toggle("setVisible");
+        imageEnnemi.classList.toggle("setInvisible");
+        imageJoueur.classList.toggle("setVisible");
+        shifumiLine.classList.toggle("setInvisible");
+        shifumiLine.classList.toggle("setVisible");
     }
     return state;
+}
+
+function shifumiPLayerSelection(state, selectedMove) {
+    switch(selectedMove) {
+        case "pierre" : {
+            state.scenarioJeuxState.gameState.playerSelection = "pierre";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            state = displayShifumiResult(state);
+            break;
+        }
+        case "feuille" : {
+            state.scenarioJeuxState.gameState.playerSelection = "feuille";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            state = displayShifumiResult(state);
+            break;
+        }
+        case "ciseaux": {
+            state.scenarioJeuxState.gameState.playerSelection = "ciseaux";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            state = displayShifumiResult(state);
+            break;
+        }
+        case "puit": {
+            state.scenarioJeuxState.gameState.playerSelection = "puit";
+            state = shifumiInformajoueurSelection(state);
+            state = resolveShifumi(state);
+            state = displayShifumiResult(state);
+            break;
+        }
+        default : {
+            writeCommandResults("Seuls les termes \"pierre\", \"feuille\", \"ciseaux\" (ou en trichant \"puit\") sont utilisables...");
+            state = restartShifumi(state);
+            break;
+        }
+    }
+    return state;
+}
+
+function shifumiInformajoueurSelection(state) {
+    var listSelection = ["pierre", "feuille", "ciseaux"];
+    var numberSelection = getRandom(3);
+    state.scenarioJeuxState.gameState.informajoueurSelection = listSelection[numberSelection];
+    return state;
+}
+
+function resolveShifumi(state) {
+    switch(state.scenarioJeuxState.gameState.playerSelection) {
+        case "pierre" : {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "equality";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "lost";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        case "feuille": {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "equality";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "lost";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        case "ciseaux": {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "lost";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "equality";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        case "puit": {
+            switch (state.scenarioJeuxState.gameState.informajoueurSelection) {
+                case "pierre": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "feuille": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                case "ciseaux": {
+                    state.scenarioJeuxState.gameState.isFinished = "won";
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+            break;
+        }
+        default : {
+            break;
+        }
+    }
+    return state;
+}
+
+function endShifumiGame(state) {
+    if (state.scenarioJeuxState.gameState.isFinished !== "won") {
+        state = restartShifumi(state);
+    } else {
+        state = launchGameStep(skipCurrentState(state));
+    }
+    return state;
+}
+
+function displayShifumiResult(state) {
+
+    var imageJoueur = document.getElementById("p" + state.scenarioJeuxState.gameState.playerSelection);
+    var connector   = document.getElementById("connector"); 
+    var imageEnnemi = document.getElementById(state.scenarioJeuxState.gameState.informajoueurSelection);
+    var shifumiLine = document.getElementById("shifumiLine");
+
+    imageJoueur.classList.toggle("setInvisible");
+    imageJoueur.classList.toggle("setVisible");
+    connector.classList.toggle("setInvisible");
+    connector.classList.toggle("setVisible");
+    imageEnnemi.classList.toggle("setInvisible");
+    imageJoueur.classList.toggle("setVisible");
+    shifumiLine.classList.toggle("setInvisible");
+    shifumiLine.classList.toggle("setVisible");
+
+    
+    setTimeout(() => {
+        var resultHtmlElement = document.getElementById('shifumiResult');
+        var resultHtmlContent = "";
+        var timeToWait = 3000;
+        switch (state.scenarioJeuxState.gameState.isFinished) {
+            case "equality" : {
+                resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Égalité<br><br><strong>L'informajoueur :</strong> \"La victoire ne vous appartient toujours pas... Il en va de même pour les informations qu'il vous reste à découvrir !\"</div>";
+                writeCommandResults("//--- Ex aequo ---//")
+                break;
+            }
+            case "lost": {
+                resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Perdu</div><br><br><strong>L'informajoueur :</strong> \"Vous n'êtes vraiment pas de taille... Me délecter de vos défaites m'accorde un plaisir que vous n'imaginez même pas héhé...\"</div>";
+                writeCommandResults("//--- Vous avez perdu ---//")
+                break;
+            }
+            case "won": {
+                if (state.scenarioJeuxState.gameState.playerSelection === "puit") {
+                    resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>L'intervention mystique d'un Merlin sauvage vous fait gagner !</div><br><br><strong>L'informajoueur :</strong> \"Ce maudit vieillard vient encore perturber mes affaires !\"</div>";
+                    timeToWait = 5000;
+                } else {
+                    resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Gagné</div><br><br><strong>L'informajoueur :</strong> \"C'est impossible !\"</div>";
+                }
+                setTimeout(() => {
+                    state = launchGameStep(skipCurrentState(state));
+                }, timeToWait);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        resultHtmlElement.innerHTML = resultHtmlContent;
+    }, 1500);
+    return state;
+}
+
+/* COMMON FUNCTIONS */
+
+function getRandom(multiplicator) {
+    return Math.floor(Math.random() * multiplicator);
 }

@@ -42,3 +42,18 @@
 .gamesTextFontFamily {
     font-family: serif;
 }
+
+.imageSize {
+    width: 200px;
+    height: auto;
+}
+
+.setInvisible {
+    visibility: hidden;
+    width: 0px;
+}
+
+.setVisible {
+    visibility: visible;
+    width: 200px;
+}
