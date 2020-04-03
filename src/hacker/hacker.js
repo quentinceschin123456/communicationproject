@@ -264,7 +264,12 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 // file list
                 // one folder
                 // file list
+<<<<<<< Updated upstream
                 writeCommandResults("--------");
+=======
+                var cmdResult = "";
+                writeCommandResults(cmdResult);
+>>>>>>> Stashed changes
                 document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
                 state.scenarioHackingState.previousCmd = "ls";
             } else {
@@ -376,70 +381,70 @@ function matchCommandeEnd(commandKey, commandOptions, state) {
 
 function documentationHackDefend1() {
     var str = "<h2>Bloquer une tentative d'accès pirate : </h2>";
-    str += "<strong>block --all-port : </strong>Ferme tous les ports écoutant un réseau distant out local<br>";
-    str += "<strong>changeIp : </strong>Change votre adresse virtuelle<br>";
-    str += "<strong>rm -rf /root/spy/* : </strong>Efface le contenu du répertoire spy contenant des écouteurs de clavier<br>";
-    str += "<strong>open --all-port : </strong>Ouvre tous les ports<br>";
+    str += "<strong>block --all-port : </strong>Ferme tous les ports écoutant un réseau distant out local<br><br>";
+    str += "<strong>changeIp : </strong>Change votre adresse virtuelle<br><br>";
+    str += "<strong>rm -rf /root/spy/* : </strong>Efface le contenu du répertoire spy contenant des écouteurs de clavier<br><br>";
+    str += "<strong>open --all-port : </strong>Ouvre tous les ports<br><br>";
 
     return str;
 }
 
 function documentationHackDefend2() {
     var str = "<h2>Régénérer ses ressources secrètes  : </h2>";
-    str += "<strong>restore --all firewall : </strong>Ré-initialise les parefeux en d'une nouvelle génération<br>";
-    str += "<strong>rsa -gc --new-key : </strong>Créé une clé puublique et une clé privé selon le protocole RSA<br>";
-    str += "<strong>apply --rsa-key fireWall: </strongGénére les parties secrètes des parefeux grâce à une clé privée<br>";
+    str += "<strong>restore --all firewall : </strong>Ré-initialise les parefeux en d'une nouvelle génération<br><br>";
+    str += "<strong>rsa -gc --new-key : </strong>Créé une clé puublique et une clé privé selon le protocole RSA<br><br>";
+    str += "<strong>apply --rsa-key fireWall: </strongGénére les parties secrètes des parefeux grâce à une clé privée<br><br>";
 
     return str;
 }
 
 function documentationHackDefend3() {
     var str = "<h2>Lancement d'une analyse complète : </h2>";
-    str += "<strong>exec windowsDefender.exe : </strong>Lance windows defender en mode administateur<br>";
-    str += "<strong>listen -a : </strong>Ecoute le contenu du disque.<br>";
-    str += "<strong>start analysis : </strong>Lance une analyse complàte des fichiers selectionnés.<br>";
+    str += "<strong>exec windowsDefender.exe : </strong>Lance windows defender en mode administateur<br><br>";
+    str += "<strong>listen -a : </strong>Ecoute le contenu du disque.<br><br>";
+    str += "<strong>start analysis : </strong>Lance une analyse complàte des fichiers selectionnés.<br><br>";
 
     return str;
 }
 
 function documentationHackRecovery1() {
     var str = "<h2>Manipulation distante : </h2>";
-    str += "<strong>netscan : </strong> Affiche les adresses IPv4 connectées au client  <br>";
-    str += "<strong>ssh --forcePassword root@192.168.1.156 : </strong>Connecte le terminal à l'hôte distant désigné.<br>";
-    str += "<strong>cat info.txt : </strong>Lis le contenu du fichier désigné.<br>";
+    str += "<strong>netscan : </strong> Affiche les adresses IPv4 connectées au client  <br><br>";
+    str += "<strong>ssh --forcePassword root@192.168.1.156 : </strong>Connecte le terminal à l'hôte distant désigné.<br><br>";
+    str += "<strong>cat info.txt : </strong>Lis le contenu du fichier désigné.<br><br>";
 
     return str;
 }
 
 function documentationHackRecovery2() {
     var str = "<h2>Manipulation distante : </h2>";
-    str += "<strong>ls -aR : </strong>Liste tout les fichiers et les dossires de l'arborescence<br>";
-    str += "<strong>cat info.txt : </strong>Lis le contenu du fichier désigné.<br>";
-    str += "<strong>cat readme.md : </strong>Lis le contenu du fichier désigné.<br>";
-    str += "<strong>cd Recrutement : </strong>Déplacement vers le dossier ciblé.<br>";
+    str += "<strong>ls -aR : </strong>Liste tout les fichiers et les dossires de l'arborescence<br><br>";
+    str += "<strong>cat info.txt : </strong>Lis le contenu du fichier désigné.<br><br>";
+    str += "<strong>cat readme.md : </strong>Lis le contenu du fichier désigné.<br><br>";
+    str += "<strong>cd Recrutement : </strong>Déplacement vers le dossier ciblé.<br><br>";
 
     return str;
 }
 
 function documentationHackRecovery3() {
     var str = "<h2>Téléchargement distant : </h2>";
-    str += "<strong>exit : </strong> Se déconnecte de la sessions ssh en cours. <br>";
-    str += "<strong>scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/ : </strong>Télécharge le fichier depuis un hôte distant.<br>";
+    str += "<strong>exit : </strong> Se déconnecte de la sessions ssh en cours. <br><br>";
+    str += "<strong>scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/ : </strong>Télécharge le fichier depuis un hôte distant.<br><br>";
 
     return str;
 }
 
 function documentationHackEnd() {
     var str = "<h2>Téléchargement distant : </h2>";
-    str += "<strong>reset : </strong> Recommence le scenério de hacking depuis le debut. <br>";
-    str += "<strong>getText : </strong>Affiche un lien de téléchargement pour le cv ainsi que tous les textes.<br>";
+    str += "<strong>reset : </strong> Recommence le scenério de hacking depuis le debut. <br><br>";
+    str += "<strong>getText : </strong>Affiche un lien de téléchargement pour le cv ainsi que tous les textes.<br><br>";
 
     return str;
 }
 
 function documentationHackInit() {
     var str = "<h2>Lancement d'outil logiciel : </h2>";
-    str += "<strong>start --debugger-sys: </strong> Lance le debugger système. <br>";
+    str += "<strong>start --debugger-sys: </strong> Lance le debugger système. <br><br>";
 
     return str;
 }
@@ -453,37 +458,48 @@ function getReadMeText() {
 }
 
 function textInitialisation() {
+    setTasseImg();
     return '<strong>HACKING : </strong><br> <br>' +
-        'Bienvenu au cybercafé "TrapedMouse", je suis anonymous et je détiens un accès à l \'intégralité de vos données.' +
+        'Bienvenue au cybercafé "TrapedMouse", vous pouvez utiliser ce réseau comme on vous semble.' +
         '<br>' +
-        '<br>' +
-        'Donnez moi 500 bitcoins si vous ne souhaitez pas que détruise vos précieuses informations.';
+        'Nous nous dédouanons de toutes activitées frauduleuses. ' +
+        '<br>Erreur dans votre tentative de connection.... Entrez la commande de debuugage. <br>';
 }
 
 
 function textDefend1() {
-    return 'Bienvenu au cybercafé "TrapedMouse", je suis anonymous et je détiens un accès à l \'intégralité de vos données.' +
+    return 'Bienvenu préciseuse victime, je suis Anonymous et je détiens un accès à l\'intégralité de vos données.' +
         '<br>' +
         '<br>' +
         'Donnez moi 500 bitcoins si vous ne souhaitez pas que détruise vos précieuses informations.' +
-        '<br>';
+        '<br>' +
+        'Ne contacter aucun organisme de police, je contrôle aussi vos communications sur vos autres appareils.';
 }
 
 function textRecovery1() {
-    return '';
+    return 'Bzzzzzz ..' +
+        'Activé suspecte détectée..... <br>' +
+        'Activation du protocole de sécurité A.L.Y.S ....<br><br>' +
+        'Bonjour, je suis A.L.Y.S, une intelligence codé par un étudiant qui vient tuer le temps dans ce cyber café. <br>' +
+        'A force de voir mon créateur travailler, j\'ai acquis des connaissances en informatique.' +
+        'Je connais votre situation et je vais vous aidez. Voyez sur la droite de votre écran, j\'y ai déposer les instructions à suivre.<br> Exécutez les dans l\'ordre et tout se passera bien.'
 }
 
 function textDefend2() {
-    return '<br>' +
-        '<img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
+    return 'Que croyez vous faire. JE CONTROLE VOTRE POSTE. Abandonnez tout espoir et payer. Sinon mes représailles seront infinies.<br>' +
+        'Toutes vos protections sont sous mon joug et je peux décider d\'ouvrir votre machine aux pirates du monde entier.<br>' +
+        'Ils ne sont pas tous aussi patient que moi.';
 }
 
 function textRecovery2() {
-    return '<br>';
+    return 'Merci, ce malotru peut interrompre mon fonctionnement à tout instant. Profitons de ce court répris pour reprendre le contrôle de la situation. <br>' +
+        'Heuresement il ne peut pas éffacer mes instructions dans la documentation. Et heuresement. <br>' +
+        'Bien, dans la séquence précédente, je me suis permis de vous faire accéder à l\'ordinateur de votre attaquant.<br>' +
+        'Nous allons retournez ses armes contre lui. Commencez par lister ce qu\'il y a sur sa machine. Puis nous allons essayer de récupérer des informations sur cet humain.<br>';
 }
 
 function textDefend3() {
-    return '<br>' +
+    return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais meiux fais d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou' +
         '<img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
 }
 
@@ -497,6 +513,11 @@ function getSkullImg() {
 
 function setSkullImg() {
     document.getElementById('hackingTextImg').innerHTML = getSkullImg();
+}
+
+
+function setTasseImg() {
+    document.getElementById('hackingTextImg').innerHTML = '<img class="hack-skull" src="../../ressources/images/tasse.png"></img>';
 }
 
 function textEnd() {
