@@ -33,6 +33,7 @@ function commandsJeux(commandKey, commandOptions, state) {
                 }
                 case "thirdGame" : {
                     state = restartShifumi(state); 
+                    writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
                     break;
                 }
                 default: {
@@ -66,6 +67,7 @@ function commandsJeux(commandKey, commandOptions, state) {
         }
         case "play" : {
             if (state.scenarioJeuxState.currentState === "thirdGame") {
+                state = restartShifumi(state);
                 state = shifumiPLayerSelection(state, commandOptions[0]);
             } else { 
                 writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
@@ -120,14 +122,14 @@ function displayGame(state) {
             var html = "<h2 class='gamesTextAlign'>PIERRE - FEUILLE - CISEAUX</h2>";
             html += "<br><br><br><br><div class='gamesTextAlign'><i id='shifumiLine' class='setVisible'>Saisissez votre choix pour le round à venir !</i>";
             html += "<div class='gamesTextAlign'>";
-            html += "<img id='ppierre' class='imageSize setInvisible' src='../../ressources/images/shifumi/ppierre.png'>";
-            html += "<img id='pfeuille' class='imageSize setInvisible' src='../../ressources/images/shifumi/pfeuille.png'>";
-            html += "<img id='pciseaux' class='imageSize setInvisible' src='../../ressources/images/shifumi/pciseaux.png'>";
-            html += "<img id='ppuit' class='imageSize setInvisible' src='../../ressources/images/shifumi/ppuit.png'>";
+            html += "<img id='ppierre' class='imageSize setInvisible' src='/images/shifumi/ppierre.png'>";
+            html += "<img id='pfeuille' class='imageSize setInvisible' src='/images/shifumi/pfeuille.png'>";
+            html += "<img id='pciseaux' class='imageSize setInvisible' src='/images/shifumi/pciseaux.png'>";
+            html += "<img id='ppuit' class='imageSize setInvisible' src='/images/shifumi/ppuit.png'>";
             html += "<span id='connector' class='setInvisible'> - contre - </span>";
-            html += "<img id='pierre' class='imageSize setInvisible' src='../../ressources/images/shifumi/pierre.png'>";
-            html += "<img id='feuille' class='imageSize setInvisible' src='../../ressources/images/shifumi/feuille.png'>";
-            html += "<img id='ciseaux' class='imageSize setInvisible' src='../../ressources/images/shifumi/ciseaux.png'></div>";
+            html += "<img id='pierre' class='imageSize setInvisible' src='/images/shifumi/pierre.png'>";
+            html += "<img id='feuille' class='imageSize setInvisible' src='/images/shifumi/feuille.png'>";
+            html += "<img id='ciseaux' class='imageSize setInvisible' src='/images/shifumi/ciseaux.png'></div>";
             html += "<br><br><br><br><div id='shifumiResult' class='gamesTextAlign'></div>";
             screen.innerHTML = html;
             break;
@@ -230,6 +232,7 @@ function launchGameStep(state) {
         case "thirdGame": {
             state = restartShifumi(state);
             writeCommandResults("//--- Jeu n°3 ---//")
+            writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
             docmnt.innerHTML += "<strong>play pierre : </strong>Jouer la pierre<br>";
             docmnt.innerHTML += "<strong>play feuille : </strong>Jouer la feuille<br>";
             docmnt.innerHTML += "<strong>play ciseaux : </strong>Jouer les ciseaux<br>";
@@ -607,7 +610,6 @@ function buildGameShifumi() {
 function restartShifumi(state) {
     state.scenarioJeuxState.gameState = buildGameShifumi();
     displayGame(state);
-    writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
     if (state.scenarioJeuxState.gameState.playerSelection && state.scenarioJeuxState.gameState.informajoueurSelection) {
 
         var imageJoueur = document.getElementById("p" + state.scenarioJeuxState.gameState.playerSelection);
@@ -659,6 +661,7 @@ function shifumiPLayerSelection(state, selectedMove) {
         default : {
             writeCommandResults("Seuls les termes \"pierre\", \"feuille\", \"ciseaux\" (ou en trichant \"puit\") sont utilisables...");
             state = restartShifumi(state);
+            writeCommandResults("Sélectionnez le symbole que vous voulez jouer...");
             break;
         }
     }
@@ -793,7 +796,7 @@ function displayShifumiResult(state) {
         var timeToWait = 3000;
         switch (state.scenarioJeuxState.gameState.isFinished) {
             case "equality" : {
-                resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Égalité<br><br><strong>L'informajoueur :</strong> \"La victoire ne vous appartient toujours pas... Il en va de même pour les informations qu'il vous reste à découvrir !\"</div>";
+                resultHtmlContent = "<div class='gamesTextAlign gamesTextUnderline'>Égalité</div><br><br><strong>L'informajoueur :</strong> \"La victoire ne vous appartient toujours pas... Il en va de même pour les informations qu'il vous reste à découvrir !\"</div>";
                 writeCommandResults("//--- Ex aequo ---//")
                 break;
             }
