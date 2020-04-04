@@ -1,5 +1,12 @@
 var hackerDocElement = document.getElementById("docScenarioHacking");
 
+function launcherHack(state) {
+    document.getElementById("hackingTextBox").innerHTML = textInitialisation();
+    // document.getElementById("hackingTextBox").display = "flex";
+    return state;
+}
+
+
 function hackingScenario(commandKey, commandOptions, state) {
     switch (state.scenarioHackingState.name) {
         case "initialisation":
@@ -443,7 +450,7 @@ function documentationHackEnd() {
 
 function documentationHackInit() {
     var str = "<h2>Lancement d'outil logiciel : </h2>";
-    str += "<strong>start --debugger-sys: </strong> Lance le debugger système. <br><br>";
+    str += "<strong>start --debugger-sys : </strong> Lance le debugger système. <br><br>";
 
     return str;
 }
@@ -462,12 +469,12 @@ function textInitialisation() {
         'Bienvenue au cybercafé "TrapedMouse", vous pouvez utiliser ce réseau comme on vous semble.' +
         '<br>' +
         'Nous nous dédouanons de toutes activitées frauduleuses. ' +
-        '<br>Erreur dans votre tentative de connection.... Entrez la commande de debuugage. <br>';
+        '<br><br><br>Erreur dans votre tentative de connection.... Entrez la commande de debuugage. <br>';
 }
 
 
 function textDefend1() {
-    return 'Bienvenu préciseuse victime, je suis Anonymous et je détiens un accès à l\'intégralité de vos données.' +
+    return 'Bienvenue préciseuse victime, je suis Anonymous et je détiens un accès à l\'intégralité de vos données.' +
         '<br>' +
         '<br>' +
         'Donnez moi 500 bitcoins si vous ne souhaitez pas que détruise vos précieuses informations.' +
@@ -505,8 +512,8 @@ function textDefend3() {
 }
 
 function textRecovery3() {
-    return 'Bien joué, nous avons réussi à accéder à son ordinateur. nous pouvons tout savoir de lui.' +
-        '';
+    return 'Bien joué, nous avons réussi à accéder à son ordinateur. nous pouvons tout savoir de lui. <br>' +
+        'Lancez le téléchargement des données et quittez la connexion au plus vite, histoire de pouvoir lire tout ça au calme.';
 }
 
 function hideAllImg() {
@@ -534,7 +541,7 @@ function setRobotImg() {
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return 'Récapitulatif';
+    return 'Merci d\'avoir jouer à ce mini-jeux. Voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a href="/informations" >ce lien </a>';
 }
 
 

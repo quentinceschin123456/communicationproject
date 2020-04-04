@@ -346,6 +346,7 @@ input:focus {
 #hackingText {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 #hackingTextImg {
