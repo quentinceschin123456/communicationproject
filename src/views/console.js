@@ -15,7 +15,7 @@
         scenarioJeuxState: {
             currentState: 'firstGameRules',
             stateArray: ['firstGameRules', 'firstGame', 'firstReward', 'secondGameRules', 'secondGame', 'secondReward', 'thirdGameRules', 'thirdGame', 'thirdReward', 'end'],
-            gameState: '' 
+            gameState: ''
         }
     };
     displayAvailableCommands(state.applicationState);
@@ -134,24 +134,29 @@ function selectScenario(commandOptions) {
         document.getElementsByClassName('menuScenariosSelected')[0].classList.remove('menuScenariosSelected');
     }
     switch (commandOptions[0]) {
-        case "--enigmas": {
-            displayScenario("firstScenario", "enigmesText");
-            document.getElementById("enigmesText").innerHTML = displayEnigmesTextGame();
-            break;
-        }
-        case "--hacking": {
-            displayScenario("secondScenario", "hackingText");
-            break;
-        }
-        case "--games": {
-            displayScenario("thirdScenario", "gamesText");
-            document.getElementById("gamesText").innerHTML = displayScenarioTextGame();
-            break;
-        }
-        default: {
-            writeCommandResults("Une option manque ou est mal écrite.");
-            break;
-        }
+        case "--enigmas":
+            {
+                displayScenario("firstScenario", "enigmesText");
+                document.getElementById("enigmesText").innerHTML = displayEnigmesTextGame();
+                break;
+            }
+        case "--hacking":
+            {
+                displayScenario("secondScenario", "hackingText");
+                document.getElementById("hackingTextBox").innerHTML = getDescriptionHacking();
+                break;
+            }
+        case "--games":
+            {
+                displayScenario("thirdScenario", "gamesText");
+                document.getElementById("gamesText").innerHTML = displayScenarioTextGame();
+                break;
+            }
+        default:
+            {
+                writeCommandResults("Une option manque ou est mal écrite.");
+                break;
+            }
     }
 }
 
@@ -168,7 +173,7 @@ function launchScenario(state) {
             case "Hacking":
                 {
                     state.applicationState = "scenarioHacking";
-                    document.getElementById("hackingTextBox").innerHTML = textInitialisation();
+                    state = launcherHack(state);
                     break;
                 }
             case "Jeux":
