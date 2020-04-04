@@ -355,8 +355,14 @@ input:focus {
     align-self: center;
 }
 
+.whiteLink {
+    color: white;
+}
+
+
 /******************ENIGME*******************/
-#enigmesText{
-    display:flex;
-    flex:1;
+
+#enigmesText {
+    display: flex;
+    flex: 1;
 }

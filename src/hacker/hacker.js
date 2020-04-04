@@ -588,7 +588,7 @@ function setRobotImg() {
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return 'Merci d\'avoir jouer à ce mini-jeux. Voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a href="/informations" >ce lien </a>' + getPdfPreview();
+    return 'Merci d\'avoir jouer à ce mini-jeux. Voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a>' + getPdfPreview();
 }
 
 
