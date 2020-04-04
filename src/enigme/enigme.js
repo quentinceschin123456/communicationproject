@@ -277,16 +277,10 @@ function commandsEnigmes(commandKey, commandOptions, state) {
                     incToNextScenario(); // Passage à l'étape suivante
                     break;
                 }
-            case "menu":
-                {
-                    goToMenu(state);
-                    break;
-                }
-            default:
-                {
-                    writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
-                    break;
-                }
+            default: {
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+                break;
+            }
         }
         nextStepScenarioEnigmes(scenarioState, ST_NONE, "");
         return state;
