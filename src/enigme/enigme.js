@@ -75,6 +75,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                             </div>\
                         </div>");
                 printInHTML(parentDiv.render);
+                document.getElementById("docScenarioEnigmes").style.display = "block";
                 break;
             }
 
@@ -173,6 +174,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 }
                 //parentDiv.addContent("<img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
                 printInHTML(parentDiv.render);
+                document.getElementById("docScenarioEnigmes").style.display = "none";
                 break;
             }
     }
