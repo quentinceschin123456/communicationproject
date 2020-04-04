@@ -143,6 +143,7 @@ function selectScenario(commandOptions) {
         case "--hacking":
             {
                 displayScenario("secondScenario", "hackingText");
+                document.getElementById("hackingTextBox").innerHTML = getDescriptionHacking();
                 break;
             }
         case "--games":

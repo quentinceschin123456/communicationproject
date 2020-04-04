@@ -560,3 +560,14 @@ function getSecondBlocQuentin() {
 function getThirdFirstBlocQuentin() {
     return "";
 }
+
+function getDescriptionHacking() {
+    hideAllImg();
+    return ' <strong>HACKING : </strong><br>' +
+        '<br> Dans ce scénario vous allez devoir saisir des commandes afin de riposter face à un hackeur et lui dérober ses données.' +
+        '<br> TeL est prit qui croyait prendre.' +
+        '<br> Vous ne serez pas seule. Un allié de taille vous donnera des instructions pour réussir.' +
+        '<br> Suivez scrupuleusement la documentation que cet adjuvant vous écrit.' +
+        '<br> Les commandes sont à saisir dans l\'ordre d\'apparition dans la documentation.' +
+        '<br> Restez bien attentif au résultat des commandes. (dans l\'encart juste au-dessus de la ligne de saisie.)';
+}
