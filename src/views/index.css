@@ -46,20 +46,20 @@ body{
     height: 100%;
 }
 
-#onglet{
+.ongletGrouped{
     background-color: #05FC69;
     box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
     border: 2px solid black;
 }
 
-#onglet > #onglet_title{
+.ongletGrouped > #onglet_title{
     padding: 5px;
     height: 20px;
     text-align: center;
     color : black;
 }
 
-#onglet > #onglet_body{
+.ongletGrouped > #onglet_body{
     margin: 5px;
     padding: 5px;
     background-color: #061704;
@@ -68,7 +68,7 @@ body{
     text-align: justify;
 }
 
-#onglet > #onglet_foot{
+.ongletGrouped > #onglet_foot{
     height: 20px;
     background-color: #05FC69;
     color : black;
