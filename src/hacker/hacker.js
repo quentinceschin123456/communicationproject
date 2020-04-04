@@ -505,7 +505,8 @@ function textDefend3() {
 }
 
 function textRecovery3() {
-    return ' ';
+    return 'Bien joué, nous avons réussi à accéder à son ordinateur. nous pouvons tout savoir de lui.' +
+        '';
 }
 
 function hideAllImg() {
