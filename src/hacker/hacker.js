@@ -1,8 +1,55 @@
 var hackerDocElement = document.getElementById("docScenarioHacking");
 
 function launcherHack(state) {
-    document.getElementById("hackingTextBox").innerHTML = textInitialisation();
+
     // document.getElementById("hackingTextBox").display = "flex";
+    switch (state.scenarioHackingState.name) {
+        case "initialisation":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textInitialisation();
+                break;
+            }
+        case "defend1":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textDefend1();
+                break;
+            }
+        case "recovery1":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textRecovery1();
+                break;
+            }
+        case "defend2":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textDefend2();
+                break;
+            }
+        case "recovery2":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textRecovery2();
+                break;
+            }
+        case "defend3":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textDefend3();
+                break;
+            }
+        case "recovery3":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textRecovery3();
+                break;
+            }
+
+        case "end":
+            {
+                document.getElementById("hackingTextBox").innerHTML = textEnd();
+                break;
+            }
+        default:
+            console.log("hackingScenario - invalid scenario state");
+            state.scenarioHackingState.name = "initialisation";
+            break;
+    }
     return state;
 }
 
@@ -541,7 +588,7 @@ function setRobotImg() {
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return 'Merci d\'avoir jouer à ce mini-jeux. Voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a href="/informations" >ce lien </a>';
+    return 'Merci d\'avoir jouer à ce mini-jeux. Voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a href="/informations" >ce lien </a>' + getPdfPreview();
 }
 
 
@@ -570,4 +617,13 @@ function getDescriptionHacking() {
         '<br> Suivez scrupuleusement la documentation que cet adjuvant vous écrit.' +
         '<br> Les commandes sont à saisir dans l\'ordre d\'apparition dans la documentation.' +
         '<br> Restez bien attentif au résultat des commandes. (dans l\'encart juste au-dessus de la ligne de saisie.)';
+}
+
+function getPdfPreview() {
+
+    // document.getElementById('hackingTextBox').style.display = "flex";
+    var innerHTML = "<object id='objData' data='/quentin_ceschin_cv.pdf' type='application/pdf'>";
+    innerHTML += "<embed src='/quentin_ceschin_cv.pdf' type='application/pdf' />";
+    innerHTML += "</object>";
+    return innerHTML;
 }
