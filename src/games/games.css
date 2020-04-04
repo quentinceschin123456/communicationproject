@@ -31,6 +31,10 @@
     margin: auto;
 }
 
+#gamesText {
+    flex: 1;
+}
+
 .gamesTextAlign {
     text-align: center;
 }
@@ -40,7 +44,9 @@
 }
 
 .gamesTextFontFamily {
-    font-family: serif;
+    font-family: sans-serif;
+    color: whitesmoke;
+    text-align: justify;
 }
 
 .imageSize {
@@ -56,4 +62,8 @@
 .setVisible {
     visibility: visible;
     width: 200px;
+}
+
+#objData {
+    flex: 1;
 }
