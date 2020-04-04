@@ -41,6 +41,7 @@
 function launchMenu(state) {
     state.applicationState = "scenariosSelection";
     document.getElementById('menu').style.display = "flex";
+    document.getElementById("displayScreenTitle").style.display = "flex";
     document.getElementById('displayScreen').style.display = "flex";
     document.getElementById('documentation').style.display = "block";
     document.getElementById('textInput').style.visibility = "visible";
