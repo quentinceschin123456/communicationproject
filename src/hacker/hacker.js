@@ -391,7 +391,7 @@ function documentationHackDefend2() {
     var str = "<h2>Régénérer ses ressources secrètes  : </h2>";
     str += "<strong>restore --all firewall : </strong>Ré-initialise les parefeux en d'une nouvelle génération<br><br>";
     str += "<strong>rsa -gc --new-key : </strong>Créé une clé puublique et une clé privé selon le protocole RSA<br><br>";
-    str += "<strong>apply --rsa-key fireWall: </strongGénére les parties secrètes des parefeux grâce à une clé privée<br><br>";
+    str += "<strong>apply --rsa-key fireWall : </strong>Génére les parties secrètes des parefeux grâce à une clé privée<br><br>";
 
     return str;
 }
