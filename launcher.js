@@ -5,6 +5,10 @@ const PORT = process.env.PORT || 8000
 
 express()
     .use(express.static(path.join(__dirname, 'ressources')))
+    .use(express.static(path.join(__dirname, 'ressources/enigmes')))
+    .use(express.static(path.join(__dirname, 'ressources/images')))
+    .use(express.static(path.join(__dirname, 'ressources/images/shifumi')))
+    .use(express.static(path.join(__dirname, 'ressources/images/us')))
     .use(express.static(path.join(__dirname, 'src/views')))
     .use(express.static(path.join(__dirname, 'src')))
     .set('views', path.join(__dirname, 'src/views'))
