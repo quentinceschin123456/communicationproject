@@ -155,6 +155,7 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
                 // hackerDocElement.style.display = "flex";
                 // hackerDocElement.innerHTML = documentationHackRecovery2();
                 document.getElementById("hackingTextBox").innerHTML = textRecovery2();
+                setRobotImg();
             } else {
 
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -170,8 +171,8 @@ function matchCommandeDefend2(commandKey, commandOptions, state) {
 
 function matchCommandeDefend3(commandKey, commandOptions, state) {
 
-    if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "recovery1") {
-        return scenarioHackingState;
+    if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "defend3") {
+        return state;
     }
     switch (state.scenarioHackingState.previousCmd) {
         case "":
@@ -193,7 +194,7 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
         case "listen":
             if (commandKey == "start" && commandOptions[0] == "analysis") {
                 writeCommandResults("Suppression de toutes les menaces terminées. Votre système est sécurisé.");
-                state.scenarioHackingState.previousCmd = "delete";
+                state.scenarioHackingState.previousCmd = "";
                 state.scenarioHackingState.name = "recovery3";
                 // hackerDocElement.style.display = "flex";
                 // hackerDocElement.innerHTML = documentationHackRecovery3();
@@ -210,7 +211,7 @@ function matchCommandeDefend3(commandKey, commandOptions, state) {
 
 function matchCommandeRecovery1(commandKey, commandOptions, state) {
     if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "recovery1") {
-        return scenarioHackingState;
+        return state;
     }
     switch (state.scenarioHackingState.previousCmd) {
         case "":
@@ -268,7 +269,7 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
 
                 var cmdResult = "";
                 writeCommandResults(cmdResult);
-                document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
+                // document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
                 state.scenarioHackingState.previousCmd = "ls";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -314,7 +315,7 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
 
 function matchCommandeRecovery3(commandKey, commandOptions, state) {
     if (!state.scenarioHackingState.isPreviousCmdSucced || state.scenarioHackingState.name != "recovery3") {
-        return scenarioHackingState;
+        return state;
     }
     // première réponse
     if (state.scenarioHackingState.isPreviousCmdSucced) {
@@ -498,8 +499,9 @@ function textRecovery2() {
 
 function textDefend3() {
     return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais meiux fait d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou <br>' +
-        'Bref je digresse, ' +
-        '';
+        'Bref je digresse, puisque je ne peux vous raisonnez, je vais de voir déplyer toute ma base de données de virus afin de m\assurer qu\'il vous poursuivent jusqu\'en enfer.<br>' +
+        'Dès qu\'ils pourront vous associer avec un appareil ce dernier sera tout simplement détruit.<br> CECI EST VOTRE DERNIERE CHANCE. Payez rapidement !!!! ' +
+        'Il s\'agit ici de mon dernier avertissement.';
 }
 
 function textRecovery3() {
@@ -536,7 +538,11 @@ function textEnd() {
 
 
 function getFirstBlocQuentin() {
-    return "";
+
+    return "<h2>Contenu du fichier info.txt</h2>" +
+        ''
+
+    ;
 }
 
 function getSecondBlocQuentin() {
