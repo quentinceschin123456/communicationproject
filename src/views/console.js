@@ -136,6 +136,7 @@ function selectScenario(commandOptions) {
     switch (commandOptions[0]) {
         case "--enigmas": {
             displayScenario("firstScenario", "enigmesText");
+            document.getElementById("enigmesText").innerHTML = displayEnigmesTextGame();
             break;
         }
         case "--hacking": {

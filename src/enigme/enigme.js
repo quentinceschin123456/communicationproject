@@ -28,11 +28,14 @@ class DivOBJ {
 }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------------------- Début de l'application*/
-var scenarioState = "scenarioState_initialisation";
-var parentDiv = new DivOBJ("parentDiv", "margin:auto");
+var scenarioState = "";
+var parentDiv = null;
 var nbTry = 0;
 
 function runScenarioEnigmes() {
+    scenarioState = "scenarioState_initialisation";
+    parentDiv = new DivOBJ("parentDiv", "margin:auto");
+    nbTry = 0;
     scenarioState = scenarioState_enum[0];
     clearInHTML();
     parentDiv.addContent("\
@@ -42,7 +45,7 @@ function runScenarioEnigmes() {
             Chacune des enigmes résolut vous donnera accès à un morceau de parchemin.</h3>\
         <h3>Prennez garde ! Car ces trois énigmes ne sont pas si facile à résoudre ! Pour vous dire, cela fait maintenant plusieurs moment que je cherche... mais je n'ai pas trouvé...</h3>\
         <h3>Alors prêt à creuser le cerveau ?</h3>\
-        <img src='../enigme/src/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 250px;'/>\
+        <img src='../enigme/src/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
         <h3>Saisissez la commande \"<bold>next</bold>\" pour commencer à aider Merlin.</h3>");
 
     printInHTML(parentDiv.render);
@@ -55,10 +58,10 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Une vieille invention :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin2.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                <img src='../enigme/src/merlin2.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
@@ -78,9 +81,9 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
         case scenarioState_enum[2]:
             {
                 parentDiv.addContent("<h1>Voilà un petit morceau :</h1>");
-                if (commentaire != "") {
+                if (commentaire != "") { // background-image:url(../enigme/src/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;
                     parentDiv.addContent("\
-                        <div style='height:400px;width:1200px;overflow:auto;background-image:url(../enigme/src/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;'>\
+                        <div style='height:400px;width:1200px;overflow:auto;'>\
                             "+ commentaire +"\
                         </div>");
                     parentDiv.addContent("<h3>Saisissez la commande \"<bold>next</bold>\" pour passer à la prochaine enigme.</h3>");
@@ -94,10 +97,10 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Une charade :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin3.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                <img src='../enigme/src/merlin3.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
@@ -136,10 +139,10 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Un monstre généreux :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin4.png' style='display: block;margin-left: auto;margin-right: auto;height: 300px;'/>");
+                <img src='../enigme/src/merlin4.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
@@ -160,7 +163,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
 
         case scenarioState_enum[6]:
             {
-                parentDiv.addContent("<h1>Vous avez réussit !</h1>");
+                parentDiv.addContent("<h1>Vous avez réussi !</h1>");
                 parentDiv.addContent("<h3>Je dois admettre que vous êtes plutôt doué !</h3>");
                 if (commentaire != "") {
                     parentDiv.addContent("\
@@ -168,7 +171,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                             "+ commentaire +"\
                         </div>");
                 }
-                parentDiv.addContent("<img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
+                //parentDiv.addContent("<img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
                 printInHTML(parentDiv.render);
                 break;
             }
@@ -186,6 +189,12 @@ function clearInHTML() {
     document.getElementById("enigmesText").innerHTML = "";
 }
 
+function hardResetEnigmes(){
+    clearInHTML();
+    displayEnigmesTextGame();
+    scenarioState = "scenarioState_initialisation";
+}
+
 // Permet d'écrire directement dans une DIV spécifique
 function printInHTMLInSpecificElement(HTMLChain, ElementId) {
     document.getElementById(ElementId).innerHTML = HTMLChain;
@@ -193,6 +202,12 @@ function printInHTMLInSpecificElement(HTMLChain, ElementId) {
 
 function clearInHTMLInSpecificElement(ElementId) {
     document.getElementById(ElementId).innerHTML = "";
+}
+
+function displayEnigmesTextGame() {
+    return "<strong>ENIGMES : </strong><br>\
+        <br> Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérable énigmes.<br>\
+        <img src=\"../enigme/src/merlin0.png\" style=\"display: block;margin: auto; height: 350px;\" /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
 }
 
 function incToNextScenario() {
@@ -216,31 +231,29 @@ function goToMenu(state) {
 
 function getJsonPart(level) {
     tempStr = "";
+    tempStr += "<p><h2>" + jsonResource[0].name + " m'a dit :</h2>";
     switch(level) {
         case 1:
         {
-            tempStr += "<p><h2>" + jsonResource[0].name + "</h2>";
-            tempStr += "<p>Mes attentes :</br>" + jsonResource[0].VosAttentes + "</p>";
-            tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
+            tempStr += "<p><u>Mes attentes :</u></br>" + jsonResource[0].VosAttentes + "</p>";
+            tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
             tempStr += "</p>";
             break;
         }
         case 2:
         {
-            tempStr += "<p><h2>" + jsonResource[0].name + "</h2>";
-            tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
-            tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[0].VosCentreInteret + "</p>";
+            tempStr += "<p><u>Mes traits de personnalités :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonResource[0].VosCentreInteret + "</p>";
             tempStr += "</p>";
             break;
         }
         case 3:
         {
-            tempStr += "<p><h2>" + jsonResource[0].name + "</h2>";
-            tempStr += "<p>Mes attentes :</br>" + jsonResource[0].VosAttentes + "</p>";
-            tempStr += "<p>Mes compétences professionnelles :</br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
-            tempStr += "<p>Mes traits de personnalités :</br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
-            tempStr += "<p>Mes centre d'intérêt :</br>" + jsonResource[0].VosCentreInteret + "</p>";
-            tempStr += "<p>Mon itinéraire pro-passé :</br>" + jsonResource[0].VotreItineraireProPasse + "</p>";
+            tempStr += "<p><u>Mes attentes :</u></br>" + jsonResource[0].VosAttentes + "</p>";
+            tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
+            tempStr += "<p><u>Mes traits de personnalités :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonResource[0].VosCentreInteret + "</p>";
+            tempStr += "<p><u>Mon itinéraire pro-passé :</u></br>" + jsonResource[0].VotreItineraireProPasse + "</p>";
             tempStr += "</p>";
             break;
         }
@@ -250,6 +263,13 @@ function getJsonPart(level) {
 
 /* ------------------------------------------------*/
 function commandsEnigmes(commandKey, commandOptions, state) {
+    if (commandKey == "menu") {
+        hardResetEnigmes();
+        state = commandsScenariosUtilities(commandKey, commandOptions, state);
+        return state;
+    }
+    
+
     if (state.application == "scenarioEnigmes" | scenarioState == scenarioState_enum[0]) {
         switch (commandKey) {
             case "next":
@@ -268,7 +288,7 @@ function commandsEnigmes(commandKey, commandOptions, state) {
 
     if (scenarioState == scenarioState_enum[1]) {
         if (commandKey == "menu") {
-            goToMenu(state);
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
             return state;
         }
         if (commandKey == "next" && nbTry > 3) {
@@ -293,28 +313,21 @@ function commandsEnigmes(commandKey, commandOptions, state) {
 
     if (scenarioState == scenarioState_enum[2]) {
         switch (commandKey) {
-            case "next":
-                {
-                    incToNextScenario();
-                    nextStepScenarioEnigmes(scenarioState, ST_NONE, ""); // Passage à l'étape suivante
-                    return state;
-                }
-            case "menu":
-                {
-                    goToMenu(state);
-                    break;
-                }
-            default:
-                {
-                    writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
-                    break;
-                }
+            case "next":{
+                incToNextScenario();
+                nextStepScenarioEnigmes(scenarioState, ST_NONE, ""); // Passage à l'étape suivante
+                return state;
+            }
+            default:{
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+                break;
+            }
         }
     }
 
     if (scenarioState == scenarioState_enum[3]) {
         if (commandKey == "menu") {
-            goToMenu(state);
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
             return state;
         }
         if (commandKey == "next" && nbTry > 3) {
@@ -338,28 +351,21 @@ function commandsEnigmes(commandKey, commandOptions, state) {
 
     if (scenarioState == scenarioState_enum[4]) {
         switch (commandKey) {
-            case "next":
-                {
-                    incToNextScenario();
-                    nextStepScenarioEnigmes(scenarioState, ST_NONE, "");
-                    return state;
-                }
-            case "menu":
-                {
-                    goToMenu(state);
-                    break;
-                }
-            default:
-                {
-                    writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
-                    break;
-                }
+            case "next":{
+                incToNextScenario();
+                nextStepScenarioEnigmes(scenarioState, ST_NONE, ""); // Passage à l'étape suivante
+                return state;
+            }
+            default:{
+                state = commandsScenariosUtilities(commandKey, commandOptions, state);
+                break;
+            }
         }
     }
 
     if (scenarioState == scenarioState_enum[5]) {
         if (commandKey == "menu") {
-            goToMenu(state);
+            state = commandsScenariosUtilities(commandKey, commandOptions, state);
             return state;
         }
         if (commandKey == "next" && nbTry > 3) {
@@ -382,18 +388,7 @@ function commandsEnigmes(commandKey, commandOptions, state) {
     }
 
     if (scenarioState == scenarioState_enum[6]) {
-        switch (commandKey) {
-            case "menu":
-                {
-                    goToMenu(state);
-                    break;
-                }
-            default:
-                {
-                    writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");
-                    break;
-                }
-        }
+        state = commandsScenariosUtilities(commandKey, commandOptions, state);
         return state;
     }
 
