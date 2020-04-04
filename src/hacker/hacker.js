@@ -484,49 +484,54 @@ function textRecovery1() {
 }
 
 function textDefend2() {
-    return 'Que croyez vous faire. JE CONTROLE VOTRE POSTE. Abandonnez tout espoir et payer. Sinon mes représailles seront infinies.<br>' +
+    return 'Que croyez vous faire. JE CONTROLE VOTRE POSTE. Abandonnez tout espoir et payez. Sinon mes représailles seront infinies.<br>' +
         'Toutes vos protections sont sous mon joug et je peux décider d\'ouvrir votre machine aux pirates du monde entier.<br>' +
         'Ils ne sont pas tous aussi patient que moi.';
 }
 
 function textRecovery2() {
-    return 'Merci, ce malotru peut interrompre mon fonctionnement à tout instant. Profitons de ce court répris pour reprendre le contrôle de la situation. <br>' +
+    return 'Merci, apparament ce malotru peut interrompre mon fonctionnement à tout instant. Profitons de ce court répris pour reprendre le contrôle de la situation. <br>' +
         'Heuresement il ne peut pas éffacer mes instructions dans la documentation. Et heuresement. <br>' +
         'Bien, dans la séquence précédente, je me suis permis de vous faire accéder à l\'ordinateur de votre attaquant.<br>' +
         'Nous allons retournez ses armes contre lui. Commencez par lister ce qu\'il y a sur sa machine. Puis nous allons essayer de récupérer des informations sur cet humain.<br>';
 }
 
 function textDefend3() {
-    return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais meiux fais d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou <br>' +
+    return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais meiux fait d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou <br>' +
         'Bref je digresse, ' +
-        '<img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
+        '';
 }
 
 function textRecovery3() {
     return ' ';
 }
 
-function getSkullImg() {
-    return '<br><img class="hack-skull" src="../../ressources/images/crane-pirate-vert.jpg"></img>';
+function hideAllImg() {
+    document.getElementById('img-tasse').style.display = "none";
+    document.getElementById('img-robot').style.display = "none";
+    document.getElementById('img-skull').style.display = "none";
 }
 
 function setSkullImg() {
-    document.getElementById('hackingTextImg').innerHTML = getSkullImg();
+    hideAllImg();
+    document.getElementById('img-skull').style.display = "block";
 }
 
 
 function setTasseImg() {
-    document.getElementById('hackingTextImg').innerHTML = '<img class="hack-skull" src="../../ressources/images/tasse.png"></img>';
+    hideAllImg();
+    document.getElementById('img-tasse').style.display = "block";
 }
 
 function setRobotImg() {
-    document.getElementById('hackingTextImg').innerHTML = '<img class="hack-skull" src="../../ressources/images/Robot.png"></img>';
+    hideAllImg();
+    document.getElementById('img-robot').style.display = "block";
 }
 
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return '';
+    return 'Récapitulatif';
 }
 
 
