@@ -1,6 +1,6 @@
 @font-face {
     font-family: "DOSFont";
-    src: url("../../ressources/DOS_VGA_437.ttf");
+    src: url("/DOS_VGA_437.ttf");
 }
 
 html{
