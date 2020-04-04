@@ -162,8 +162,8 @@ function displayGameRewards(currentState) {
         }
         case "end" : {
             document.getElementById('gamesText').style.display = "flex";
-            var innerHTML = "<object id='objData' data='../../ressources/Grandchamps_CV.pdf' type='application/pdf'>";
-            innerHTML +=  "<embed src='../../ressources/Grandchamps_CV.pdf' type='application/pdf' />";
+            var innerHTML = "<object id='objData' data='/Grandchamps_CV.pdf' type='application/pdf'>";
+            innerHTML +=  "<embed src='/Grandchamps_CV.pdf' type='application/pdf' />";
             innerHTML +=  "</object>";
             
             screen.innerHTML = innerHTML;
