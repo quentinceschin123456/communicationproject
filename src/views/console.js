@@ -42,6 +42,7 @@ function launchMenu(state) {
     state.applicationState = "scenariosSelection";
     document.getElementById('menu').style.display = "flex";
     document.getElementById("displayScreenTitle").style.display = "flex";
+    document.getElementById("displayScreenTitle").innerHTML = "Bienvenue";
     document.getElementById('displayScreen').style.display = "flex";
     document.getElementById('documentation').style.display = "block";
     document.getElementById('textInput').style.visibility = "visible";
@@ -49,6 +50,7 @@ function launchMenu(state) {
     displayAvailableCommands(state);
     var listScenarioDisplayText = document.getElementsByClassName("scenariosDisplayText");
     setToDisplayNone(listScenarioDisplayText);
+    document.getElementById("commonText").style.display = "block";
     initializeCommandTypingEvent(state);
 }
 
@@ -181,6 +183,10 @@ function launchScenario(state) {
         displayAvailableCommands(state);
         document.getElementById("menu").style.display = "none";
         document.getElementById("displayScreenTitle").style.display = "none";
+        document.getElementById("commonText").style.display = "none";
+        if (document.getElementsByClassName('menuScenariosSelected')[0]) {
+            document.getElementsByClassName('menuScenariosSelected')[0].classList.remove('menuScenariosSelected');
+        }
     } else {
         writeCommandResults("Veuillez choisir un scénario avant de le charger.");
     }
