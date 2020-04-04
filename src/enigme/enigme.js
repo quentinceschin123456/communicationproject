@@ -29,7 +29,7 @@ class DivOBJ {
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------------------- Début de l'application*/
 var scenarioState = "scenarioState_initialisation";
-var parentDiv = new DivOBJ("parentDiv", "");
+var parentDiv = new DivOBJ("parentDiv", "margin:auto");
 var nbTry = 0;
 
 function runScenarioEnigmes() {
@@ -179,11 +179,11 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
 /* ------------------------------ Fonctions pour le programme ------------------------------ */
 
 function printInHTML(HTMLChain) {
-    document.getElementById("displayScreenText").innerHTML = HTMLChain;
+    document.getElementById("enigmesText").innerHTML = HTMLChain;
 }
 
 function clearInHTML() {
-    document.getElementById("displayScreenText").innerHTML = "";
+    document.getElementById("enigmesText").innerHTML = "";
 }
 
 // Permet d'écrire directement dans une DIV spécifique
