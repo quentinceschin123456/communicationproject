@@ -1,6 +1,81 @@
-.menu{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+@font-face {
+    font-family: "DOSFont";
+    src: url("../../ressources/DOS_VGA_437.ttf");
 }
+
+html{
+    font-family: 'DOSFont', Arial, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    font-size: 20px;
+    /*margin: 20%;*/
+    margin: 0;
+    padding: 0;
+    /*height: 70%;*/
+    /*background-color: black;*/
+}
+
+#top_onglet{
+    padding: 7px;
+    background-color: #05FC69;
+    flex-direction: row;
+    height: 20px;
+    text-align: center;
+    color: black;
+}
+
+#menu{
+    flex-direction: row;
+    align-items: center;
+    background-color: black;
+    height: 20px;
+    padding: 5px;
+    text-align: center;
+}
+
+#menu > a{
+    color: white;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+body{
+    background-color: #061704;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.ongletGrouped{
+    background-color: #05FC69;
+    box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+    border: 2px solid black;
+}
+
+.ongletGrouped > #onglet_title{
+    padding: 5px;
+    height: 20px;
+    text-align: center;
+    color : black;
+}
+
+.ongletGrouped > #onglet_body{
+    margin: 5px;
+    padding: 5px;
+    background-color: #061704;
+    color : #05FC69;
+    box-shadow: inset 3px 3px black;
+    text-align: justify;
+}
+
+.ongletGrouped > #onglet_foot{
+    height: 20px;
+    background-color: #05FC69;
+    color : black;
+}
+
+#onglet_body > a {
+    color: white;
+    font-weight: bolder;
+}
+
