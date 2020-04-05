@@ -45,7 +45,7 @@ function runScenarioEnigmes() {
             Chacune des enigmes résolues vous donnera accès à un morceau de parchemin.</h3>\
         <h3>Prennez garde ! Car ces trois énigmes ne sont pas si faciles à résoudre ! Pour vous dire, cela fait maintenant un moment que je cherche... mais je n'ai pas trouvé...</h3>\
         <h3>Alors prêt à se creuser le cerveau ?</h3>\
-        <img src='../enigme/src/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
+        <img src='/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
         <h3>Saisissez la commande \"<bold>next</bold>\" pour commencer à aider Merlin.</h3>");
 
     printInHTML(parentDiv.render);
@@ -58,17 +58,17 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Une vieille invention :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin2.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlin2.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
                 }
                 parentDiv.addContent("\
                         <div style='position: relative;text-align: center;'>\
-                            <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
+                            <img src='/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
                                 <p>Une vieille invention qui est très utilisée aujourd'hui, permet de voir à travers les murs.</p>\
                                 <p>Qui suis-je ?</p>\
@@ -82,7 +82,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
         case scenarioState_enum[2]:
             {
                 parentDiv.addContent("<h1>Voilà un petit morceau :</h1>");
-                if (commentaire != "") { // background-image:url(../enigme/src/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;
+                if (commentaire != "") { // background-image:url(/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;
                     parentDiv.addContent("\
                         <div style='height:400px;width:1200px;overflow:auto;'>\
                             "+ commentaire +"\
@@ -98,17 +98,17 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Une charade :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin3.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlin3.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
                 }
                 parentDiv.addContent("\
                         <div style='position: relative;text-align: center;'>\
-                            <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
+                            <img src='/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
                                 <p>- Mon premier peut être en fer ou en chocolat</br>\
                                 - Mon second est une boisson chaude très appréciée en Angleterre</br>\
@@ -140,17 +140,17 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Un monstre généreux :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin4.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlin4.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
                 }
                 parentDiv.addContent("\
                         <div style='position: relative;text-align: center;'>\
-                            <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
+                            <img src='/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
                                 <p>Un monstre affamé pose cette devinette à un chevalier perdu :</br>\
                                 \"J'ai quatre dents mais je ne mords pas.</br>\
@@ -172,7 +172,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                             "+ commentaire +"\
                         </div>");
                 }
-                //parentDiv.addContent("<img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
+                //parentDiv.addContent("<img src='/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
                 printInHTML(parentDiv.render);
                 document.getElementById("docScenarioEnigmes").style.display = "none";
                 break;
@@ -209,7 +209,7 @@ function clearInHTMLInSpecificElement(ElementId) {
 function displayEnigmesTextGame() {
     return "<strong>ENIGMES : </strong><br>\
         <br> Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérables énigmes.<br>\
-        <img src='../enigme/src/merlin0.png' style='display: block;margin: auto; height: 350px;' /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
+        <img src='/merlin0.png' style='display: block;margin: auto; height: 350px;' /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
 }
 
 function incToNextScenario() {
