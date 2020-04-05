@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .text {
     color: black;
     padding: 10px;
@@ -5,16 +9,12 @@
 
 .container {
     display: flex;
-    flex-direction: row;
-    align-self: center;
-    justify-self: center;
-    justify-content: space-evenly;
-    background-color: #061704;
-    min-width: 75%;
-}
-
-#blocCorentin {
-    flex-direction: row-reverse;
+    flex-direction: column;
+    padding: 15px 0px;
+    flex: 3;
+    background: black;
+    border: 2px solid #05FC69;
+    box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
 }
 
 .asset {
@@ -41,18 +41,6 @@ img {
     padding-right: 20%;
 }
 
-.cocoPhoto {
-    height: 230px;
-    width: auto;
-}
-
-#onglet_body {
-    text-align: center !important;
-}
-
-
-
-
 #pageContent {
     display: flex;
     flex-direction: column;
@@ -61,7 +49,6 @@ img {
 #cardsContainer {
     display: flex;
     margin: auto;
-    flex: 1;
 }
 
 .cards {
@@ -74,8 +61,13 @@ img {
     background-color: #05FC69;
     border: 2px solid black;
     box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+    cursor: pointer;
 }
 
+
+.cards:hover {
+    opacity: 0.5;
+}
 .cardsTitle {
     text-align: center;
     padding-bottom: 10px;
@@ -110,13 +102,74 @@ img {
 }
 
 .cardsFontLinks {
-    text-decoration: none;
     color: whitesmoke;
+    cursor: pointer;
 }
 
 #bodyContainer {
-    display: flex;
+    display: none;
     margin: auto;
-    flex: 2;
+    flex-direction: column;
+}
+
+#bodyTitleContainer {
+    display: flex;
+}
+
+#bodyTitle {
+    text-align: center;
     background-color: #05FC69;
+    padding: 10px;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#bodyContent {
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.textsMarge {
+    flex: 1;
+}
+
+.textsMargeFlex3 {
+    flex: 3;
+}
+
+#blocAncelin {
+    display: none;
+}
+
+#blocQuentin {
+    display: none;
+}
+
+#blocCorentin {
+    display: none;
+}
+
+.paragraphe {
+    font-family: sans-serif;
+    text-align: justify;
+    padding: 15px 30px;
+    color: whitesmoke;
+}
+
+.linksCV {
+    color: black;
+    background-color: #05FC69;
+    text-decoration: none;
+    padding: 15px;
+    border: 2px solid whitesmoke;
+}
+
+.linksCV:hover {
+    background-color: rgba(5, 252, 104, 0.747);
+}
+
+.paragrapheCV {
+    text-align: right;
 }

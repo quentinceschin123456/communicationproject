@@ -50,6 +50,11 @@ body{
     background-color: #05FC69;
     box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
     border: 2px solid black;
+    width: 600px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    color: whitesmoke
 }
 
 .ongletGrouped > #onglet_title{
@@ -61,11 +66,12 @@ body{
 
 .ongletGrouped > #onglet_body{
     margin: 5px;
-    padding: 5px;
+    padding: 15px;
     background-color: #061704;
     color : #05FC69;
     box-shadow: inset 3px 3px black;
     text-align: justify;
+    font-family: sans-serif;
 }
 
 .ongletGrouped > #onglet_foot{
@@ -75,6 +81,5 @@ body{
 }
 
 #onglet_body > a {
-    color: white;
+    color: whitesmoke;
 }
-
