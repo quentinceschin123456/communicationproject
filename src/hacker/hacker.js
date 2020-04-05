@@ -106,7 +106,7 @@ function hackingScenario(commandKey, commandOptions, state) {
         }
     } else {
         bypass(state);
-        writeCommandResults("Vous avez passez un bout du scénario.")
+        writeCommandResults("Vous avez passé un bout du scénario.")
     }
     console.log(state.scenarioHackingState);
     return state;
@@ -556,7 +556,7 @@ function documentationHackRecovery3() {
 
 function documentationHackEnd() {
     var str = "<h2>Téléchargement distant : </h2>";
-    str += "<strong>reset : </strong> Recommence le scenério de hacking depuis le debut. <br><br>";
+    str += "<strong>reset : </strong> Recommence le scénario de hacking depuis le debut. <br><br>";
     str += "<strong>getText : </strong>Affiche un lien de téléchargement pour le cv ainsi que tous les textes.<br><br>";
 
     return str;
@@ -588,6 +588,7 @@ function textInitialisation() {
 
 
 function textDefend1() {
+    setSkullImg();
     return 'Bienvenue très chère victime, je suis Anonymous et je détiens un accès à l\'intégralité de vos données.' +
         '<br>' +
         '<br>' +
@@ -597,6 +598,7 @@ function textDefend1() {
 }
 
 function textRecovery1() {
+    setRobotImg();
     return 'Bzzzzzz ..' +
         'Activé suspecte détectée..... <br>' +
         'Activation du protocole de sécurité A.L.Y.S ....<br><br>' +
@@ -606,12 +608,14 @@ function textRecovery1() {
 }
 
 function textDefend2() {
+    setSkullImg();
     return 'Que croyez vous faire. JE CONTROLE VOTRE POSTE. Abandonnez tout espoir et payez. Sinon mes représailles seront infinies.<br>' +
         'Toutes vos protections sont sous mon joug et je peux décider d\'ouvrir votre machine aux pirates du monde entier.<br>' +
         'Ils ne sont pas tous aussi patients que moi.';
 }
 
 function textRecovery2() {
+    setRobotImg();
     return 'Merci, apparemment ce malotru peut interrompre mon fonctionnement à tout instant. Profitons de ce court répit pour reprendre le contrôle de la situation. <br>' +
         'Par chance, il ne peut pas effacer mes instructions dans la documentation. Et heuresement. <br>' +
         'Bien, dans la séquence précédente, je me suis permis de vous faire accéder à l\'ordinateur de votre attaquant.<br>' +
@@ -619,6 +623,7 @@ function textRecovery2() {
 }
 
 function textDefend3() {
+    setSkullImg();
     return 'Comment avez vous fait pour vous introduire dans mon ordinateur.. Pfff, j\'aurais mieux fait d\'écouter pendant les cours de sécurtié. "root" comme mot de passe c\'est pas fou fou <br>' +
         'Bref je digresse, puisque je ne peux vous raisonner, je vais devoir déployer toute ma base de données de virus afin de m\'assurer qu\'il vous poursuivent jusqu\'en enfer.<br>' +
         'Dès qu\'ils pourront vous associer avec un appareil ce dernier sera tout simplement détruit.<br> CECI EST VOTRE DERNIERE CHANCE. Payez rapidement !!!! ' +
@@ -635,6 +640,7 @@ function hideAllImg() {
     document.getElementById('img-tasse').style.display = "none";
     document.getElementById('img-robot').style.display = "none";
     document.getElementById('img-skull').style.display = "none";
+    document.getElementById('hackingCvPdf').style.display = "none";
 }
 
 function setSkullImg() {
@@ -658,7 +664,7 @@ function textEnd() {
     hideAllImg();
     setPdfPreview();
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return 'Merci d\'avoir joué à ce mini-jeux. Vous avez battu le hackeur et toucher du doigt l\'utilisation d\'une console, appelé aussi terminal.<br>En récompense voici une prévisualisation de mon CV qui est téléchargeable. Vous pouvez retrouver toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a>';
+    return 'Merci d\'avoir joué ce scénario. Vous avez battu le hackeur et toucher du doigt l\'utilisation d\'une console, appelé aussi terminal.<br>En récompense voici une prévisualisation de mon CV qui est téléchargeable. Vous pouvez retrouver toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a><br>';
 }
 
 
@@ -709,7 +715,7 @@ function getPdfPreview() {
 }
 
 function setPdfPreview() {
-    document.getElementById("objData").style.display = "flex";
+    document.getElementById("hackingCvPdf").style.display = "flex";
 }
 
 function getHelpForLS() {
