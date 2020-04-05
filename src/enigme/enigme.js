@@ -40,11 +40,11 @@ function runScenarioEnigmes() {
     clearInHTML();
     parentDiv.addContent("\
         <h1>Je vous souhaite la bienvenue, moi c'est Merlin.</h1>\
-        <h3>Quelque chose me dit que vous cherchiez quelque chose ici.</br>\
+        <h3>Mon petit doigt me dit que vous cherchez quelque chose ici.</br>\
             Etant magicien, je vous aiderai volontier... mais tout d'abord vous devez m'aider à résoudre trois enigmes.<br>\
             Chacune des enigmes résolues vous donnera accès à un morceau de parchemin.</h3>\
-        <h3>Prennez garde ! Car ces trois énigmes ne sont pas si facile à résoudre ! Pour vous dire, cela fait maintenant un moment que je cherche... mais je n'ai pas trouvé...</h3>\
-        <h3>Alors prêt à vous creuser le cerveau ?</h3>\
+        <h3>Prennez garde ! Car ces trois énigmes ne sont pas si faciles à résoudre ! Pour vous dire, cela fait maintenant un moment que je cherche... mais je n'ai pas trouvé...</h3>\
+        <h3>Alors prêt à se creuser le cerveau ?</h3>\
         <img src='../enigme/src/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
         <h3>Saisissez la commande \"<bold>next</bold>\" pour commencer à aider Merlin.</h3>");
 
@@ -113,7 +113,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                                 <p>- Mon premier peut être en fer ou en chocolat</br>\
                                 - Mon second est une boisson chaude très appréciée en Angleterre</br>\
                                 - Mon troisième peut être mélangé (en petite quantité) à mon second</br>\
-                                - Mon quatrième se trouve sous la croûte de pain</br>\
+                                - Mon quatrième se trouve sous la croûte du pain</br>\
                                 - Mon tout est un prénom</p>\
                             </div>\
                         </div>");
@@ -244,7 +244,7 @@ function getJsonPart(level) {
         }
         case 2:
         {
-            tempStr += "<p><u>Mes traits de personnalités :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p><u>Mes traits de personnalité :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
             tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonResource[0].VosCentreInteret + "</p>";
             tempStr += "</p>";
             break;
@@ -253,7 +253,7 @@ function getJsonPart(level) {
         {
             tempStr += "<p><u>Mes attentes :</u></br>" + jsonResource[0].VosAttentes + "</p>";
             tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
-            tempStr += "<p><u>Mes traits de personnalités :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p><u>Mes traits de personnalité :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
             tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonResource[0].VosCentreInteret + "</p>";
             tempStr += "<p><u>Mon itinéraire pro-passé :</u></br>" + jsonResource[0].VotreItineraireProPasse + "</p>";
             tempStr += "</p>";
