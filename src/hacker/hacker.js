@@ -711,3 +711,26 @@ function getHelpForLS() {
     return 'Parfait, nous connaissons une partie du contenue de son disque. Je vous conseille de lire le fichier <strong>info.txt</strong> ainsi que le fichier <strong>readme.md</strong> avec fouiller le reste des dossiers. <br>' +
         'Suivez les instructions dans la documentation.';
 }
+
+function textQuentinPersonality() {
+    return '&nbsp;&nbsp;&nbsp;&nbsp;<u>Mes attentes professionnelles et personnelles : </u><br><br>J’aimerais atteindre le statut de cadre ou de chef d’équipe car le management d’une petite équipe autant sur le plan humain que technique me' +
+        'semble très intéressant et formateur. Je souhaite cependant garder une majorité de mon temps pour développer et vraiment faire partie de l’équipe. Je souhaite me placer en tant qu’expert métier car cela nécessite beaucoup de connaissance' +
+        'et de recherche, deux aspects que je trouve important de maîtriser pour se considérer comme un bon informaticien.';
+}
+
+function textQuentinInterest() {
+
+}
+
+function textQuentinHistoric() {
+
+}
+
+function textQuentinAbilities() {
+
+}
+
+function textQuentinWishes() {
+
+}
+]
