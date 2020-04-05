@@ -235,7 +235,7 @@ function displayAvailableCommands(state) {
         case "scenarioEnigmes":
             {
                 document.getElementById('docScenarioEnigmes').style.display = "block";
-                displayUtilitiesCommands();
+                displayUtilitiesCommands(state);
                 break;
             }
         case "scenarioHacking":
@@ -289,13 +289,13 @@ function displayAvailableCommands(state) {
                         document.getElementById('docScenarioHacking').style.display = "block";
                         break;
                 }
-                displayUtilitiesCommands();
+                displayUtilitiesCommands(state);
                 break;
             }
         case "scenarioJeux":
             {
                 document.getElementById('docScenarioJeux').style.display = "block";
-                displayUtilitiesCommands();
+                displayUtilitiesCommands(state);
                 break;
             }
         default:
@@ -303,8 +303,13 @@ function displayAvailableCommands(state) {
     }
 }
 
-function displayUtilitiesCommands() {
+function displayUtilitiesCommands(state) {
     document.getElementById('docUtilities').style.display = "block";
+    if (state.applicationState == "scenarioHacking") {
+        document.getElementById('DocBypass').style.display = "block";
+    } else {
+        document.getElementById('DocBypass').style.display = "none";
+    }
 }
 
 /**********/

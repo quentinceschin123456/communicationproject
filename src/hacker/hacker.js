@@ -106,6 +106,7 @@ function hackingScenario(commandKey, commandOptions, state) {
         }
     } else {
         bypass(state);
+        writeCommandResults("Vous avez passez un bout du scénario.")
     }
     console.log(state.scenarioHackingState);
     return state;
@@ -166,6 +167,10 @@ function bypass(state) {
             break;
     }
     return state;
+}
+
+function displayBypassCommand() {
+    document.getElementById('DocBypass').style.display = "block";
 }
 
 function matchCommandeInit(commandKey, commandOptions, state) {
@@ -562,6 +567,10 @@ function documentationHackInit() {
     str += "<strong>start --debugger-sys : </strong> Lance le debugger système. <br><br>";
 
     return str;
+}
+
+function documentationHackBypass() {
+
 }
 
 function documentationHackGeneral() {
