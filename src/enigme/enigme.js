@@ -39,12 +39,12 @@ function runScenarioEnigmes() {
     scenarioState = scenarioState_enum[0];
     clearInHTML();
     parentDiv.addContent("\
-        <h1>Je vous souhaite la bienvenu, moi c'est Merlin.</h1>\
+        <h1>Je vous souhaite la bienvenue, moi c'est Merlin.</h1>\
         <h3>Quelque chose me dit que vous cherchiez quelque chose ici.</br>\
-            Etant magicien, je vous aiderai volontié... mais tout d'abord vous devez m'aider à résoudre trois enigmes.<br>\
-            Chacune des enigmes résolut vous donnera accès à un morceau de parchemin.</h3>\
-        <h3>Prennez garde ! Car ces trois énigmes ne sont pas si facile à résoudre ! Pour vous dire, cela fait maintenant plusieurs moment que je cherche... mais je n'ai pas trouvé...</h3>\
-        <h3>Alors prêt à creuser le cerveau ?</h3>\
+            Etant magicien, je vous aiderai volontier... mais tout d'abord vous devez m'aider à résoudre trois enigmes.<br>\
+            Chacune des enigmes résolues vous donnera accès à un morceau de parchemin.</h3>\
+        <h3>Prennez garde ! Car ces trois énigmes ne sont pas si facile à résoudre ! Pour vous dire, cela fait maintenant un moment que je cherche... mais je n'ai pas trouvé...</h3>\
+        <h3>Alors prêt à vous creuser le cerveau ?</h3>\
         <img src='../enigme/src/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
         <h3>Saisissez la commande \"<bold>next</bold>\" pour commencer à aider Merlin.</h3>");
 
@@ -70,7 +70,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                         <div style='position: relative;text-align: center;'>\
                             <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
-                                <p>Une vielle invention qui est très utilisée aujourd'hui, permet de voir à travers les murs.</p>\
+                                <p>Une vieille invention qui est très utilisée aujourd'hui, permet de voir à travers les murs.</p>\
                                 <p>Qui suis-je ?</p>\
                             </div>\
                         </div>");
@@ -111,7 +111,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                             <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
                                 <p>- Mon premier peut être en fer ou en chocolat</br>\
-                                - Mon second est une boisson chaude très apprécié en Angleterre</br>\
+                                - Mon second est une boisson chaude très appréciée en Angleterre</br>\
                                 - Mon troisième peut être mélangé (en petite quantité) à mon second</br>\
                                 - Mon quatrième se trouve sous la croûte de pain</br>\
                                 - Mon tout est un prénom</p>\
@@ -208,8 +208,8 @@ function clearInHTMLInSpecificElement(ElementId) {
 
 function displayEnigmesTextGame() {
     return "<strong>ENIGMES : </strong><br>\
-        <br> Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérable énigmes.<br>\
-        <img src=\"../enigme/src/merlin0.png\" style=\"display: block;margin: auto; height: 350px;\" /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
+        <br> Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérables énigmes.<br>\
+        <img src='../enigme/src/merlin0.png' style='display: block;margin: auto; height: 350px;' /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
 }
 
 function incToNextScenario() {
