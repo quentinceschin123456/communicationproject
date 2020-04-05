@@ -669,21 +669,26 @@ function textEnd() {
 function getFirstBlocQuentin() {
     hideAllImg();
     return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
-        '' +
+        textQuentinHeader() +
+        textQuentinWishes() +
+        textQuentinPersonality() +
         '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getSecondBlocQuentin() {
     hideAllImg();
     return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
-        '' +
+        textQuentinHeader() +
+        textQuentinAbilities() +
+        textQuentinInterest() +
         '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getThirdFirstBlocQuentin() {
     hideAllImg();
     return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
-        '' +
+        textQuentinHeader() +
+        textQuentinHistoric() +
         '</div><br>Taper la commande suivante pour continuer.';
 }
 
@@ -712,25 +717,56 @@ function getHelpForLS() {
         'Suivez les instructions dans la documentation.';
 }
 
-function textQuentinPersonality() {
-    return '&nbsp;&nbsp;&nbsp;&nbsp;<u>Mes attentes professionnelles et personnelles : </u><br><br>J’aimerais atteindre le statut de cadre ou de chef d’équipe car le management d’une petite équipe autant sur le plan humain que technique me' +
-        'semble très intéressant et formateur. Je souhaite cependant garder une majorité de mon temps pour développer et vraiment faire partie de l’équipe. Je souhaite me placer en tant qu’expert métier car cela nécessite beaucoup de connaissance' +
+function textQuentinWishes() {
+    return '&nbsp;&nbsp;&nbsp;&nbsp;<u>Mes attentes professionnelles et personnelles : </u><br><br>J’aimerais atteindre le statut de cadre ou de chef d’équipe car le management d’une petite équipe autant sur le plan humain que technique me ' +
+        'semble très intéressant et formateur. Je souhaite cependant garder une majorité de mon temps pour développer et vraiment faire partie de l’équipe. Je souhaite me placer en tant qu’expert métier car cela nécessite beaucoup de connaissance ' +
         'et de recherche, deux aspects que je trouve important de maîtriser pour se considérer comme un bon informaticien.';
 }
 
-function textQuentinInterest() {
-
+function textQuentinAbilities() {
+    return '&nbsp;&nbsp;&nbsp;&nbsp;<u></u>Mes compétences professionnelles : </u><br><br>Dans le monde du développement, je me place en tant que développeur fullstack, c’est-à-dire que mes compétences sont réparties un peu partout dans le' +
+        ' domaine du logiciel. En effet côté back-end (Traitement métiers) : <br>Mes formations passées étaient fortement axées sur ce domaine. J’y ai appris à coder en Java, C#, Python et PHP. Comme vous pouvez le voir avec ces technologies,' +
+        ' je suis surtout formé autour de la programmation orientée objet. Ce concept est de plus en plus populaire et ce n’est pas pour me déplaire car j’adore tout simplement ça. Une grande partie de mon travail repose sur ma capacité' +
+        ' à bien programmer selon cette philosophie, ce qui garantit une bonne qualité de développement. <br>Coté front-end, c’est en entreprise que j’ai pu vraiment découvrir cet univers notamment via l’apprentissage de Web (HTML/CSS/JS)' +
+        ' et surtout la découverte du framework Vue.js. De ce fait j’ai appris à monter des sites internet complexes, sécurisés et maintenables.<br>De plus j’ai été sensibilisé via mes cours au devops et entrainé grâce à des projets personnels' +
+        ' qui m’ont permis d’apprendre à mettre en place le CI/CD (Continious Integration / Continious Delivery) et bien comprendre cet univers. <br>Coté compétence humaine, j’ai l’habitude de travailler en équipe (souvent agile) et j’apprécie' +
+        ' beaucoup le travail à plusieurs. Je sais comment me comporter en entreprise, autant sur le plan professionnel que sur le plan humain, et comment me montrer volontaire afin de communiquer ma motivation à tout le reste de l’équipe.' +
+        ' Je suis bon communicant et j’arrive à tisser des liens professionnels avec tous mes collègues afin de pouvoir collaborer dans de bonne conditions.';
 }
 
 function textQuentinHistoric() {
-
+    return '&nbsp;&nbsp;&nbsp;&nbsp;<u>Mon itinéraire professionnel/scolaire passé : </u><br><br>Suite à mon baccalauréat scientifique, je me destinais à des études de chimie. Dans cette optique, j’ai intégré l’IUT de Castres. Cependant cette ' +
+        'première année post-bac ne s’est pas bien passée. En effet, je manquais un peu de maturité et surtout de connaissance sur le monde des études supérieures.De plus, j\'ai pu m\'apercevoir que cette voie ne me plaisait pas du tout.' +
+        '<br>Je me suis donc réorienté vers un nouveau domaine, l’informatique. Je suis alors entré en première année de DUT informatique à l’IUT de Blagnac. En découvrant ce domaine, j’ai fait la connaissance d’un monde qui me passionne ' +
+        'aujourd’hui. <br>Dans l’optique de faire un parcours jalonné, j’ai fait une licence professionnelle APSIO, situé à l’IUT de Blagnac, en alternance qui est spécialisée dans le développement logiciel. J’ai choisi Synapse Développement ' +
+        'comme entreprise de par son expertise en intelligence artificielle appliquée au langage naturel et de son cadre. Cette année s’est très bien passé. Puis j’ai poursuivi avec le Master ICE à l’université Toulouse II Jean Jaurès en ' +
+        'alternance dans la même entreprise que la licence professionnelle, dans l’optique de terminer mon cursus et d’avoir un avis sur la recherche informatique qui est très bien représentée dans ce master.';
 }
 
-function textQuentinAbilities() {
-
+function textQuentinInterest() {
+    return '&nbsp;&nbsp;&nbsp;&nbsp;<u>Mes centres d\'intérêt : </u><br><br>Je suis un grand passionné de jeux vidéo, notamment des jeux rôles et d’aventure. Ils me permettent de voyager dans des contrées irréelles aux lois propres. Cette évasion' +
+        ' permet de faire travailler mon imaginaire et stocker des bonnes idées pour mes futures applications. <br>J’apprécie beaucoup les jeux en équipe et en coopération, car s’amuser avec ses amis permet de nouer des liens qui, mêmes' +
+        ' à distance, resteront solide. De plus la gestion d’une équipe, ainsi que du conflit et du mental sont des aspects que j’apprécie beaucoup car ce sont pour moi des notions presque aussi importantes qu’avoir un bon niveau de jeu.' +
+        ' <br>Bien sûr comme tout bon informaticien, j’aime bien les nouvelles technologies dont je surveille les avancées. Qui sait, peut-être que le programme ultime est à portée de main. Notamment les progrès en intelligence artificielle' +
+        ' ou la robotique qui sont pour moi les deux axes prometteurs. <br>Quand j’ai un peu plus de temps libre, je retrouve une bande de copains, pour aller faire de l’escalade en salle. Il s’agit d’une activité sportive que j’apprécie' +
+        ' énormément notamment par la présence de mes amis mais aussi car cette discipline demande un certain niveau de dépassement de soi. La progression se fait par à-coup mais reste très satisfaisante et l’entraide permet de ne pas rester' +
+        ' bloquer sur un obstacle trop longtemps.';
 }
 
-function textQuentinWishes() {
-
+function textQuentinPersonality() {
+    return "&nbsp;&nbsp;&nbsp;&nbsp;<u>Mes traits de personnalités : </u><br><br> Après avoir demandé à mon entourage comment il me voit, il en est ressorti plusieurs grands axes :" +
+        "<ul>" +
+        "<li>La gentillesse et la bienveillance, notamment via mes conseils et ma capacité d’écoute. Peu importe le cadre, je suis là pour les aider, collègues ou amis, afin de ne laisser personnes se faire dépasser par ses difficultés." +
+        "</li>" +
+        "<li>Les actions réfléchies, je fais des choix très logiques voir pragmatiques et raisonnés car la logique fait entièrement partie de ma personne. Elle est cependant originale de par la vision qu’elle apporte, ce qui peut sembler " +
+        "être non adapté au premier abord. Mais son exercice, mes compagnons s’aperçoivent que mes actions ont un but qu’ils n’avaient pas vu.</li>" +
+        "<li>La capacité à prendre le lead, c’est une chose que je fais quand il est nécessaire de prendre des décisions et que personne ne souhaite s’en occuper. J’exploite mes capacités en conception ainsi que des principes managériaux " +
+        "simples, que j’ai pu observer en entreprise ou apprendre en cours.</li>" +
+        "<li>Je suis de nature stressé, le sachant je fais des efforts pour le contrebalancer mieux mais je travaille mal sous la pression. Malheureusement, je n’ai pas choisi la profession la plus calme et j’apprends au travers de la vie " +
+        "en entreprise à le gérer. J’ai tendance à m’enfermer sur moi-même dans les situations tendues par soucis de ne pas vouloir perturber mes camarades qui subissent, eux aussi, cette pression. </li>" +
+        "</ul>";
 }
-]
+
+function textQuentinHeader() {
+    return "<br>Informations pourtant sur Quentin CESCHIN.<br>";
+}
