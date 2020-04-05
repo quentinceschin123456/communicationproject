@@ -209,11 +209,7 @@ function commandsScenariosUtilities(commandKey, commandOptions, state) {
                 writeCommandResults("Retour à l'écran principal de l'application.");
                 break;
             }
-        case "bypass":
-            {
-                // c'est chiant à faire donc si tu vois ce commentaire j'ai eu la fleme
-                break;
-            }
+
         default:
             {
                 writeCommandResults("Commande inconnue, référez vous à la documentation sur la droite de l'écran.");

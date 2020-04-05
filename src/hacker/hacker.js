@@ -55,55 +55,116 @@ function launcherHack(state) {
 
 
 function hackingScenario(commandKey, commandOptions, state) {
+    if (commandKey != "bypass") {
+        switch (state.scenarioHackingState.name) {
+            case "initialisation":
+                {
+                    state = matchCommandeInit(commandKey, commandOptions, state);
+                    break;
+                }
+            case "defend1":
+                {
+                    state = matchCommandeDefend1(commandKey, commandOptions, state);
+                    break;
+                }
+            case "recovery1":
+                {
+                    state = matchCommandeRecovery1(commandKey, commandOptions, state);
+
+                    break;
+                }
+            case "defend2":
+                {
+                    state = matchCommandeDefend2(commandKey, commandOptions, state);
+                    break;
+                }
+            case "recovery2":
+                {
+                    state = matchCommandeRecovery2(commandKey, commandOptions, state);
+                    break;
+                }
+            case "defend3":
+                {
+                    state = matchCommandeDefend3(commandKey, commandOptions, state);
+                    break;
+                }
+            case "recovery3":
+                {
+                    state = matchCommandeRecovery3(commandKey, commandOptions, state);
+                    break;
+                }
+
+            case "end":
+                {
+                    state = matchCommandeEnd(commandKey, commandOptions, state);
+                    break;
+                }
+            default:
+                console.log("hackingScenario - invalid scenario state");
+                state.scenarioHackingState.name = "initialisation";
+                break;
+        }
+    } else {
+        bypass(state);
+    }
+    console.log(state.scenarioHackingState);
+    return state;
+}
+
+function bypass(state) {
     switch (state.scenarioHackingState.name) {
         case "initialisation":
             {
-                state = matchCommandeInit(commandKey, commandOptions, state);
+                state.scenarioHackingState.name = "recovery1";
+                document.getElementById("hackingTextBox").innerHTML = textRecovery1();
                 break;
             }
         case "defend1":
             {
-                state = matchCommandeDefend1(commandKey, commandOptions, state);
+                state.scenarioHackingState.name = "recovery1";
+                document.getElementById("hackingTextBox").innerHTML = textRecovery1();
                 break;
             }
         case "recovery1":
             {
-                state = matchCommandeRecovery1(commandKey, commandOptions, state);
-
+                state.scenarioHackingState.name = "recovery2";
+                document.getElementById("hackingTextBox").innerHTML = textRecovery2();
                 break;
             }
         case "defend2":
             {
-                state = matchCommandeDefend2(commandKey, commandOptions, state);
+                state.scenarioHackingState.name = "recovery2";
+                document.getElementById("hackingTextBox").innerHTML = textRecovery2();
                 break;
             }
         case "recovery2":
             {
-                state = matchCommandeRecovery2(commandKey, commandOptions, state);
+                state.scenarioHackingState.name = "recovery3";
+                document.getElementById("hackingTextBox").innerHTML = textRecovery3();
                 break;
             }
         case "defend3":
             {
-                state = matchCommandeDefend3(commandKey, commandOptions, state);
+                state.scenarioHackingState.name = "recovery3";
+                document.getElementById("hackingTextBox").innerHTML = textRecovery3();
                 break;
             }
         case "recovery3":
             {
-                state = matchCommandeRecovery3(commandKey, commandOptions, state);
+                state.scenarioHackingState.name = "end";
+                document.getElementById("hackingTextBox").innerHTML = textEnd();
                 break;
             }
 
         case "end":
             {
-                state = matchCommandeEnd(commandKey, commandOptions, state);
+                writeCommandResults("Vous vous trouvez déjà à la fin du scénario. Vous ne pouvez pas allez plus loin.");
                 break;
             }
         default:
-            console.log("hackingScenario - invalid scenario state");
-            state.scenarioHackingState.name = "initialisation";
+            console.log("error in bypass");
             break;
     }
-    console.log(state.scenarioHackingState);
     return state;
 }
 
