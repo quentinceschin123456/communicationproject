@@ -320,7 +320,6 @@ input:focus {
 /* Animation */
 
 .anim-typewriter {
-    /*border-right: 2px solid rgba(255, 255, 255, .75);*/
     white-space: nowrap;
     overflow: hidden;
     animation: typewriter 4s steps(40) 0s 1 normal both;
@@ -370,4 +369,9 @@ input:focus {
 #enigmesText {
     display: flex;
     flex: 1;
+}
+
+
+#indexLink {
+    color: whitesmoke
 }
