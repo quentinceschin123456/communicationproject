@@ -361,6 +361,7 @@ input:focus {
 .fileLaF {
     border: 1px solid #05FC69;
     padding: 10px;
+    min-height: 300px;
 }
 
 
@@ -370,7 +371,6 @@ input:focus {
     display: flex;
     flex: 1;
 }
-
 
 #indexLink {
     color: whitesmoke

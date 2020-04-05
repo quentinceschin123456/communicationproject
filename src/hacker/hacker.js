@@ -569,13 +569,6 @@ function documentationHackInit() {
     return str;
 }
 
-function documentationHackBypass() {
-
-}
-
-function documentationHackGeneral() {
-
-}
 
 function getReadMeText() {
     hideAllImg();
@@ -633,6 +626,7 @@ function textDefend3() {
 }
 
 function textRecovery3() {
+    setRobotImg();
     return 'Bien joué, nous avons réussi à accéder à son ordinateur. nous pouvons tout savoir de lui. <br>' +
         'Lancez le téléchargement des données et quittez la connexion au plus vite, histoire de pouvoir lire tout ça au calme.';
 }
@@ -661,8 +655,10 @@ function setRobotImg() {
 
 
 function textEnd() {
+    hideAllImg();
+    setPdfPreview();
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return 'Merci d\'avoir joué à ce mini-jeux. Vous avez battu le hackeur et toucher du doigt l\'utilisation d\'une console, appelé aussi terminal.<br>En récompense voici une prévisualisation de mon CV qui est téléchargeable. Vous pouvez retrouver toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a>' + getPdfPreview();
+    return 'Merci d\'avoir joué à ce mini-jeux. Vous avez battu le hackeur et toucher du doigt l\'utilisation d\'une console, appelé aussi terminal.<br>En récompense voici une prévisualisation de mon CV qui est téléchargeable. Vous pouvez retrouver toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a>';
 }
 
 
@@ -710,6 +706,10 @@ function getPdfPreview() {
     innerHTML += "<embed src='/quentin_ceschin_cv.pdf' type='application/pdf' />";
     innerHTML += "</object>";
     return innerHTML;
+}
+
+function setPdfPreview() {
+    document.getElementById("objData").style.display = "flex";
 }
 
 function getHelpForLS() {
