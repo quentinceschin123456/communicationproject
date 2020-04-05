@@ -451,6 +451,15 @@ function matchCommandeRecovery3(commandKey, commandOptions, state) {
                 }
                 break;
             case "exit":
+                if (commandKey == "cat" && commandOptions == "info.txt") {
+                    writeCommandResults("Ouverture du fichier info.txt");
+                    document.getElementById("hackingTextBox").innerHTML = getThirdFirstBlocQuentin();
+                    state.scenarioHackingState.previousCmd = "cat-info";
+                } else {
+                    state = commandsScenariosUtilities(commandKey, commandOptions, state);
+                }
+                break;
+            case "cat":
                 if (commandKey == "scp" && commandOptions[0] == "root@192.168.1.156:/root/Desktop/Recrutement" && commandOptions[1] == "~/root/Desktop/") {
                     writeCommandResults("Téléchargment des fichiers...")
                     writeCommandResults("Fichiers Récupérés.")
@@ -549,6 +558,7 @@ function documentationHackRecovery2() {
 function documentationHackRecovery3() {
     var str = "<h2>Téléchargement distant : </h2>";
     str += "<strong>exit : </strong> Se déconnecte de la session ssh en cours. <br><br>";
+    str += "<strong>cat info.txt : </strong>Lit le contenu du fichier désigné.<br><br>";
     str += "<strong>scp root@192.168.1.156:/root/Desktop/Recrutement ~/root/Desktop/ : </strong>Télécharge le fichier depuis un hôte distant.<br><br>";
 
     return str;
@@ -671,26 +681,26 @@ function textEnd() {
 function getFirstBlocQuentin() {
     hideAllImg();
     return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
-        textQuentinHeader() +
-        textQuentinWishes() +
-        textQuentinPersonality() +
+        textQuentinHeader() + '<br>' +
+        textQuentinWishes() + '<br>' +
+        textQuentinPersonality() + '<br>' +
         '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getSecondBlocQuentin() {
     hideAllImg();
     return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
-        textQuentinHeader() +
-        textQuentinAbilities() +
-        textQuentinInterest() +
+        textQuentinHeader() + '<br>' +
+        textQuentinAbilities() + '<br>' +
+        textQuentinInterest() + '<br>' +
         '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getThirdFirstBlocQuentin() {
     hideAllImg();
     return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
-        textQuentinHeader() +
-        textQuentinHistoric() +
+        textQuentinHeader() + '<br>' +
+        textQuentinHistoric() + '<br>' +
         '</div><br>Taper la commande suivante pour continuer.';
 }
 
