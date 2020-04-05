@@ -321,9 +321,10 @@ function matchCommandeRecovery2(commandKey, commandOptions, state) {
                 // one folder
                 // file list
 
-                var cmdResult = "";
+                var cmdResult = "Listing du contenu du fichier :<ul><li>syteme/<ul><li>win32.exe</li><li>lib.c</li><li>daemon/</li></ul><ul><li>Recrutement/<ul><li>????</li></ul></li><li>info.txt</li><li>readme.md</li></ul>";
+
                 writeCommandResults(cmdResult);
-                // document.getElementById("hackingTextBox").innerHTML = getFirstBlocQuentin();
+                document.getElementById("hackingTextBox").innerHTML = getHelpForLS();
                 state.scenarioHackingState.previousCmd = "ls";
             } else {
                 state = commandsScenariosUtilities(commandKey, commandOptions, state);
@@ -507,7 +508,10 @@ function documentationHackGeneral() {
 }
 
 function getReadMeText() {
-    return "Toutes les informations personnelles sont dans le répertoire Recrutement";
+    hideAllImg();
+    return "<h2>Contenu du fichier readme.md:</h2><div class='fileLaF'>" +
+        'Toutes les informations personnelles sont dans le répertoire Recrutement' +
+        '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function textInitialisation() {
@@ -516,7 +520,7 @@ function textInitialisation() {
         'Bienvenue au cybercafé "TrapedMouse", vous pouvez utiliser ce réseau comme on vous semble.' +
         '<br>' +
         'Nous nous dédouanons de toutes activitées frauduleuses. ' +
-        '<br><br><br>Erreur dans votre tentative de connection.... Entrez la commande de debuugage. <br>';
+        '<br><br><br>Erreur dans votre tentative de connection.... Entrez la commande de debuggage. <br>';
 }
 
 
@@ -588,24 +592,29 @@ function setRobotImg() {
 
 function textEnd() {
     // il faut récap tout les textes + lien du cv + dire que l'on veut reset
-    return 'Merci d\'avoir jouer à ce mini-jeux. Voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a>' + getPdfPreview();
+    return 'Merci d\'avoir jouer à ce mini-jeux. Vous avez battu le hacker et toucher du doit l\'utilisation d\'une console, appelé aussi terminal.<br>En récompense voici une preview de mon qui est téléchargeable. Vous pouvez retrouvez toutes les informations en suivant <a class="whiteLink" href="/informations" >ce lien</a>' + getPdfPreview();
 }
 
 
 function getFirstBlocQuentin() {
-
-    return "<h2>Contenu du fichier info.txt</h2>" +
-        ''
-
-    ;
+    hideAllImg();
+    return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
+        '' +
+        '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getSecondBlocQuentin() {
-    return "";
+    hideAllImg();
+    return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
+        '' +
+        '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getThirdFirstBlocQuentin() {
-    return "";
+    hideAllImg();
+    return "<h2>Contenu du fichier info.txt:</h2><div class='fileLaF'>" +
+        '' +
+        '</div><br>Taper la commande suivante pour continuer.';
 }
 
 function getDescriptionHacking() {
@@ -626,4 +635,9 @@ function getPdfPreview() {
     innerHTML += "<embed src='/quentin_ceschin_cv.pdf' type='application/pdf' />";
     innerHTML += "</object>";
     return innerHTML;
+}
+
+function getHelpForLS() {
+    return 'Parfait, nous connaissons une partie du contenue de son disque. Je vous conseille de lire le fichier <strong>info.txt</strong> ainsi que le fichier <strong>readme.md</strong> avec fouiller le reste des dossiers. <br>' +
+        'Suivez les instructions dans la documentation.';
 }
