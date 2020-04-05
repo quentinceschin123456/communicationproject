@@ -1,0 +1,122 @@
+.text {
+    color: black;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-self: center;
+    justify-content: space-evenly;
+    background-color: #061704;
+    min-width: 75%;
+}
+
+#blocCorentin {
+    flex-direction: row-reverse;
+}
+
+.asset {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+#developpersGrid {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.cocoPhoto {
+    height: 230px;
+    width: auto;
+}
+
+#onglet_body {
+    text-align: center !important;
+}
+
+
+
+
+#pageContent {
+    display: flex;
+    flex-direction: column;
+}
+
+#cardsContainer {
+    display: flex;
+    margin: auto;
+    flex: 1;
+}
+
+.cards {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 260px;
+    margin: 5vh;
+    padding: 5px;
+    background-color: #05FC69;
+    border: 2px solid black;
+    box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+}
+
+.cardsTitle {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.cardsContent {
+    display: flex;
+    flex-direction: column;
+    background-color: #061704;
+}
+
+.cardsImageContainer {
+    text-align: center;
+    background-color: black;
+}
+
+.cardsImage {
+    max-width: 250px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    padding: 5px 5px 0px 5px;
+}
+
+.cardsLinksContainer {
+    padding: 5px;
+    text-align: center;
+}
+
+.cardsLinks {
+    padding: 5px;
+}
+
+.cardsFontLinks {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+#bodyContainer {
+    display: flex;
+    margin: auto;
+    flex: 2;
+    background-color: #05FC69;
+}

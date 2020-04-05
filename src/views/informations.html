@@ -4,59 +4,7 @@
 <head>
     <title>Communication</title>
     <link rel="stylesheet" type="text/css" href="./index.css">
-    <style>
-        .text {
-            color: black;
-            padding: 10px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: row;
-            align-self: center;
-            justify-self: center;
-            justify-content: space-evenly;
-            background-color: #061704;
-            min-width: 75%;
-        }
-
-        #blocCorentin {
-            flex-direction: row-reverse;
-        }
-
-        .asset {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-        }
-
-        #main {
-            display: flex;
-            flex-direction: column;
-        }
-
-        img {
-            height: auto;
-            width: 100%;
-        }
-
-        #developpersGrid{
-            display: flex;
-            flex-direction: row;
-            flex: 1;
-            padding-left: 20%;
-            padding-right: 20%;
-        }
-
-        .cocoPhoto {
-            height: 250px;
-            width: auto;
-        }
-
-        #onglet_body {
-            text-align: center !important;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./informations.css">
 </head>
 
 <header>
@@ -72,32 +20,66 @@
 
 <body>
 
-    <div id="developpersGrid">
-        <div class="ongletGrouped" style="width: 250px;margin-top: 30px;margin-left: auto;margin-right: auto;">
-            <div id="onglet_title">Ancelin GLORIES</div>
-            <div id="onglet_body">
-                <img src="/ancelin.jpg" alt="photoAncelin">
-                <a href="../../ressources/scenarii_morpion.PNG">Télécharger son CV</a></br>
-                <a href="../../ressources/scenarii_morpion.PNG">Voir détails</a>
+
+    <div id="pageContent">
+        <div id="cardsContainer">
+            <div id="cardA" class="cards">
+                <div id="cardATitle" class="cardsTitle">
+                    Ancelin GLORIES
+                </div>
+                <div id="cardAContent" class="cardsContent">
+                    <div id="cardAImage" class="cardsImageContainer">
+                        <img src="/ancelin.jpg" class="cardsImage" alt="photoAncelin">
+                    </div>
+                    <div id="cardALinks" class="cardsLinksContainer">
+                        <div id="cardACV" class="cardsLinks">
+                            <a class="cardsFontLinks" href="../../ressources/scenarii_morpion.PNG" target="_blank">Télécharger son CV</a>
+                        </div>
+                        <div id="cardADetails" class="cardsLinks" >
+                            <a class="cardsFontLinks" href="../../ressources/scenarii_morpion.PNG">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cardC" class="cards">
+                <div id="cardCTitle" class="cardsTitle">
+                    Corentin GRANDCHAMPS
+                </div>
+                <div id="cardCContent" class="cardsContent">
+                    <div id="cardCImage" class="cardsImageContainer">
+                        <img class="cardsImage" src="/corentin.jpg" alt="photoCorentin">
+                    </div>
+                    <div id="cardCLinks" class="cardsLinksContainer">
+                        <div id="cardCCV" class="cardsLinks">
+                            <a class="cardsFontLinks" href="../../ressources/scenarii_morpion.PNG" target="_blank">Télécharger son CV</a>
+                        </div>
+                        <div id="cardCDetails" class="cardsLinks" >
+                            <a class="cardsFontLinks" href="../../ressources/scenarii_morpion.PNG">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="cardQ" class="cards">
+                <div id="cardQTitle" class="cardsTitle">
+                    Quentin CESCHIN
+                </div>
+                <div id="cardQContent" class="cardsContent">
+                    <div id="cardQImage" class="cardsImageContainer">
+                        <img src="/quentin.jpg" class="cardsImage" alt="photoQuentin">
+                    </div>
+                    <div id="cardQLinks" class="cardsLinksContainer">
+                        <div id="cardQCV" class="cardsLinks">
+                            <a class="cardsFontLinks" href="../../ressources/scenarii_morpion.PNG" target="_blank">Télécharger son CV</a>
+                        </div>
+                        <div id="cardQDetails" class="cardsLinks" >
+                            <a class="cardsFontLinks" href="../../ressources/scenarii_morpion.PNG">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="bodyContainer">
 
-        <div class="ongletGrouped" style="width: 250px;margin-top: 30px;margin-left: auto;margin-right: auto;">
-            <div id="onglet_title">Corentin GRANDCHAMPS</div>
-            <div id="onglet_body">
-                <img class="cocoPhoto" src="/corentin.jpg" alt="photoCorentin">
-                <a href="../../ressources/scenarii_morpion.PNG">Télécharger son CV</a></br>
-                <a href="../../ressources/scenarii_morpion.PNG">Voir détails</a>
-            </div>
-        </div>
-
-        <div class="ongletGrouped" style="width: 250px;margin-top: 30px;margin-left: auto;margin-right: auto;">
-            <div id="onglet_title">Quentin CESCHIN</div>
-            <div id="onglet_body">
-                <img src="/quentin.jpg" alt="photoQuentin">
-                <a href="../../ressources/scenarii_morpion.PNG">Télécharger son CV</a></br>
-                <a href="../../ressources/scenarii_morpion.PNG">Voir détails</a>
-            </div>
         </div>
     </div>
 
