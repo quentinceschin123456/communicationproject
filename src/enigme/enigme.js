@@ -39,13 +39,13 @@ function runScenarioEnigmes() {
     scenarioState = scenarioState_enum[0];
     clearInHTML();
     parentDiv.addContent("\
-        <h1>Je vous souhaite la bienvenu, moi c'est Merlin.</h1>\
-        <h3>Quelque chose me dit que vous cherchiez quelque chose ici.</br>\
-            Etant magicien, je vous aiderai volontié... mais tout d'abord vous devez m'aider à résoudre trois enigmes.<br>\
-            Chacune des enigmes résolut vous donnera accès à un morceau de parchemin.</h3>\
-        <h3>Prennez garde ! Car ces trois énigmes ne sont pas si facile à résoudre ! Pour vous dire, cela fait maintenant plusieurs moment que je cherche... mais je n'ai pas trouvé...</h3>\
-        <h3>Alors prêt à creuser le cerveau ?</h3>\
-        <img src='../enigme/src/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
+        <h1>Je vous souhaite la bienvenue, moi c'est Merlin.</h1>\
+        <h3>Mon petit doigt me dit que vous cherchez quelque chose ici.</br>\
+            Etant magicien, je vous aiderai volontier... mais tout d'abord vous devez m'aider à résoudre trois enigmes.<br>\
+            Chacune des enigmes résolues vous donnera accès à un morceau de parchemin.</h3>\
+        <h3>Prennez garde ! Car ces trois énigmes ne sont pas si faciles à résoudre ! Pour vous dire, cela fait maintenant un moment que je cherche... mais je n'ai pas trouvé...</h3>\
+        <h3>Alors prêt à se creuser le cerveau ?</h3>\
+        <img src='/merlin1.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>\
         <h3>Saisissez la commande \"<bold>next</bold>\" pour commencer à aider Merlin.</h3>");
 
     printInHTML(parentDiv.render);
@@ -58,19 +58,19 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Une vieille invention :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin2.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlin2.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
                 }
                 parentDiv.addContent("\
                         <div style='position: relative;text-align: center;'>\
-                            <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
+                            <img src='/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
-                                <p>Une vielle invention qui est très utilisée aujourd'hui, permet de voir à travers les murs.</p>\
+                                <p>Une vieille invention qui est très utilisée aujourd'hui, permet de voir à travers les murs.</p>\
                                 <p>Qui suis-je ?</p>\
                             </div>\
                         </div>");
@@ -82,7 +82,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
         case scenarioState_enum[2]:
             {
                 parentDiv.addContent("<h1>Voilà un petit morceau :</h1>");
-                if (commentaire != "") { // background-image:url(../enigme/src/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;
+                if (commentaire != "") { // background-image:url(/parchemin.png);background-position:center;background-repeat:no-repeat;background-size:cover;
                     parentDiv.addContent("\
                         <div style='height:400px;width:1200px;overflow:auto;'>\
                             "+ commentaire +"\
@@ -98,22 +98,22 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Une charade :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin3.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlin3.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
                 }
                 parentDiv.addContent("\
                         <div style='position: relative;text-align: center;'>\
-                            <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
+                            <img src='/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
                                 <p>- Mon premier peut être en fer ou en chocolat</br>\
-                                - Mon second est une boisson chaude très apprécié en Angleterre</br>\
+                                - Mon second est une boisson chaude très appréciée en Angleterre</br>\
                                 - Mon troisième peut être mélangé (en petite quantité) à mon second</br>\
-                                - Mon quatrième se trouve sous la croûte de pain</br>\
+                                - Mon quatrième se trouve sous la croûte du pain</br>\
                                 - Mon tout est un prénom</p>\
                             </div>\
                         </div>");
@@ -140,17 +140,17 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                 parentDiv.addContent("<h1>Un monstre généreux :</h1>");
                 if (evalType == ST_ERR) {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlinerror0.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 } else {
                     parentDiv.addContent("\
-                <img src='../enigme/src/merlin4.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
+                <img src='/merlin4.png' style='display: block;margin-left: auto;margin-right: auto;height: 200px;'/>");
                 }
                 if (commentaire != "") {
                     parentDiv.addContent("<p style='text-align: center;'>" + commentaire + "</p>");
                 }
                 parentDiv.addContent("\
                         <div style='position: relative;text-align: center;'>\
-                            <img src='../enigme/src/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
+                            <img src='/Q.png' style='display: block;margin-left: auto;margin-right: auto;'/>\
                             <div style='position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);'>\
                                 <p>Un monstre affamé pose cette devinette à un chevalier perdu :</br>\
                                 \"J'ai quatre dents mais je ne mords pas.</br>\
@@ -172,7 +172,7 @@ function nextStepScenarioEnigmes(indexString, evalType, commentaire) {
                             "+ commentaire +"\
                         </div>");
                 }
-                //parentDiv.addContent("<img src='../enigme/src/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
+                //parentDiv.addContent("<img src='/merlin5.png' style='display: block;margin-left: auto;margin-right: auto;height: 150px;'/>");
                 printInHTML(parentDiv.render);
                 document.getElementById("docScenarioEnigmes").style.display = "none";
                 break;
@@ -208,8 +208,8 @@ function clearInHTMLInSpecificElement(ElementId) {
 
 function displayEnigmesTextGame() {
     return "<strong>ENIGMES : </strong><br>\
-        <br> Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérable énigmes.<br>\
-        <img src=\"../enigme/src/merlin0.png\" style=\"display: block;margin: auto; height: 350px;\" /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
+        <br> Partez à l'aventure en aidant Merlin qui cherche depuis une éternité... à résoudre trois misérables énigmes.<br>\
+        <img src='/merlin0.png' style='display: block;margin: auto; height: 350px;' /> Si vous vous sentez prêt à l'aider, saissisez la commande \"launch\"."
 }
 
 function incToNextScenario() {
@@ -233,29 +233,29 @@ function goToMenu(state) {
 
 function getJsonPart(level) {
     tempStr = "";
-    tempStr += "<p><h2>" + jsonResource[0].name + " m'a dit :</h2>";
+    tempStr += "<p><h2>" + jsonEnigmeResource[0].name + " m'a dit :</h2>";
     switch(level) {
         case 1:
         {
-            tempStr += "<p><u>Mes attentes :</u></br>" + jsonResource[0].VosAttentes + "</p>";
-            tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
+            tempStr += "<p><u>Mes attentes :</u></br>" + jsonEnigmeResource[0].VosAttentes + "</p>";
+            tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonEnigmeResource[0].VosCompetenceProfessionnelles + "</p>";
             tempStr += "</p>";
             break;
         }
         case 2:
         {
-            tempStr += "<p><u>Mes traits de personnalités :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
-            tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonResource[0].VosCentreInteret + "</p>";
+            tempStr += "<p><u>Mes traits de personnalité :</u></br>" + jsonEnigmeResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonEnigmeResource[0].VosCentreInteret + "</p>";
             tempStr += "</p>";
             break;
         }
         case 3:
         {
-            tempStr += "<p><u>Mes attentes :</u></br>" + jsonResource[0].VosAttentes + "</p>";
-            tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonResource[0].VosCompetenceProfessionnelles + "</p>";
-            tempStr += "<p><u>Mes traits de personnalités :</u></br>" + jsonResource[0].VosTraitsDePersonnalités + "</p>";
-            tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonResource[0].VosCentreInteret + "</p>";
-            tempStr += "<p><u>Mon itinéraire pro-passé :</u></br>" + jsonResource[0].VotreItineraireProPasse + "</p>";
+            tempStr += "<p><u>Mes attentes :</u></br>" + jsonEnigmeResource[0].VosAttentes + "</p>";
+            tempStr += "<p><u>Mes compétences professionnelles :</u></br>" + jsonEnigmeResource[0].VosCompetenceProfessionnelles + "</p>";
+            tempStr += "<p><u>Mes traits de personnalité :</u></br>" + jsonEnigmeResource[0].VosTraitsDePersonnalités + "</p>";
+            tempStr += "<p><u>Mes centres d'intérêts :</u></br>" + jsonEnigmeResource[0].VosCentreInteret + "</p>";
+            tempStr += "<p><u>Mon itinéraire pro-passé :</u></br>" + jsonEnigmeResource[0].VotreItineraireProPasse + "</p>";
             tempStr += "</p>";
             break;
         }
@@ -430,3 +430,57 @@ const scenarioStep3Responses_enum = [
 
 const ST_NONE = 0;
 const ST_ERR = 1;
+
+var jsonEnigmeResource =
+[
+    {   // Ancelin GLORIES
+        "name":"Ancelin GLORIES",
+        "VosAttentes":"\
+            Après cette formation, j’aimerais poursuivre mes études. Je suis encore étudiant, jeune et motivé à apprendre,\
+            je préfère donc faire en sorte d’atteindre mes limites dans les études. Je souhaiterais alors faire une thèse, \
+            si possible dans le domaine de la recherche en micro-informatique, sujet qui me passionne énormément, \
+            dans le but d’améliorer mes compétences. Dans le cas où il m’est impossible de poursuivre mes études, \
+            j’aimerais travailler directement dans la même entreprise que mon alternance qui, \
+            jusque-là, apprécie mon travail. Dans un futur plus lointain, j’aimerais travailler dans la micro-informatique au sens large du terme (conception de processeur, \
+            programmation de systèmes embarqués, etc…).",
+        "VosCompetenceProfessionnelles":"\
+            •	Le travail d’équipe, qui selon moi est crucial dans une entreprise,</br>\
+            •	Ma polyvalence,</br>\
+            •	Le fait d’être rigoureux renforce ma capacité à vouloir faire et rendre un travail de qualité,</br>\
+            •	Ma curiosité est de loin mon meilleur atout car c’est grâce à lui que j’aime ce que je fais aujourd’hui,</br>\
+            •	Etre persévérant et savoir prendre du recul me permet de réfléchir strategiquement,</br>\
+            •	Mon autonomie est aussi très appréciée en entreprise.",
+        "VosTraitsDePersonnalités":"\
+            Ils ont été évalués dans différents milieux : au sein de ma famille, de mes amis, et moi-même.\
+            Selon eux je suis quelqu’un qui est à l’aise en travail d’équipe (coopératif, impliqué, à l’écoute, rationnel), \
+            mais malgré tout renfermé (timide, réservé, ayant du mal à accorder sa confiance aux amis proches), \
+            et parfois dur avec moi-même (isolement en cas de difficulté, manque de confiance en soi, a du mal à se mettre en valeur). \
+            Cependant tout cela n’affecte en rien mes capacités à être cool, respectueux, poli, rétro, empathique, intelligent, calme, …",
+        "VosCentreInteret":"\
+            Ils sont assez ciblés : lire, jouer aux jeux vidéo, informatique \
+            (amateur de collection de vieux ordinateurs, apprentissage de vieux langages de programmation), \
+            électronique (Arduino, Raspberry PI), autodidacte (électronique, informatique, micro-informatique).",
+        "VotreItineraireProPasse":"\
+            Après le collège, je suis allé en lycée professionnel, notamment en raison du peu de sérieux que j’avais à ce moment-là. \
+            Mon choix s’est alors porté sur le Bac Processionnel Système Electronique et Numérique dans le lycée Déodat de Séverac. \
+            Durant ces trois années, ma passion dans le domaine de l’informatique n’a fait que croitre. \
+            De plus, je pris peu à peu goût au développement informatique durant mes différentes sessions de stage en entreprise \
+            (je remercie David PHAM, gérant de la société D@videv Informatique pour m’avoir formé). \
+            A la fin de cette formation, j’ai hésité entre continuer mes études avec un BTS SIO au lycée Ozenne à Toulouse ou poursuivre \
+            au lycée Déodat de Séverac avec le BTS Système Numérique. Après quelques semaines de réflexion, \
+            j’ai décidé de mettre le BTS SN (système numérique) en premier vœu, étant déjà scolarisé au lycée Déodat, \
+            et ayant mes amis dans le même établissement. De ce fait le BTS SIO fut mis en seconde place, jugé à mes yeux moins important.\
+            Mon premier vœu a alors été accepté. Après ces deux années en BTS SN, j’ai dû décider ou non de poursuivre mes études. \
+            Etant major de promotion à ce moment-là, je ne voulais pas gâcher ma chance de pouvoir continuer vers une licence classique \
+            ou professionnelle. J’ai alors posé me candidature dans différentes écoles, que ce soit en licence informatique (L2 et L3) \
+            à l’université Paul Sabatier ou dans des licences professionnelles. Au final, une seule formation m’a accepté : \
+            la licence professionnelle APSIO (Analyste Programmateur de Systèmes Informatiques Ouvert) à l’IUT de Blagnac. \
+            J’ai donc dû contacter plusieurs entreprises acceptant de prendre des étudiants en alternance. Je fus alors pris chez Engie \
+            INEO. Après un entretien concluant, j’ai commencé à travailler là-bas. A la fin de cette année de licence, souhaitant \
+            poursuivre mes études, j’ai soumis ma candidature dans différentes écoles : l’ENSEEIHT (que deux employés d’Engie INEO \
+            m’avaient conseillé), le Master ICE en alternance à l’université Toulouse II Jean Jaurès et d’autres formations \
+            professionnelles. Je fus pris dans le Master quelques jours seulement avant le début des cours. Je suis donc \
+            resté dans la même entreprise.\
+            Si aucune formation ne m’avait accepté, j’aurais alors signé un CDI chez Engie."
+    }
+]
