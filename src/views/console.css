@@ -359,6 +359,11 @@ input:focus {
     color: white;
 }
 
+.fileLaF {
+    border: 1px solid #05FC69;
+    padding: 10px;
+}
+
 
 /******************ENIGME*******************/
 
